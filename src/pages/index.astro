@@ -1,0 +1,414 @@
+---
+import '../styles/global.css';
+
+interface Proyecto {
+  titulo: string;
+  descripcion: string;
+  tags: string[];
+  imagen: string | null;
+  bgStyle?: string;
+}
+
+const areas = [
+  "Mercado Libre",
+  "Amazon Seller Central",
+  "Catálogo & Publicaciones",
+  "Métricas & Análisis",
+  "Estrategia de precios",
+  "Publicidad digital",
+  "Reputación & CX",
+  "IA aplicada al e-commerce",
+];
+
+const plataformas = [
+  { nombre: "Mercado Libre", logo: "/mercado-libre.svg" },
+  { nombre: "Amazon", logo: "https://api.iconify.design/ri/amazon-fill.svg" },
+  { nombre: "Tiendanube", logo: "https://api.iconify.design/nimbus/tiendanube.svg" },
+  { nombre: "WhatsApp", logo: "https://cdn.simpleicons.org/whatsapp" },
+  { nombre: "Supabase", logo: "https://cdn.simpleicons.org/supabase" },
+  { nombre: "n8n", logo: "https://cdn.simpleicons.org/n8n" },
+  { nombre: "Alibaba", logo: "https://cdn.simpleicons.org/alibabadotcom" },
+];
+
+const proyectos: Proyecto[] = [
+  {
+    titulo: "Perfil del vendedor",
+    descripcion: "Cuenta posicionada como MercadoLíder Platinum con +10.000 ventas, +1.000 seguidores y +500 productos activos. Tienda oficial verificada.",
+    tags: ["MercadoLíder Platinum", "+10k ventas"],
+    imagen: "/perfil-vendedor.jpg",
+  },
+  {
+    titulo: "Catálogo & Publicaciones",
+    descripcion: "Optimización de títulos, atributos, imágenes y variantes. Publicaciones con +5.000 unidades vendidas y estrategia de cupones para impulsar conversión.",
+    tags: ["SEO interno", "+5mil vendidos"],
+    imagen: "/publicacion.jpg",
+  },
+  {
+    titulo: "Publicidad (Product Ads)",
+    descripcion: "Inversión de $450K generó $6.200.000 en ingresos en 30 días — 788.000 impresiones y 224 ventas atribuidas a campañas.",
+    tags: ["ROAS 13×", "788k impresiones"],
+    imagen: "/publicidad-metricas.png",
+  },
+  {
+    titulo: "Reputación",
+    descripcion: "$120.000.000 facturado en 60 días. Reclamos 0,45%, mediaciones 0% y cancelaciones 0,38% — todos por debajo del límite permitido.",
+    tags: ["0% mediaciones", "$120M / 60 días"],
+    imagen: "/reputacion.png",
+  },
+  {
+    titulo: "Amazon Seller Central",
+    descripcion: "Gestión de cuenta en Amazon con análisis de rendimiento mensual, seguimiento de ventas por unidad y tendencias por año.",
+    tags: ["Amazon", "Analytics"],
+    imagen: "/amazon-dashboard.png",
+  },
+  {
+    titulo: "Sourcing internacional",
+    descripcion: "Importaciones desde China hacia EE.UU. con gestión de proveedores en Alibaba, envíos FedEx DDP y despacho a centros FBA en California.",
+    tags: ["China → USA", "FedEx DDP"],
+    imagen: "/sourcing-china.png",
+  },
+  {
+    titulo: "Óptica Recetas AI",
+    descripcion: "Sistema de automatización de recetas ópticas con inteligencia artificial. Procesamiento inteligente y envío automático por WhatsApp a los pacientes.",
+    tags: ["WhatsApp", "IA", "Supabase", "Next.js"],
+    imagen: "/optica-panel.png",
+  },
+  {
+    titulo: "Automatizaciones n8n",
+    descripcion: "Flujos de automatización para atención al cliente, captación de leads y gestión de CRM potenciados con inteligencia artificial.",
+    tags: ["n8n", "Atención al cliente", "Leads", "CRM", "IA"],
+    imagen: "/n8n workflow.png",
+    bgStyle: "background: linear-gradient(135deg, #0d1f12, #1a3a22)",
+  },
+];
+---
+
+<html class="dark" lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Nicolás Ferreira — Consultor de e-commerce y automatización IA. Escalo operaciones de venta online y automatizo procesos para que las empresas vendan más y trabajen mejor." />
+    <title>Nicolás Ferreira — Consultor E-commerce & IA</title>
+  </head>
+
+  <body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white">
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox" class="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center hidden cursor-pointer" onclick="closeLightbox()">
+      <button
+        class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2"
+        onclick="event.stopPropagation(); closeLightbox()"
+        aria-label="Cerrar"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+      <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-default" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- NAV -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm border-b border-zinc-100 dark:border-zinc-900">
+      <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
+        <span class="font-semibold text-sm tracking-tight text-zinc-900 dark:text-white">Nicolás Ferreira</span>
+        <div class="flex items-center gap-5">
+          <div class="hidden sm:flex items-center gap-6 text-sm text-zinc-500">
+            <a href="#trayectoria" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Trayectoria</a>
+            <a href="#servicios" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Servicios</a>
+            <a href="#proyectos" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Proyectos</a>
+            <a href="#contacto" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Contacto</a>
+          </div>
+          <button id="theme-toggle" class="p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all" aria-label="Cambiar tema">
+            <!-- Sol: visible en dark mode -->
+            <svg class="hidden dark:block w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+            </svg>
+            <!-- Luna: visible en light mode -->
+            <svg class="block dark:hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-32 pb-24 px-6">
+      <div class="max-w-5xl mx-auto lg:grid lg:grid-cols-[3fr_2fr] lg:gap-16 lg:items-center">
+        <div>
+          <p class="text-sm font-medium text-zinc-400 dark:text-zinc-600 tracking-widest uppercase mb-4">Consultor E-commerce & IA</p>
+          <h1 class="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-6 text-zinc-900 dark:text-white">
+            Nicolás<br/>Ferreira
+          </h1>
+          <p class="text-xl text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed mb-3">
+            Escalo operaciones de e-commerce y automatizo procesos con IA para que las empresas vendan más y trabajen mejor.
+          </p>
+          <p class="text-base text-zinc-500 max-w-xl leading-relaxed mb-10">
+            Experiencia comprobada llevando un canal de Mercado Libre de <span class="text-zinc-700 dark:text-zinc-300 font-medium">$8M a $130M mensuales</span>.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a
+              href="#contacto"
+              class="inline-flex items-center gap-2 bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors"
+            >
+              Contactar
+            </a>
+            <a
+              href="#proyectos"
+              class="inline-flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+            >
+              Ver proyectos
+            </a>
+          </div>
+        </div>
+
+        <!-- Stats column -->
+        <div class="mt-14 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-8">
+          <div>
+            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">16×</p>
+            <p class="text-sm text-zinc-500 mt-1">Crecimiento</p>
+          </div>
+          <div>
+            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">$130M</p>
+            <p class="text-sm text-zinc-500 mt-1">Facturación pico</p>
+          </div>
+          <div>
+            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">5+</p>
+            <p class="text-sm text-zinc-500 mt-1">Años experiencia</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PLATAFORMAS -->
+    <section class="py-10 px-6 border-t border-zinc-100 dark:border-zinc-900">
+      <div class="max-w-5xl mx-auto">
+        <p class="text-xs font-medium text-zinc-300 dark:text-zinc-700 tracking-widest uppercase mb-7 text-center">Experiencia en plataformas y herramientas</p>
+        <div class="flex flex-wrap items-center justify-center gap-2.5">
+          {plataformas.map((plat) => (
+            <div class="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 hover:bg-white dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-sm transition-all duration-200 cursor-default group">
+              <img
+                src={plat.logo}
+                alt=""
+                class="w-3.5 h-3.5 object-contain brightness-0 opacity-35 dark:invert dark:opacity-40 group-hover:opacity-75 dark:group-hover:opacity-70 transition-opacity duration-200"
+              />
+              <span class="text-xs font-medium text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors duration-200">{plat.nombre}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- TRAYECTORIA -->
+    <section id="trayectoria" class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Trayectoria</h2>
+        </div>
+        <div class="sm:col-span-2 space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <p>
+            Trabajo hace más de 5 años en e-commerce, gestionando y supervisando el canal de Mercado Libre de una empresa importadora de herramientas. Mi rol fue evolucionando junto con el crecimiento del negocio: desde la operación inicial hasta asumir responsabilidad estratégica sobre el canal.
+          </p>
+          <p>
+            Hoy mi foco está en la gestión integral: definición de catálogo y publicaciones, estrategia de precios y promociones, publicidad, análisis de métricas y coordinación del equipo operativo. Veo Mercado Libre no como un catálogo, sino como un canal que tiene que estar alineado con la operación, el stock y la rentabilidad real del negocio.
+          </p>
+          <p>
+            También cuento con experiencia en Amazon Seller Central, gestión de envíos FBA, sourcing internacional desde China hacia Estados Unidos y automatización de procesos con inteligencia artificial.
+          </p>
+
+          <!-- ÁREAS -->
+          <div class="pt-4 flex flex-wrap gap-2">
+            {areas.map((area) => (
+              <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">
+                {area}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid sm:grid-cols-3 gap-12 mb-12">
+          <div>
+            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Servicios</h2>
+          </div>
+          <div class="sm:col-span-2">
+            <p class="text-zinc-500 leading-relaxed">Lo que ofrezco a empresas y marcas que quieren crecer en digital.</p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors">
+            <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">E-commerce</h3>
+            <p class="text-sm text-zinc-500 leading-relaxed mb-5">
+              Gestión integral de canales de venta online — estrategia, catálogo, publicidad, precios y operaciones.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {["Mercado Libre", "Amazon", "Tiendanube"].map((tag) => (
+                <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors">
+            <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">Automatización IA</h3>
+            <p class="text-sm text-zinc-500 leading-relaxed mb-5">
+              Automatización de procesos con inteligencia artificial para atención al cliente, ventas y operaciones.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {["n8n", "WhatsApp", "CRM", "IA"].map((tag) => (
+                <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROYECTOS -->
+    <section id="proyectos" class="py-24 px-6">
+      <div class="max-w-5xl mx-auto">
+        <div class="grid sm:grid-cols-3 gap-12 mb-12">
+          <div>
+            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Proyectos</h2>
+          </div>
+          <div class="sm:col-span-2">
+            <p class="text-zinc-500 leading-relaxed">Áreas de trabajo con resultados concretos en los últimos 5 años.</p>
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {proyectos.map((proyecto) => (
+            <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors group">
+              <div class="h-44 overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                {proyecto.imagen ? (
+                  <img
+                    src={proyecto.imagen}
+                    alt={proyecto.titulo}
+                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                    onclick="openLightbox(this.src, this.alt)"
+                  />
+                ) : (
+                  <div
+                    class="w-full h-full flex items-end p-4"
+                    style={proyecto.bgStyle}
+                  >
+                    <span class="text-sm font-medium text-zinc-400">{proyecto.titulo}</span>
+                  </div>
+                )}
+              </div>
+              <div class="p-5">
+                <h3 class="font-semibold text-zinc-900 dark:text-white mb-1.5">{proyecto.titulo}</h3>
+                <p class="text-sm text-zinc-500 leading-relaxed mb-4">{proyecto.descripcion}</p>
+                <div class="flex flex-wrap gap-1.5">
+                  {proyecto.tags.map((tag) => (
+                    <span class="text-xs text-zinc-500 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-2 py-0.5 rounded">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
+        <div>
+          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Contacto</h2>
+        </div>
+        <div class="sm:col-span-2 space-y-6">
+          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Si necesitás escalar tu e-commerce o automatizar procesos con IA, podemos hablar.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a
+              href="https://wa.me/5491138158237"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+            >
+              WhatsApp
+            </a>
+            <a
+              href="https://www.linkedin.com/in/nicolas-ferreira-039254232/"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="mailto:fernicnet@gmail.com"
+              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+            >
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-10 px-6 border-t border-zinc-100 dark:border-zinc-900">
+      <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
+        <div>
+          <p class="font-semibold text-sm text-zinc-800 dark:text-zinc-200">Nicolás Ferreira</p>
+          <p class="text-xs text-zinc-500 mt-1">Consultor Ecommerce & IA</p>
+          <p class="text-xs text-zinc-300 dark:text-zinc-700 mt-3">Buenos Aires, Argentina</p>
+        </div>
+        <div class="flex items-center gap-6">
+          <a href="https://wa.me/5491138158237" target="_blank" rel="noopener" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/nicolas-ferreira-039254232/" target="_blank" rel="noopener" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">LinkedIn</a>
+          <a href="mailto:fernicnet@gmail.com" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">Email</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Dark/Light toggle
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') html.classList.remove('dark');
+
+      toggle?.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+      });
+
+      // Lightbox
+      function openLightbox(src: string, alt: string) {
+        const lightbox = document.getElementById('lightbox') as HTMLElement;
+        const img = document.getElementById('lightbox-img') as HTMLImageElement;
+        img.src = src;
+        img.alt = alt;
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById('lightbox') as HTMLElement;
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Escape') closeLightbox();
+      });
+
+      // Make functions available globally for onclick handlers
+      (window as any).openLightbox = openLightbox;
+      (window as any).closeLightbox = closeLightbox;
+    </script>
+
+  </body>
+</html>

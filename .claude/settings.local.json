@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//d/Proyectos/**)",
+      "Bash(dir \"d:\\\\Proyectos\")",
+      "Bash(Get-ChildItem \"d:\\\\Proyectos\\\\optica-recetas-ai\" -Recurse -Include \"*.png\",\"*.jpg\",\"*.jpeg\",\"*.webp\",\"*.gif\",\"*.svg\")",
+      "Bash(Select-Object FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(cp \"d:/Proyectos/optica-recetas-ai/docs/screenshots/Panel_Optica2.png\" \"d:/Proyectos/Portfolio/public/optica-panel.png\" && echo \"Copiado OK\")",
+      "Bash(cd /d)",
+      "Bash(find \"d:\\\\Proyectos\\\\Portfolio\" -maxdepth 2 -name \"tailwind.config.*\" -o -name \"tsconfig.json\")",
+      "Bash(npm run *)",
+      "Bash(npx astro *)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "WebFetch(domain:cdn.worldvectorlogo.com)",
+      "WebFetch(domain:api.iconify.design)",
+      "WebFetch(domain:cdn.simpleicons.org)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:simpleicons.org)",
+      "Bash(vercel --version)",
+      "Bash(git --version)",
+      "Bash(gh --version)"
+    ],
+    "additionalDirectories": [
+      "d:\\Proyectos\\optica-recetas-ai\\docs\\screenshots"
+    ]
+  }
+}

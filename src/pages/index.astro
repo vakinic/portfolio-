@@ -87,17 +87,28 @@ const proyectos: Proyecto[] = [
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- viewport-fit=cover enables env(safe-area-inset-*) for notched iPhones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="description" content="Nicolás Ferreira — Consultor de e-commerce y automatización IA. Escalo operaciones de venta online y automatizo procesos para que las empresas vendan más y trabajen mejor." />
+    <!-- Colors the browser chrome on Android Chrome and iOS Safari -->
+    <meta name="theme-color" content="#09090b" id="meta-theme-color" />
     <title>Nicolás Ferreira — Consultor E-commerce & IA</title>
   </head>
 
   <body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white">
 
     <!-- LIGHTBOX -->
-    <div id="lightbox" class="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center hidden cursor-pointer" onclick="closeLightbox()">
+    <div
+      id="lightbox"
+      class="fixed inset-0 z-[200] bg-black/90 flex items-center justify-center hidden"
+      onclick="closeLightbox()"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Imagen ampliada"
+    >
+      <!-- Close button with minimum 44×44px touch target (iOS HIG) -->
       <button
-        class="absolute top-4 right-4 text-white/70 hover:text-white transition-colors p-2"
+        class="absolute top-3 right-3 sm:top-4 sm:right-4 min-w-[44px] min-h-[44px] flex items-center justify-center text-white/70 hover:text-white active:text-white transition-colors rounded-xl"
         onclick="event.stopPropagation(); closeLightbox()"
         aria-label="Cerrar"
       >
@@ -105,52 +116,104 @@ const proyectos: Proyecto[] = [
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
         </svg>
       </button>
-      <img id="lightbox-img" src="" alt="" class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg cursor-default" onclick="event.stopPropagation()">
+      <img
+        id="lightbox-img"
+        src=""
+        alt=""
+        class="max-w-[92vw] max-h-[88vh] object-contain rounded-lg"
+        onclick="event.stopPropagation()"
+        draggable="false"
+      />
+      <!-- Swipe hint for mobile -->
+      <p class="absolute bottom-4 left-0 right-0 text-center text-xs text-white/30 sm:hidden select-none">
+        Deslizá hacia abajo para cerrar
+      </p>
     </div>
 
     <!-- NAV -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm border-b border-zinc-100 dark:border-zinc-900">
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-zinc-950/90 backdrop-blur-sm border-b border-zinc-100 dark:border-zinc-900"
+      style="padding-top: env(safe-area-inset-top);"
+    >
       <div class="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
         <span class="font-semibold text-sm tracking-tight text-zinc-900 dark:text-white">Nicolás Ferreira</span>
-        <div class="flex items-center gap-5">
+        <div class="flex items-center gap-3 sm:gap-5">
+          <!-- Desktop nav links -->
           <div class="hidden sm:flex items-center gap-6 text-sm text-zinc-500">
             <a href="#trayectoria" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Trayectoria</a>
             <a href="#servicios" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Servicios</a>
             <a href="#proyectos" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Proyectos</a>
             <a href="#contacto" class="hover:text-zinc-900 dark:hover:text-white transition-colors">Contacto</a>
           </div>
-          <button id="theme-toggle" class="p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-all" aria-label="Cambiar tema">
-            <!-- Sol: visible en dark mode -->
+          <!-- Theme toggle -->
+          <button
+            id="theme-toggle"
+            class="p-2 rounded-lg text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 active:bg-zinc-100 dark:active:bg-zinc-800 transition-all"
+            aria-label="Cambiar tema"
+          >
             <svg class="hidden dark:block w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
             </svg>
-            <!-- Luna: visible en light mode -->
             <svg class="block dark:hidden w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+            </svg>
+          </button>
+          <!-- Hamburger button — mobile only -->
+          <button
+            id="menu-toggle"
+            class="sm:hidden flex items-center justify-center w-9 h-9 rounded-lg text-zinc-500 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 active:bg-zinc-100 dark:active:bg-zinc-800 transition-all"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <!-- Hamburger icon -->
+            <svg id="icon-hamburger" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <!-- X icon (hidden by default) -->
+            <svg id="icon-x" class="w-5 h-5 hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
       </div>
     </nav>
 
+    <!-- MOBILE MENU — dropdown below nav, sm:hidden via CSS pointer-events -->
+    <div
+      id="mobile-menu"
+      class="sm:!hidden fixed left-0 right-0 z-40 bg-white/97 dark:bg-zinc-950/97 backdrop-blur-md border-b border-zinc-100 dark:border-zinc-900 shadow-xl"
+      style="top: calc(56px + env(safe-area-inset-top));"
+      aria-hidden="true"
+    >
+      <div class="px-6 py-1 flex flex-col divide-y divide-zinc-100 dark:divide-zinc-800/60">
+        <a href="#trayectoria" onclick="closeMobileMenu()" class="flex items-center py-4 text-sm font-medium text-zinc-700 dark:text-zinc-300 active:text-zinc-900 dark:active:text-white transition-colors">Trayectoria</a>
+        <a href="#servicios" onclick="closeMobileMenu()" class="flex items-center py-4 text-sm font-medium text-zinc-700 dark:text-zinc-300 active:text-zinc-900 dark:active:text-white transition-colors">Servicios</a>
+        <a href="#proyectos" onclick="closeMobileMenu()" class="flex items-center py-4 text-sm font-medium text-zinc-700 dark:text-zinc-300 active:text-zinc-900 dark:active:text-white transition-colors">Proyectos</a>
+        <a href="#contacto" onclick="closeMobileMenu()" class="flex items-center py-4 text-sm font-medium text-zinc-700 dark:text-zinc-300 active:text-zinc-900 dark:active:text-white transition-colors">Contacto</a>
+      </div>
+    </div>
+
     <!-- HERO -->
-    <section class="pt-32 pb-24 px-6">
+    <!-- pt uses env() to clear the notch/Dynamic Island on iPhones -->
+    <section class="pb-20 sm:pb-24 px-6" style="padding-top: max(7rem, calc(4.5rem + env(safe-area-inset-top)));">
       <div class="max-w-5xl mx-auto lg:grid lg:grid-cols-[3fr_2fr] lg:gap-16 lg:items-center">
         <div>
-          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-600 tracking-widest uppercase mb-4">Consultor E-commerce & IA</p>
-          <h1 class="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-6 text-zinc-900 dark:text-white">
+          <p class="text-xs sm:text-sm font-medium text-zinc-500 dark:text-zinc-600 tracking-widest uppercase mb-4">Consultor E-commerce & IA</p>
+          <!-- Smaller base on mobile to avoid overflow at 375px -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-5 sm:mb-6 text-zinc-900 dark:text-white">
             Nicolás<br/>Ferreira
           </h1>
-          <p class="text-xl text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed mb-3">
+          <p class="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 max-w-xl leading-relaxed mb-3">
             Escalo operaciones de e-commerce y automatizo procesos con IA para que las empresas vendan más y trabajen mejor.
           </p>
-          <p class="text-base text-zinc-500 max-w-xl leading-relaxed mb-10">
+          <p class="text-sm sm:text-base text-zinc-500 max-w-xl leading-relaxed mb-8 sm:mb-10">
             Experiencia comprobada llevando un canal de Mercado Libre de <span class="text-zinc-700 dark:text-zinc-300 font-medium">$8M a $130M mensuales</span>.
           </p>
           <div class="flex flex-wrap gap-3">
             <a
               href="#contacto"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              class="inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 active:opacity-80"
               style="background: #A64D79;"
               onmouseover="this.style.background='#6A1E55'"
               onmouseout="this.style.background='#A64D79'"
@@ -159,7 +222,7 @@ const proyectos: Proyecto[] = [
             </a>
             <a
               href="#proyectos"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+              class="inline-flex items-center gap-2 px-5 py-3 sm:py-2.5 rounded-lg text-sm font-medium transition-all duration-200 active:opacity-70"
               style="border: 1px solid #A64D79; color: #A64D79;"
               onmouseover="this.style.background='rgba(166,77,121,0.12)'"
               onmouseout="this.style.background='transparent'"
@@ -169,19 +232,19 @@ const proyectos: Proyecto[] = [
           </div>
         </div>
 
-        <!-- Stats column -->
-        <div class="mt-14 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-8">
+        <!-- Stats column — 3-col on mobile with smaller text to fit 375px screens -->
+        <div class="mt-12 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-6 lg:gap-8">
           <div>
-            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">16×</p>
-            <p class="text-base text-zinc-600 dark:text-white mt-1">Crecimiento</p>
+            <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">16×</p>
+            <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Crecimiento</p>
           </div>
           <div>
-            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">$130M</p>
-            <p class="text-base text-zinc-600 dark:text-white mt-1">Facturación pico</p>
+            <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">$130M</p>
+            <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Facturación pico</p>
           </div>
           <div>
-            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">5+</p>
-            <p class="text-base text-zinc-600 dark:text-white mt-1">Años experiencia</p>
+            <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">5+</p>
+            <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Años experiencia</p>
           </div>
         </div>
       </div>
@@ -192,11 +255,12 @@ const proyectos: Proyecto[] = [
       <p class="text-xs font-medium tracking-widest uppercase mb-7 text-center px-6" style="color: var(--acc-label);">Experiencia en plataformas y herramientas</p>
       <div class="marquee-track" style="display: flex; gap: 0.625rem;">
         {[...plataformas, ...plataformas, ...plataformas, ...plataformas].map((plat) => (
-          <div class="flex items-center gap-3 rounded-lg px-5 py-3 cursor-default flex-shrink-0" style="background: var(--acc-item-bg); border: 1px solid var(--acc-card-border);">
+          <div class="flex items-center gap-3 rounded-lg px-5 py-3 flex-shrink-0 select-none" style="background: var(--acc-item-bg); border: 1px solid var(--acc-card-border);">
             <img
               src={plat.logo}
               alt=""
               class="w-6 h-6 object-contain brightness-0 dark:invert opacity-60"
+              draggable="false"
             />
             <span class="text-base font-medium" style="color: var(--acc-soft);">{plat.nombre}</span>
           </div>
@@ -210,8 +274,11 @@ const proyectos: Proyecto[] = [
         width: max-content;
         padding: 0 0.625rem;
       }
-      .marquee-track:hover {
-        animation-play-state: paused;
+      /* Pause only on desktop hover; touch devices don't have hover */
+      @media (hover: hover) {
+        .marquee-track:hover {
+          animation-play-state: paused;
+        }
       }
       @keyframes marquee {
         from { transform: translateX(0); }
@@ -246,8 +313,8 @@ const proyectos: Proyecto[] = [
     </style>
 
     <!-- TRAYECTORIA -->
-    <section id="trayectoria" class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900">
-      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
+    <section id="trayectoria" class="py-20 sm:py-24 px-6 border-t border-zinc-100 dark:border-zinc-900">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-8 sm:gap-12">
         <div>
           <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Trayectoria</h2>
         </div>
@@ -261,8 +328,6 @@ const proyectos: Proyecto[] = [
           <p>
             También cuento con experiencia en Amazon Seller Central, gestión de envíos FBA, sourcing internacional desde China hacia Estados Unidos y automatización de procesos con inteligencia artificial.
           </p>
-
-          <!-- ÁREAS -->
           <div class="pt-4 flex flex-wrap gap-2">
             {areas.map((area) => (
               <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">
@@ -275,14 +340,13 @@ const proyectos: Proyecto[] = [
     </section>
 
     <!-- SERVICIOS -->
-    <section id="servicios" class="py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+    <section id="servicios" class="py-20 sm:py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
       <div class="max-w-5xl mx-auto">
-        <div class="mb-12">
+        <div class="mb-10 sm:mb-12">
           <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Servicios</h2>
         </div>
-
-        <div class="grid sm:grid-cols-2 gap-6">
-          <div class="rounded-xl p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
+        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+          <div class="rounded-xl p-5 sm:p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
             <h3 class="font-semibold mb-2" style="color: var(--acc-heading);">E-commerce</h3>
             <p class="text-sm leading-relaxed mb-5" style="color: var(--acc-body);">
               Gestión integral de canales de venta online — estrategia, catálogo, publicidad, precios y operaciones.
@@ -293,8 +357,7 @@ const proyectos: Proyecto[] = [
               ))}
             </div>
           </div>
-
-          <div class="rounded-xl p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
+          <div class="rounded-xl p-5 sm:p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
             <h3 class="font-semibold mb-2" style="color: var(--acc-heading);">Automatización IA</h3>
             <p class="text-sm leading-relaxed mb-5" style="color: var(--acc-body);">
               Automatización de procesos con inteligencia artificial para atención al cliente, ventas y operaciones.
@@ -310,25 +373,25 @@ const proyectos: Proyecto[] = [
     </section>
 
     <!-- PROYECTOS -->
-    <section id="proyectos" class="py-24 px-6">
+    <section id="proyectos" class="py-20 sm:py-24 px-6">
       <div class="max-w-5xl mx-auto">
-        <div class="grid sm:grid-cols-3 gap-12 mb-12">
+        <div class="grid sm:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
           <div>
             <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Proyectos</h2>
           </div>
           <div class="sm:col-span-2"></div>
         </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {proyectos.map((proyecto) => (
-            <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors group">
+            <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 active:border-zinc-300 dark:active:border-zinc-600 transition-colors group">
               <div class="h-44 overflow-hidden bg-zinc-200 dark:bg-zinc-800">
                 {proyecto.imagen ? (
                   <img
                     src={proyecto.imagen}
                     alt={proyecto.titulo}
-                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-zoom-in"
+                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-zoom-in select-none"
                     onclick="openLightbox(this.src, this.alt)"
+                    draggable="false"
                   />
                 ) : (
                   <div
@@ -339,7 +402,7 @@ const proyectos: Proyecto[] = [
                   </div>
                 )}
               </div>
-              <div class="p-5">
+              <div class="p-4 sm:p-5">
                 <h3 class="font-semibold text-zinc-900 dark:text-white mb-1.5">{proyecto.titulo}</h3>
                 <p class="text-sm text-zinc-500 leading-relaxed mb-4">{proyecto.descripcion}</p>
                 <div class="flex flex-wrap gap-1.5">
@@ -357,8 +420,8 @@ const proyectos: Proyecto[] = [
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06);">
-      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
+    <section id="contacto" class="py-20 sm:py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06);">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-8 sm:gap-12">
         <div>
           <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Contacto</h2>
         </div>
@@ -370,8 +433,8 @@ const proyectos: Proyecto[] = [
             <a
               href="https://wa.me/5491138158237"
               target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 active:opacity-80"
               style="background: #A64D79;"
               onmouseover="this.style.background='#6A1E55'"
               onmouseout="this.style.background='#A64D79'"
@@ -381,8 +444,8 @@ const proyectos: Proyecto[] = [
             <a
               href="https://www.linkedin.com/in/nicolas-ferreira-039254232/"
               target="_blank"
-              rel="noopener"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 active:opacity-80"
               style="background: #A64D79;"
               onmouseover="this.style.background='#6A1E55'"
               onmouseout="this.style.background='#A64D79'"
@@ -391,7 +454,7 @@ const proyectos: Proyecto[] = [
             </a>
             <a
               href="mailto:fernicnet@gmail.com"
-              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              class="inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200 active:opacity-80"
               style="background: #A64D79;"
               onmouseover="this.style.background='#6A1E55'"
               onmouseout="this.style.background='#A64D79'"
@@ -403,8 +466,11 @@ const proyectos: Proyecto[] = [
       </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="py-10 px-6 border-t border-zinc-100 dark:border-zinc-900">
+    <!-- FOOTER — bottom safe area for iPhone home indicator -->
+    <footer
+      class="pt-10 px-6 border-t border-zinc-100 dark:border-zinc-900"
+      style="padding-bottom: max(2.5rem, calc(1.25rem + env(safe-area-inset-bottom)));"
+    >
       <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6">
         <div>
           <p class="font-semibold text-sm text-zinc-800 dark:text-zinc-200">Nicolás Ferreira</p>
@@ -412,30 +478,84 @@ const proyectos: Proyecto[] = [
           <p class="text-xs text-zinc-300 dark:text-zinc-700 mt-3">Buenos Aires, Argentina</p>
         </div>
         <div class="flex items-center gap-6">
-          <a href="https://wa.me/5491138158237" target="_blank" rel="noopener" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">WhatsApp</a>
-          <a href="https://www.linkedin.com/in/nicolas-ferreira-039254232/" target="_blank" rel="noopener" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">LinkedIn</a>
+          <a href="https://wa.me/5491138158237" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">WhatsApp</a>
+          <a href="https://www.linkedin.com/in/nicolas-ferreira-039254232/" target="_blank" rel="noopener noreferrer" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">LinkedIn</a>
           <a href="mailto:fernicnet@gmail.com" class="text-xs text-zinc-400 dark:text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">Email</a>
         </div>
       </div>
     </footer>
 
     <script>
-      // Dark/Light toggle
-      const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
 
+      // ─── Theme ───────────────────────────────────────────────────────────
       const saved = localStorage.getItem('theme');
       if (saved === 'light') html.classList.remove('dark');
 
-      toggle?.addEventListener('click', () => {
+      function updateThemeColor() {
+        const color = html.classList.contains('dark') ? '#09090b' : '#ffffff';
+        document.getElementById('meta-theme-color')?.setAttribute('content', color);
+      }
+      updateThemeColor();
+
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
         html.classList.toggle('dark');
         localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        updateThemeColor();
       });
 
-      // Lightbox
+      // ─── Mobile menu ─────────────────────────────────────────────────────
+      const menuToggle   = document.getElementById('menu-toggle') as HTMLButtonElement;
+      const mobileMenu   = document.getElementById('mobile-menu') as HTMLElement;
+      const iconHamburger = document.getElementById('icon-hamburger') as HTMLElement;
+      const iconX        = document.getElementById('icon-x') as HTMLElement;
+
+      function openMobileMenu() {
+        mobileMenu.classList.add('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        menuToggle.setAttribute('aria-expanded', 'true');
+        iconHamburger.classList.add('hidden');
+        iconX.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        iconHamburger.classList.remove('hidden');
+        iconX.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+
+      menuToggle?.addEventListener('click', () => {
+        mobileMenu.classList.contains('is-open') ? closeMobileMenu() : openMobileMenu();
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          closeMobileMenu();
+          closeLightbox();
+        }
+      });
+
+      // Close mobile menu when user scrolls (likely browsing)
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (Math.abs(window.scrollY - lastScrollY) > 40 && mobileMenu.classList.contains('is-open')) {
+          closeMobileMenu();
+        }
+        lastScrollY = window.scrollY;
+      }, { passive: true });
+
+      // Make close available globally for onclick attributes on menu links
+      (window as any).closeMobileMenu = closeMobileMenu;
+
+      // ─── Lightbox ────────────────────────────────────────────────────────
       function openLightbox(src: string, alt: string) {
         const lightbox = document.getElementById('lightbox') as HTMLElement;
-        const img = document.getElementById('lightbox-img') as HTMLImageElement;
+        const img      = document.getElementById('lightbox-img') as HTMLImageElement;
         img.src = src;
         img.alt = alt;
         lightbox.classList.remove('hidden');
@@ -448,12 +568,26 @@ const proyectos: Proyecto[] = [
         document.body.style.overflow = '';
       }
 
-      document.addEventListener('keydown', (e: KeyboardEvent) => {
-        if (e.key === 'Escape') closeLightbox();
-      });
+      // Swipe down to close lightbox on touch devices
+      const lightboxEl = document.getElementById('lightbox') as HTMLElement;
+      let touchStartY = 0;
+      let touchStartX = 0;
 
-      // Make functions available globally for onclick handlers
-      (window as any).openLightbox = openLightbox;
+      lightboxEl?.addEventListener('touchstart', (e: TouchEvent) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+      }, { passive: true });
+
+      lightboxEl?.addEventListener('touchend', (e: TouchEvent) => {
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+        const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        // Close if swiped down ≥ 80px and not a horizontal swipe
+        if (deltaY > 80 && deltaX < 60) {
+          closeLightbox();
+        }
+      }, { passive: true });
+
+      (window as any).openLightbox  = openLightbox;
       (window as any).closeLightbox = closeLightbox;
     </script>
 

@@ -20,7 +20,10 @@
       "WebFetch(domain:simpleicons.org)",
       "Bash(vercel --version)",
       "Bash(git --version)",
-      "Bash(gh --version)"
+      "Bash(gh --version)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": [
       "d:\\Proyectos\\optica-recetas-ai\\docs\\screenshots"

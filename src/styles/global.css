@@ -9,9 +9,37 @@
 
 html {
   scroll-behavior: smooth;
+  /* Prevent iOS from boosting font sizes on orientation change */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Remove blue flash on tap for all elements on iOS/Android */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Eliminate 300ms click delay on touch devices */
+button,
+a,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+/* Mobile menu slide-in animation */
+#mobile-menu {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+#mobile-menu.is-open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
 }

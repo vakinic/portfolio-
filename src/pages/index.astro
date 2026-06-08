@@ -68,7 +68,7 @@ const proyectos: Proyecto[] = [
     imagen: "/sourcing-china.png",
   },
   {
-    titulo: "Óptica Recetas AI",
+    titulo: "Óptica Recetas IA",
     descripcion: "Sistema de automatización de recetas ópticas con inteligencia artificial. Procesamiento inteligente y envío automático por WhatsApp a los pacientes.",
     tags: ["WhatsApp", "IA", "Supabase", "Next.js"],
     imagen: "/optica-panel.png",
@@ -137,7 +137,7 @@ const proyectos: Proyecto[] = [
     <section class="pt-32 pb-24 px-6">
       <div class="max-w-5xl mx-auto lg:grid lg:grid-cols-[3fr_2fr] lg:gap-16 lg:items-center">
         <div>
-          <p class="text-sm font-medium text-zinc-400 dark:text-zinc-600 tracking-widest uppercase mb-4">Consultor E-commerce & IA</p>
+          <p class="text-sm font-medium text-zinc-500 dark:text-zinc-600 tracking-widest uppercase mb-4">Consultor E-commerce & IA</p>
           <h1 class="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-6 text-zinc-900 dark:text-white">
             Nicolás<br/>Ferreira
           </h1>
@@ -150,13 +150,19 @@ const proyectos: Proyecto[] = [
           <div class="flex flex-wrap gap-3">
             <a
               href="#contacto"
-              class="inline-flex items-center gap-2 bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              style="background: #A64D79;"
+              onmouseover="this.style.background='#6A1E55'"
+              onmouseout="this.style.background='#A64D79'"
             >
               Contactar
             </a>
             <a
               href="#proyectos"
-              class="inline-flex items-center gap-2 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-600 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200"
+              style="border: 1px solid #A64D79; color: #A64D79;"
+              onmouseover="this.style.background='rgba(166,77,121,0.12)'"
+              onmouseout="this.style.background='transparent'"
             >
               Ver proyectos
             </a>
@@ -166,45 +172,84 @@ const proyectos: Proyecto[] = [
         <!-- Stats column -->
         <div class="mt-14 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-3 lg:grid-cols-1 gap-6 lg:gap-8">
           <div>
-            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">16×</p>
-            <p class="text-sm text-zinc-500 mt-1">Crecimiento</p>
+            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">16×</p>
+            <p class="text-base text-zinc-600 dark:text-white mt-1">Crecimiento</p>
           </div>
           <div>
-            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">$130M</p>
-            <p class="text-sm text-zinc-500 mt-1">Facturación pico</p>
+            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">$130M</p>
+            <p class="text-base text-zinc-600 dark:text-white mt-1">Facturación pico</p>
           </div>
           <div>
-            <p class="text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">5+</p>
-            <p class="text-sm text-zinc-500 mt-1">Años experiencia</p>
+            <p class="text-4xl font-bold tracking-tight" style="color: #A64D79;">5+</p>
+            <p class="text-base text-zinc-600 dark:text-white mt-1">Años experiencia</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- PLATAFORMAS -->
-    <section class="py-10 px-6 border-t border-zinc-100 dark:border-zinc-900">
-      <div class="max-w-5xl mx-auto">
-        <p class="text-xs font-medium text-zinc-300 dark:text-zinc-700 tracking-widest uppercase mb-7 text-center">Experiencia en plataformas y herramientas</p>
-        <div class="flex flex-wrap items-center justify-center gap-2.5">
-          {plataformas.map((plat) => (
-            <div class="flex items-center gap-2 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-lg px-3 py-1.5 hover:bg-white dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-sm transition-all duration-200 cursor-default group">
-              <img
-                src={plat.logo}
-                alt=""
-                class="w-3.5 h-3.5 object-contain brightness-0 opacity-35 dark:invert dark:opacity-40 group-hover:opacity-75 dark:group-hover:opacity-70 transition-opacity duration-200"
-              />
-              <span class="text-xs font-medium text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors duration-200">{plat.nombre}</span>
-            </div>
-          ))}
-        </div>
+    <section class="py-10 overflow-hidden bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
+      <p class="text-xs font-medium tracking-widest uppercase mb-7 text-center px-6" style="color: var(--acc-label);">Experiencia en plataformas y herramientas</p>
+      <div class="marquee-track" style="display: flex; gap: 0.625rem;">
+        {[...plataformas, ...plataformas, ...plataformas, ...plataformas].map((plat) => (
+          <div class="flex items-center gap-3 rounded-lg px-5 py-3 cursor-default flex-shrink-0" style="background: var(--acc-item-bg); border: 1px solid var(--acc-card-border);">
+            <img
+              src={plat.logo}
+              alt=""
+              class="w-6 h-6 object-contain brightness-0 dark:invert opacity-60"
+            />
+            <span class="text-base font-medium" style="color: var(--acc-soft);">{plat.nombre}</span>
+          </div>
+        ))}
       </div>
     </section>
+
+    <style>
+      .marquee-track {
+        animation: marquee 22s linear infinite;
+        width: max-content;
+        padding: 0 0.625rem;
+      }
+      .marquee-track:hover {
+        animation-play-state: paused;
+      }
+      @keyframes marquee {
+        from { transform: translateX(0); }
+        to   { transform: translateX(-50%); }
+      }
+      .bg-accent {
+        background-color: rgba(166, 77, 121, 0.2);
+        --acc-label: #71717a;
+        --acc-heading: #18181b;
+        --acc-body: #71717a;
+        --acc-muted: #52525b;
+        --acc-soft: #52525b;
+        --acc-card-bg: rgba(255,255,255,0.7);
+        --acc-card-border: rgba(166,77,121,0.25);
+        --acc-tag-bg: rgba(255,255,255,0.55);
+        --acc-tag-border: rgba(166,77,121,0.2);
+        --acc-item-bg: rgba(255,255,255,0.6);
+      }
+      .dark .bg-accent {
+        background-color: #3B1C32;
+        --acc-label: rgba(255,255,255,0.35);
+        --acc-heading: rgba(255,255,255,0.9);
+        --acc-body: rgba(255,255,255,0.5);
+        --acc-muted: rgba(255,255,255,0.55);
+        --acc-soft: rgba(255,255,255,0.6);
+        --acc-card-bg: rgba(255,255,255,0.05);
+        --acc-card-border: rgba(255,255,255,0.1);
+        --acc-tag-bg: rgba(255,255,255,0.07);
+        --acc-tag-border: rgba(255,255,255,0.12);
+        --acc-item-bg: rgba(255,255,255,0.06);
+      }
+    </style>
 
     <!-- TRAYECTORIA -->
     <section id="trayectoria" class="py-24 px-6 border-t border-zinc-100 dark:border-zinc-900">
       <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
         <div>
-          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Trayectoria</h2>
+          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Trayectoria</h2>
         </div>
         <div class="sm:col-span-2 space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
           <p>
@@ -230,38 +275,33 @@ const proyectos: Proyecto[] = [
     </section>
 
     <!-- SERVICIOS -->
-    <section id="servicios" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800">
+    <section id="servicios" class="py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
       <div class="max-w-5xl mx-auto">
-        <div class="grid sm:grid-cols-3 gap-12 mb-12">
-          <div>
-            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Servicios</h2>
-          </div>
-          <div class="sm:col-span-2">
-            <p class="text-zinc-500 leading-relaxed">Lo que ofrezco a empresas y marcas que quieren crecer en digital.</p>
-          </div>
+        <div class="mb-12">
+          <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Servicios</h2>
         </div>
 
         <div class="grid sm:grid-cols-2 gap-6">
-          <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors">
-            <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">E-commerce</h3>
-            <p class="text-sm text-zinc-500 leading-relaxed mb-5">
+          <div class="rounded-xl p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
+            <h3 class="font-semibold mb-2" style="color: var(--acc-heading);">E-commerce</h3>
+            <p class="text-sm leading-relaxed mb-5" style="color: var(--acc-body);">
               Gestión integral de canales de venta online — estrategia, catálogo, publicidad, precios y operaciones.
             </p>
             <div class="flex flex-wrap gap-2">
               {["Mercado Libre", "Amazon", "Tiendanube"].map((tag) => (
-                <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">{tag}</span>
+                <span class="text-xs font-medium px-3 py-1.5 rounded-full" style="background: var(--acc-tag-bg); border: 1px solid var(--acc-tag-border); color: var(--acc-muted);">{tag}</span>
               ))}
             </div>
           </div>
 
-          <div class="bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors">
-            <h3 class="font-semibold text-zinc-900 dark:text-white mb-2">Automatización IA</h3>
-            <p class="text-sm text-zinc-500 leading-relaxed mb-5">
+          <div class="rounded-xl p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
+            <h3 class="font-semibold mb-2" style="color: var(--acc-heading);">Automatización IA</h3>
+            <p class="text-sm leading-relaxed mb-5" style="color: var(--acc-body);">
               Automatización de procesos con inteligencia artificial para atención al cliente, ventas y operaciones.
             </p>
             <div class="flex flex-wrap gap-2">
               {["n8n", "WhatsApp", "CRM", "IA"].map((tag) => (
-                <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">{tag}</span>
+                <span class="text-xs font-medium px-3 py-1.5 rounded-full" style="background: var(--acc-tag-bg); border: 1px solid var(--acc-tag-border); color: var(--acc-muted);">{tag}</span>
               ))}
             </div>
           </div>
@@ -274,11 +314,9 @@ const proyectos: Proyecto[] = [
       <div class="max-w-5xl mx-auto">
         <div class="grid sm:grid-cols-3 gap-12 mb-12">
           <div>
-            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Proyectos</h2>
+            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Proyectos</h2>
           </div>
-          <div class="sm:col-span-2">
-            <p class="text-zinc-500 leading-relaxed">Áreas de trabajo con resultados concretos en los últimos 5 años.</p>
-          </div>
+          <div class="sm:col-span-2"></div>
         </div>
 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -319,13 +357,13 @@ const proyectos: Proyecto[] = [
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="py-24 px-6 bg-zinc-50 dark:bg-zinc-900 border-t border-zinc-100 dark:border-zinc-800">
+    <section id="contacto" class="py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06);">
       <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-12">
         <div>
-          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600">Contacto</h2>
+          <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Contacto</h2>
         </div>
         <div class="sm:col-span-2 space-y-6">
-          <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          <p class="leading-relaxed" style="color: var(--acc-muted);">
             Si necesitás escalar tu e-commerce o automatizar procesos con IA, podemos hablar.
           </p>
           <div class="flex flex-col sm:flex-row gap-3">
@@ -333,7 +371,10 @@ const proyectos: Proyecto[] = [
               href="https://wa.me/5491138158237"
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              style="background: #A64D79;"
+              onmouseover="this.style.background='#6A1E55'"
+              onmouseout="this.style.background='#A64D79'"
             >
               WhatsApp
             </a>
@@ -341,13 +382,19 @@ const proyectos: Proyecto[] = [
               href="https://www.linkedin.com/in/nicolas-ferreira-039254232/"
               target="_blank"
               rel="noopener"
-              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              style="background: #A64D79;"
+              onmouseover="this.style.background='#6A1E55'"
+              onmouseout="this.style.background='#A64D79'"
             >
               LinkedIn
             </a>
             <a
               href="mailto:fernicnet@gmail.com"
-              class="inline-flex items-center gap-2 border border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-300 px-5 py-2.5 rounded-lg text-sm font-medium hover:border-zinc-400 dark:hover:border-zinc-500 transition-colors"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white transition-all duration-200"
+              style="background: #A64D79;"
+              onmouseover="this.style.background='#6A1E55'"
+              onmouseout="this.style.background='#A64D79'"
             >
               Email
             </a>

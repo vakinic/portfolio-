@@ -23,10 +23,44 @@
       "Bash(gh --version)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(git checkout *)",
+      "Bash(command -v npx)",
+      "Read(//c/Program Files/Google/Chrome/Application/**)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=1440,900 --screenshot=/d/Proyectos/Portfolio/public/shopify/home.png http://localhost:8089/index.html)",
+      "Bash(rm -rf /d/Proyectos/Web-shopify/.chrome-profile)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --user-data-dir=/d/Proyectos/Web-shopify/.chrome-profile --window-size=1440,900 --virtual-time-budget=2000 --screenshot=/tmp/seed-out.png http://localhost:8089/seed-cart.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=1280,2400 --screenshot=/tmp/portfolio-proyectos.png 'http://localhost:4321/#proyectos')",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=1280,7200 --screenshot=/tmp/portfolio-full.png http://localhost:4321/)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=1280,3600 --screenshot=/tmp/portfolio-proyectos2.png 'http://localhost:4321/#proyectos')",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=900,1100 --screenshot=/tmp/portfolio-newcards.png 'http://localhost:4321/#proyectos' --window-position=0,2750)",
+      "Bash(python -c ' *)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=960,520 --screenshot=/tmp/newcards-crop.png file:///C:/Users/Nicolas/AppData/Local/Temp/crop.html)",
+      "Bash('/c/Program Files/Google/Chrome/Application/chrome.exe' --headless --disable-gpu --hide-scrollbars --window-size=960,520 --screenshot=/tmp/newcards-crop2.png file:///C:/Users/Nicolas/AppData/Local/Temp/crop2.html)",
+      "Bash(rm -f \"d:/Proyectos/Web-shopify/demo/seed-cart.html\")",
+      "Bash(rm -rf \"d:/Proyectos/Web-shopify/.chrome-profile\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8089/index.shot.html)",
+      "Bash(CHROME=\"/c/Program Files/Google/Chrome/Application/chrome.exe\" *)",
+      "Bash(rm -f index.shot.html producto.shot.html carrito.shot.html seed-cart.html)",
+      "Bash(cd /d/Proyectos/Portfolio && grep -n \"imagenes\" -B3 src/pages/index.astro)",
+      "Read(//d/d/Proyectos/Portfolio/src/pages/**)",
+      "Bash(node -e ' *)",
+      "Bash(rm public/tiendanube/Screenshot_*.png && ls -la public/tiendanube/)",
+      "Read(//tmp/**)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4322/)",
+      "Bash(npx --yes playwright --version)",
+      "Bash(npx --yes playwright install chromium --with-deps)",
+      "Bash(node \"C:/Users/Nicolas/AppData/Local/Temp/screenshot-trayectoria.mjs\")",
+      "Bash(npm install *)",
+      "Bash(node screenshot-tmp.mjs)",
+      "Bash(rm -f screenshot-tmp3.mjs)",
+      "Bash(pkill -f \"astro dev\")"
     ],
     "additionalDirectories": [
-      "d:\\Proyectos\\optica-recetas-ai\\docs\\screenshots"
+      "d:\\Proyectos\\optica-recetas-ai\\docs\\screenshots",
+      "D:\\Proyectos\\Web-shopify",
+      "D:\\Proyectos\\Portfolio\\public\\tiendanube"
     ]
   }
 }

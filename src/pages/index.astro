@@ -6,6 +6,7 @@ interface Proyecto {
   descripcion: string;
   tags: string[];
   imagen: string | null;
+  imagenes?: string[];
   bgStyle?: string;
 }
 
@@ -80,6 +81,20 @@ const proyectos: Proyecto[] = [
     imagen: "/n8n workflow.png",
     bgStyle: "background: linear-gradient(135deg, #0d1f12, #1a3a22)",
   },
+  {
+    titulo: "Tienda Nube — Mi primera tienda",
+    descripcion: "Primera tienda online que armé, en Tiendanube: catálogo organizado por categorías, fichas de producto y experiencia de compra pensada mobile-first.",
+    tags: ["Tiendanube", "E-commerce", "UI/UX"],
+    imagen: null,
+    imagenes: ["/tiendanube/home.jpg", "/tiendanube/categoria.jpg", "/tiendanube/producto.jpg"],
+  },
+  {
+    titulo: "Shopify Optical Concept",
+    descripcion: "Prototipo visual de una tienda óptica estilo Shopify: header sticky, grilla de productos, ficha de producto con selector de variantes y carrito funcional.",
+    tags: ["Shopify", "UI/UX", "Demo"],
+    imagen: null,
+    imagenes: ["/shopify/home.png", "/shopify/producto.png", "/shopify/carrito.png"],
+  },
 ];
 ---
 
@@ -124,8 +139,31 @@ const proyectos: Proyecto[] = [
         onclick="event.stopPropagation()"
         draggable="false"
       />
+      <!-- Gallery prev/next — shown only when the opened project has more than one image -->
+      <button
+        id="lightbox-prev"
+        class="hidden absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 min-w-[44px] min-h-[44px] items-center justify-center text-white/70 hover:text-white active:text-white transition-colors rounded-xl bg-black/20"
+        onclick="event.stopPropagation(); lightboxNav(-1)"
+        aria-label="Imagen anterior"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+        </svg>
+      </button>
+      <button
+        id="lightbox-next"
+        class="hidden absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 min-w-[44px] min-h-[44px] items-center justify-center text-white/70 hover:text-white active:text-white transition-colors rounded-xl bg-black/20"
+        onclick="event.stopPropagation(); lightboxNav(1)"
+        aria-label="Imagen siguiente"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5 15.75 12l-7.5 7.5" />
+        </svg>
+      </button>
+      <!-- Gallery dots -->
+      <div id="lightbox-dots" class="hidden absolute bottom-10 left-0 right-0 items-center justify-center gap-2"></div>
       <!-- Swipe hint for mobile -->
-      <p class="absolute bottom-4 left-0 right-0 text-center text-xs text-white/30 sm:hidden select-none">
+      <p id="lightbox-hint" class="absolute bottom-4 left-0 right-0 text-center text-xs text-white/30 sm:hidden select-none">
         Deslizá hacia abajo para cerrar
       </p>
     </div>
@@ -252,7 +290,7 @@ const proyectos: Proyecto[] = [
 
     <!-- PLATAFORMAS -->
     <section class="py-10 overflow-hidden bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
-      <p class="text-xs font-medium tracking-widest uppercase mb-7 text-center px-6" style="color: var(--acc-label);">Experiencia en plataformas y herramientas</p>
+      <p class="text-xs font-medium tracking-widest uppercase mb-7 text-center px-6 text-white">Experiencia en plataformas y herramientas</p>
       <div class="marquee-track" style="display: flex; gap: 0.625rem;">
         {[...plataformas, ...plataformas, ...plataformas, ...plataformas].map((plat) => (
           <div class="flex items-center gap-3 rounded-lg px-5 py-3 flex-shrink-0 select-none" style="background: var(--acc-item-bg); border: 1px solid var(--acc-card-border);">
@@ -314,27 +352,30 @@ const proyectos: Proyecto[] = [
 
     <!-- TRAYECTORIA -->
     <section id="trayectoria" class="py-20 sm:py-24 px-6 border-t border-zinc-100 dark:border-zinc-900">
-      <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-8 sm:gap-12">
+      <div class="max-w-5xl mx-auto grid sm:grid-cols-[3fr_2fr] gap-10 sm:gap-16">
         <div>
-          <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Trayectoria</h2>
-        </div>
-        <div class="sm:col-span-2 space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          <p>
-            Trabajo hace más de 5 años en e-commerce, gestionando y supervisando el canal de Mercado Libre de una empresa importadora de herramientas. Mi rol fue evolucionando junto con el crecimiento del negocio: desde la operación inicial hasta asumir responsabilidad estratégica sobre el canal.
-          </p>
-          <p>
-            Hoy mi foco está en la gestión integral: definición de catálogo y publicaciones, estrategia de precios y promociones, publicidad, análisis de métricas y coordinación del equipo operativo. Veo Mercado Libre no como un catálogo, sino como un canal que tiene que estar alineado con la operación, el stock y la rentabilidad real del negocio.
-          </p>
-          <p>
-            También cuento con experiencia en Amazon Seller Central, gestión de envíos FBA, sourcing internacional desde China hacia Estados Unidos y automatización de procesos con inteligencia artificial.
-          </p>
-          <div class="pt-4 flex flex-wrap gap-2">
-            {areas.map((area) => (
-              <span class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full">
-                {area}
-              </span>
-            ))}
+          <h2 class="text-sm sm:text-base font-bold tracking-widest uppercase text-zinc-800 dark:text-zinc-200 mb-6">Trayectoria</h2>
+          <div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p>
+              Trabajo hace más de 5 años en e-commerce, gestionando y supervisando el canal de Mercado Libre de una empresa importadora de herramientas. Mi rol fue evolucionando junto con el crecimiento del negocio: desde la operación inicial hasta asumir responsabilidad estratégica sobre el canal.
+            </p>
+            <p>
+              Hoy mi foco está en la gestión integral: definición de catálogo y publicaciones, estrategia de precios y promociones, publicidad, análisis de métricas y coordinación del equipo operativo. Veo Mercado Libre no como un catálogo, sino como un canal que tiene que estar alineado con la operación, el stock y la rentabilidad real del negocio.
+            </p>
+            <p>
+              También cuento con experiencia en Amazon Seller Central, gestión de envíos FBA, sourcing internacional desde China hacia Estados Unidos y automatización de procesos con inteligencia artificial.
+            </p>
           </div>
+        </div>
+        <div class="sm:border-l border-zinc-200 dark:border-zinc-800 sm:pl-10">
+          <h3 class="text-xs font-semibold tracking-widest uppercase text-zinc-400 dark:text-zinc-600 mb-5">Áreas de expertise</h3>
+          <ul class="flex flex-col gap-2">
+            {areas.map((area) => (
+              <li class="text-xs font-medium bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-3 py-1.5 rounded-full text-center">
+                {area}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -343,7 +384,7 @@ const proyectos: Proyecto[] = [
     <section id="servicios" class="py-20 sm:py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06);">
       <div class="max-w-5xl mx-auto">
         <div class="mb-10 sm:mb-12">
-          <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Servicios</h2>
+          <h2 class="text-sm sm:text-base font-bold tracking-widest uppercase" style="color: var(--acc-heading);">Servicios</h2>
         </div>
         <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
           <div class="rounded-xl p-5 sm:p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
@@ -377,31 +418,81 @@ const proyectos: Proyecto[] = [
       <div class="max-w-5xl mx-auto">
         <div class="grid sm:grid-cols-3 gap-8 sm:gap-12 mb-10 sm:mb-12">
           <div>
-            <h2 class="text-xs font-semibold tracking-widest uppercase text-zinc-500 dark:text-zinc-600">Proyectos</h2>
+            <h2 class="text-sm sm:text-base font-bold tracking-widest uppercase text-zinc-800 dark:text-zinc-200">Proyectos</h2>
           </div>
           <div class="sm:col-span-2"></div>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {proyectos.map((proyecto) => (
             <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 active:border-zinc-300 dark:active:border-zinc-600 transition-colors group">
-              <div class="h-44 overflow-hidden bg-zinc-200 dark:bg-zinc-800">
-                {proyecto.imagen ? (
-                  <img
-                    src={proyecto.imagen}
-                    alt={proyecto.titulo}
-                    class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-zoom-in select-none"
-                    onclick="openLightbox(this.src, this.alt)"
-                    draggable="false"
-                  />
-                ) : (
-                  <div
-                    class="w-full h-full flex items-end p-4"
-                    style={proyecto.bgStyle}
-                  >
-                    <span class="text-sm font-medium text-zinc-400">{proyecto.titulo}</span>
+              {proyecto.imagenes ? (
+                <div
+                  class="relative h-44 overflow-hidden bg-zinc-200 dark:bg-zinc-800"
+                  data-carousel
+                  data-index="0"
+                  data-gallery={JSON.stringify(proyecto.imagenes)}
+                  data-alt={proyecto.titulo}
+                >
+                  <div class="flex h-full transition-transform duration-300 ease-out" data-carousel-track>
+                    {proyecto.imagenes.map((img) => (
+                      <img
+                        src={img}
+                        alt={proyecto.titulo}
+                        class="w-full h-full shrink-0 object-cover object-top cursor-zoom-in select-none"
+                        data-carousel-img
+                        draggable="false"
+                      />
+                    ))}
                   </div>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    class="absolute left-1.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
+                    data-carousel-prev
+                    aria-label="Imagen anterior"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    class="absolute right-1.5 top-1/2 -translate-y-1/2 z-10 w-7 h-7 flex items-center justify-center rounded-full bg-black/30 hover:bg-black/50 text-white transition-colors"
+                    data-carousel-next
+                    aria-label="Imagen siguiente"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5 15.75 12l-7.5 7.5" />
+                    </svg>
+                  </button>
+                  <div class="absolute bottom-2 inset-x-0 z-10 flex justify-center gap-1.5" data-carousel-dots>
+                    {proyecto.imagenes.map((_, di) => (
+                      <span
+                        class={`w-1.5 h-1.5 rounded-full transition-colors ${di === 0 ? "bg-white" : "bg-white/50"}`}
+                        data-dot
+                      ></span>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <div class="h-44 overflow-hidden bg-zinc-200 dark:bg-zinc-800">
+                  {proyecto.imagen ? (
+                    <img
+                      src={proyecto.imagen}
+                      alt={proyecto.titulo}
+                      class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 cursor-zoom-in select-none"
+                      onclick="openLightbox(this.src, this.alt)"
+                      draggable="false"
+                    />
+                  ) : (
+                    <div
+                      class="w-full h-full flex items-end p-4"
+                      style={proyecto.bgStyle}
+                    >
+                      <span class="text-sm font-medium text-zinc-400">{proyecto.titulo}</span>
+                    </div>
+                  )}
+                </div>
+              )}
               <div class="p-4 sm:p-5">
                 <h3 class="font-semibold text-zinc-900 dark:text-white mb-1.5">{proyecto.titulo}</h3>
                 <p class="text-sm text-zinc-500 leading-relaxed mb-4">{proyecto.descripcion}</p>
@@ -423,7 +514,7 @@ const proyectos: Proyecto[] = [
     <section id="contacto" class="py-20 sm:py-24 px-6 bg-accent" style="border-top: 1px solid rgba(255,255,255,0.06);">
       <div class="max-w-5xl mx-auto grid sm:grid-cols-3 gap-8 sm:gap-12">
         <div>
-          <h2 class="text-xs font-semibold tracking-widest uppercase" style="color: var(--acc-label);">Contacto</h2>
+          <h2 class="text-sm sm:text-base font-bold tracking-widest uppercase" style="color: var(--acc-heading);">Contacto</h2>
         </div>
         <div class="sm:col-span-2 space-y-6">
           <p class="leading-relaxed" style="color: var(--acc-muted);">
@@ -553,11 +644,58 @@ const proyectos: Proyecto[] = [
       (window as any).closeMobileMenu = closeMobileMenu;
 
       // ─── Lightbox ────────────────────────────────────────────────────────
+      const lightboxImgEl  = document.getElementById('lightbox-img') as HTMLImageElement;
+      const lightboxPrevEl = document.getElementById('lightbox-prev') as HTMLElement;
+      const lightboxNextEl = document.getElementById('lightbox-next') as HTMLElement;
+      const lightboxDotsEl = document.getElementById('lightbox-dots') as HTMLElement;
+      const lightboxHintEl = document.getElementById('lightbox-hint') as HTMLElement;
+
+      let lightboxGallery: string[] = [];
+      let lightboxIndex = 0;
+      let lightboxAlt = '';
+
+      function renderLightboxImage() {
+        lightboxImgEl.src = lightboxGallery[lightboxIndex];
+        lightboxImgEl.alt = lightboxAlt;
+
+        const hasMultiple = lightboxGallery.length > 1;
+        lightboxPrevEl.classList.toggle('hidden', !hasMultiple);
+        lightboxPrevEl.classList.toggle('flex', hasMultiple);
+        lightboxNextEl.classList.toggle('hidden', !hasMultiple);
+        lightboxNextEl.classList.toggle('flex', hasMultiple);
+        lightboxDotsEl.classList.toggle('hidden', !hasMultiple);
+        lightboxDotsEl.classList.toggle('flex', hasMultiple);
+        lightboxHintEl.classList.toggle('hidden', hasMultiple);
+
+        if (hasMultiple) {
+          lightboxDotsEl.innerHTML = lightboxGallery
+            .map((_, i) => `<span class="w-1.5 h-1.5 rounded-full transition-colors ${i === lightboxIndex ? 'bg-white' : 'bg-white/40'}"></span>`)
+            .join('');
+        }
+      }
+
+      function lightboxNav(delta: number) {
+        if (lightboxGallery.length < 2) return;
+        lightboxIndex = (lightboxIndex + delta + lightboxGallery.length) % lightboxGallery.length;
+        renderLightboxImage();
+      }
+
       function openLightbox(src: string, alt: string) {
+        lightboxGallery = [src];
+        lightboxIndex = 0;
+        lightboxAlt = alt;
+        renderLightboxImage();
         const lightbox = document.getElementById('lightbox') as HTMLElement;
-        const img      = document.getElementById('lightbox-img') as HTMLImageElement;
-        img.src = src;
-        img.alt = alt;
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function openLightboxGallery(gallery: string[], index: number, alt: string) {
+        lightboxGallery = gallery;
+        lightboxIndex = index;
+        lightboxAlt = alt;
+        renderLightboxImage();
+        const lightbox = document.getElementById('lightbox') as HTMLElement;
         lightbox.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
       }
@@ -568,7 +706,15 @@ const proyectos: Proyecto[] = [
         document.body.style.overflow = '';
       }
 
-      // Swipe down to close lightbox on touch devices
+      // Arrow keys navigate the gallery while the lightbox is open
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        const lightbox = document.getElementById('lightbox') as HTMLElement;
+        if (lightbox.classList.contains('hidden')) return;
+        if (e.key === 'ArrowLeft') lightboxNav(-1);
+        if (e.key === 'ArrowRight') lightboxNav(1);
+      });
+
+      // Swipe down to close, swipe left/right to navigate the gallery
       const lightboxEl = document.getElementById('lightbox') as HTMLElement;
       let touchStartY = 0;
       let touchStartX = 0;
@@ -580,15 +726,59 @@ const proyectos: Proyecto[] = [
 
       lightboxEl?.addEventListener('touchend', (e: TouchEvent) => {
         const deltaY = e.changedTouches[0].clientY - touchStartY;
-        const deltaX = Math.abs(e.changedTouches[0].clientX - touchStartX);
-        // Close if swiped down ≥ 80px and not a horizontal swipe
-        if (deltaY > 80 && deltaX < 60) {
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        if (deltaY > 80 && Math.abs(deltaX) < 60) {
           closeLightbox();
+        } else if (Math.abs(deltaX) > 60 && Math.abs(deltaY) < 60) {
+          lightboxNav(deltaX < 0 ? 1 : -1);
         }
       }, { passive: true });
 
       (window as any).openLightbox  = openLightbox;
       (window as any).closeLightbox = closeLightbox;
+      (window as any).lightboxNav   = lightboxNav;
+
+      // ─── Project card carousels ────────────────────────────────────────────
+      document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+        const gallery: string[] = JSON.parse(root.dataset.gallery || '[]');
+        const alt = root.dataset.alt || '';
+        const track = root.querySelector<HTMLElement>('[data-carousel-track]');
+        const prevBtn = root.querySelector<HTMLElement>('[data-carousel-prev]');
+        const nextBtn = root.querySelector<HTMLElement>('[data-carousel-next]');
+        const dots = Array.from(root.querySelectorAll<HTMLElement>('[data-dot]'));
+        const images = Array.from(root.querySelectorAll<HTMLImageElement>('[data-carousel-img]'));
+        let index = 0;
+
+        function goTo(i: number) {
+          index = (i + gallery.length) % gallery.length;
+          if (track) track.style.transform = `translateX(-${index * 100}%)`;
+          dots.forEach((dot, di) => {
+            dot.classList.toggle('bg-white', di === index);
+            dot.classList.toggle('bg-white/50', di !== index);
+          });
+        }
+
+        prevBtn?.addEventListener('click', (e) => { e.stopPropagation(); goTo(index - 1); });
+        nextBtn?.addEventListener('click', (e) => { e.stopPropagation(); goTo(index + 1); });
+
+        images.forEach((img) => {
+          img.addEventListener('click', () => openLightboxGallery(gallery, index, alt));
+        });
+
+        let cardTouchStartX = 0;
+        let cardTouchStartY = 0;
+        root.addEventListener('touchstart', (e: TouchEvent) => {
+          cardTouchStartX = e.touches[0].clientX;
+          cardTouchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        root.addEventListener('touchend', (e: TouchEvent) => {
+          const deltaX = e.changedTouches[0].clientX - cardTouchStartX;
+          const deltaY = e.changedTouches[0].clientY - cardTouchStartY;
+          if (Math.abs(deltaX) > 40 && Math.abs(deltaY) < 50) {
+            goTo(index + (deltaX < 0 ? 1 : -1));
+          }
+        }, { passive: true });
+      });
     </script>
 
   </body>

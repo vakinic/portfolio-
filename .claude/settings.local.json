@@ -55,7 +55,8 @@
       "Bash(npm install *)",
       "Bash(node screenshot-tmp.mjs)",
       "Bash(rm -f screenshot-tmp3.mjs)",
-      "Bash(pkill -f \"astro dev\")"
+      "Bash(pkill -f \"astro dev\")",
+      "Bash(git merge *)"
     ],
     "additionalDirectories": [
       "d:\\Proyectos\\optica-recetas-ai\\docs\\screenshots",

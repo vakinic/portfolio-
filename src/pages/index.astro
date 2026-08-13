@@ -92,11 +92,22 @@ const proyectos: Proyecto[] = [
     bgStyle: "background: linear-gradient(135deg, #0d1f12, #1a3a22)",
   },
   {
-    titulo: "Shopify Optical Concept",
-    descripcion: "Prototipo visual de una tienda óptica estilo Shopify: header sticky, grilla de productos, ficha de producto con selector de variantes y carrito funcional.",
-    tags: ["Shopify", "UI/UX", "Demo"],
+    titulo: "Goldvision — Óptica en Shopify",
+    descripcion: "Tienda Shopify para Goldvision: catálogo de anteojos, cristales y lentes de contacto, con compra de anteojos recetados 100% online.",
+    tags: ["Shopify", "E-commerce", "Recetas ópticas"],
     imagen: null,
-    imagenes: ["/shopify/home.png", "/shopify/producto.png", "/shopify/carrito.png"],
+    imagenes: [
+      "/shopify/goldvision-home.png",
+      "/shopify/goldvision-mas-vendidos.png",
+      "/shopify/goldvision-receta-testimonios.png",
+      "/shopify/goldvision-producto.png",
+      "/shopify/goldvision-graduacion.png",
+    ],
+    caso: {
+      problema: "Una óptica necesitaba vender anteojos recetados online, no solo de sol — un desafío mayor al de un e-commerce estándar, porque cada compra depende de datos de graduación (esfera, cilindro, eje, distancia pupilar) que antes solo se tomaban en el local.",
+      solucion: "Tienda en Shopify con catálogo completo (armazones, cristales, lentes de contacto), selector de color y graduación en la ficha de producto, opción de cargar la receta por foto o completarla a mano, y coordinación de los datos por WhatsApp para que la óptica los valide antes de fabricar.",
+      resultado: "Flujo de compra de anteojos recetados 100% online, de la selección del armazón a la validación de la receta, sin que el cliente tenga que pisar el local.",
+    },
   },
 ];
 ---

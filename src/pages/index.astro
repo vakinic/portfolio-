@@ -8,6 +8,11 @@ interface Proyecto {
   imagen: string | null;
   imagenes?: string[];
   bgStyle?: string;
+  caso?: {
+    problema: string;
+    solucion: string;
+    resultado: string;
+  };
 }
 
 const areas = [
@@ -73,6 +78,11 @@ const proyectos: Proyecto[] = [
     descripcion: "Sistema de automatización de recetas ópticas con inteligencia artificial. Procesamiento inteligente y envío automático por WhatsApp a los pacientes.",
     tags: ["WhatsApp", "IA", "Supabase", "Next.js"],
     imagen: "/optica-panel.png",
+    caso: {
+      problema: "La óptica cargaba cada receta a mano: un empleado leía la foto o el papel, tipeaba los datos en el sistema y después escribía al paciente por WhatsApp para confirmar. Con varias recetas por día, el cuello de botella estaba en esa carga manual y en los errores de tipeo.",
+      solucion: "Un sistema con IA que lee la receta (foto o PDF), extrae automáticamente los datos de graduación y armado, los carga al panel de gestión y dispara la confirmación al paciente por WhatsApp sin que nadie tenga que tipear nada.",
+      resultado: "El tiempo de procesamiento por receta bajó de ~15 minutos a menos de 2 minutos (estimado), y el equipo pasó de cargar datos a enfocarse en la atención al paciente.",
+    },
   },
   {
     titulo: "Automatizaciones n8n",
@@ -260,8 +270,8 @@ const proyectos: Proyecto[] = [
           </div>
         </div>
 
-        <!-- Stats column — 3-col on mobile with smaller text to fit 375px screens -->
-        <div class="mt-12 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-6 lg:gap-8">
+        <!-- Stats column — 2-col on mobile, 3-col from sm, single col on desktop sidebar -->
+        <div class="mt-12 lg:mt-0 lg:border-l border-zinc-200 dark:border-zinc-800 lg:pl-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-1 gap-3 sm:gap-6 lg:gap-8">
           <div>
             <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">16×</p>
             <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Crecimiento</p>
@@ -269,6 +279,14 @@ const proyectos: Proyecto[] = [
           <div>
             <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">$130M</p>
             <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Facturación pico</p>
+          </div>
+          <div>
+            <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">13×</p>
+            <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">ROAS en Ads</p>
+          </div>
+          <div>
+            <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">0,45%</p>
+            <p class="text-xs sm:text-sm lg:text-base text-zinc-600 dark:text-white mt-0.5 sm:mt-1">Tasa de reclamos</p>
           </div>
           <div>
             <p class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight" style="color: #A64D79;">5+</p>
@@ -375,6 +393,9 @@ const proyectos: Proyecto[] = [
       <div class="max-w-5xl mx-auto">
         <div class="mb-10 sm:mb-12">
           <h2 class="text-sm sm:text-base font-bold tracking-widest uppercase" style="color: var(--acc-heading);">Servicios</h2>
+          <p class="text-sm sm:text-base mt-3 max-w-2xl leading-relaxed" style="color: var(--acc-body);">
+            Trabajo con marcas y negocios que ya venden y quieren profesionalizar su canal o automatizar su operación con IA.
+          </p>
         </div>
         <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
           <div class="rounded-xl p-5 sm:p-6 transition-colors" style="background: var(--acc-card-bg); border: 1px solid var(--acc-card-border);">
@@ -485,7 +506,24 @@ const proyectos: Proyecto[] = [
               )}
               <div class="p-4 sm:p-5">
                 <h3 class="font-semibold text-zinc-900 dark:text-white mb-1.5">{proyecto.titulo}</h3>
-                <p class="text-sm text-zinc-500 leading-relaxed mb-4">{proyecto.descripcion}</p>
+                {proyecto.caso ? (
+                  <div class="space-y-2 mb-4">
+                    <p class="text-sm text-zinc-500 leading-relaxed">
+                      <span class="font-semibold text-zinc-700 dark:text-zinc-300">Problema: </span>
+                      {proyecto.caso.problema}
+                    </p>
+                    <p class="text-sm text-zinc-500 leading-relaxed">
+                      <span class="font-semibold text-zinc-700 dark:text-zinc-300">Solución: </span>
+                      {proyecto.caso.solucion}
+                    </p>
+                    <p class="text-sm text-zinc-500 leading-relaxed">
+                      <span class="font-semibold text-zinc-700 dark:text-zinc-300">Resultado: </span>
+                      {proyecto.caso.resultado}
+                    </p>
+                  </div>
+                ) : (
+                  <p class="text-sm text-zinc-500 leading-relaxed mb-4">{proyecto.descripcion}</p>
+                )}
                 <div class="flex flex-wrap gap-1.5">
                   {proyecto.tags.map((tag) => (
                     <span class="text-xs text-zinc-500 dark:text-zinc-500 bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 px-2 py-0.5 rounded">

@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import reputacion from '../assets/trayectoria/reputacion.png';
+---
+<section class="trk" id="trayectoria" aria-labelledby="trk-title">
+  <div class="wrap">
+    <h2 class="trk__title" id="trk-title">Antes de diseñar tiendas, las operé.</h2>
+    <p class="trk__figure" aria-describedby="trk-figcap">
+      <span>$8M</span><Icon name="arrow-right" class="trk__arrow" /><span>$130M</span>
+      <span class="sr-only">: de 8 a 130 millones de pesos mensuales</span>
+    </p>
+    <p class="trk__figcap" id="trk-figcap">Facturación mensual del canal de Mercado Libre que gestioné, del inicio al pico.</p>
+
+    <div class="trk__grid">
+      <div class="trk__text">
+        <p>
+          Durante más de cinco años gestioné el canal de Mercado Libre de una empresa importadora de herramientas:
+          catálogo, precios, promociones, publicidad, métricas y coordinación del equipo operativo.
+        </p>
+        <p>
+          Por eso diseño pensando en lo que pasa después del lanzamiento: el stock, las cuotas, las preguntas del
+          cliente y el margen real de cada venta.
+        </p>
+        <p class="trk__facts">
+          MercadoLíder Platinum · más de 10.000 ventas · ROAS 13× en Product Ads · también Amazon Seller Central,
+          envíos FBA y sourcing desde China.
+        </p>
+      </div>
+      <figure class="trk__fig">
+        <div class="trk__mount" data-reveal>
+          <Image
+            src={reputacion}
+            alt="Panel de reputación de Mercado Libre: MercadoLíder Platinum, 2.851 ventas en 60 días, reclamos 0,45 %, mediaciones 0 %, cancelaciones 0,38 %."
+            widths={[480, 720, 1080]}
+            sizes="(min-width: 64rem) 46vw, 100vw"
+            loading="lazy"
+          />
+        </div>
+        <figcaption>Reputación del canal en 60 días: reclamos 0,45 % y mediaciones 0 %.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trk {
+    margin-top: clamp(5rem, 3rem + 6vw, 10rem);
+    padding-block: clamp(4rem, 2.5rem + 5vw, 8rem);
+    background: var(--ink);
+    color: var(--on-ink);
+  }
+  .trk ::selection { background: var(--paper); color: var(--ink); }
+  .trk :focus-visible { outline-color: var(--blue-light); }
+  .trk__title {
+    font-size: var(--fs-h2);
+    font-stretch: 112%;
+    font-weight: 720;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    max-width: 18ch;
+    text-wrap: balance;
+  }
+  .trk__figure {
+    margin-top: clamp(1.5rem, 1rem + 2vw, 3rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    column-gap: 0.12em;
+    font-size: var(--fs-figure);
+    font-stretch: var(--display-stretch, 125%);
+    font-weight: 780;
+    letter-spacing: -0.045em;
+    line-height: 0.86;
+    color: var(--paper);
+  }
+  .trk__figure :global(.trk__arrow) {
+    width: 0.62em;
+    height: 0.62em;
+    color: var(--on-ink-2);
+    stroke-width: 2.2;
+    flex: none;
+  }
+  .trk__figcap {
+    margin-top: 1rem;
+    font-size: var(--fs-lead);
+    color: var(--on-ink-2);
+    max-width: 40ch;
+  }
+  .trk__grid {
+    margin-top: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line-on-ink);
+    display: grid;
+    gap: 2.5rem 4rem;
+  }
+  .trk__text { display: grid; gap: 1.1rem; align-content: start; }
+  .trk__text p { max-width: 52ch; color: var(--on-ink-2); }
+  .trk__text p:first-child { color: var(--on-ink); font-size: 1.125rem; }
+  .trk__facts { font-size: var(--fs-sm); }
+  .trk__fig { margin: 0; display: grid; gap: 0.6rem; }
+  .trk__mount { background: var(--mount-on-ink); padding: clamp(0.5rem, 0.2rem + 1.2vw, 1.25rem); }
+  .trk__mount :global(img) { display: block; width: 100%; height: auto; }
+  .trk__fig figcaption { font-size: var(--fs-sm); color: var(--on-ink-2); }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 64rem) {
+    .trk__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  }
+</style>

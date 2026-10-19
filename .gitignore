@@ -22,3 +22,10 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Impeccable: capturas de revisión y archivos temporales
+.impeccable/review/
+.impeccable/direction-payload.json
+.impeccable/brief-body.md
+.impeccable/*.local.json
+.impeccable/questions/

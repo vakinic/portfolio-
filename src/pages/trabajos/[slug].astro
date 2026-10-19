@@ -1,0 +1,227 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import SheetHead from '../../components/SheetHead.astro';
+import Plate from '../../components/Plate.astro';
+import CalloutList from '../../components/CalloutList.astro';
+import Contact from '../../components/Contact.astro';
+import { projects, type Project } from '../../data/projects';
+
+export function getStaticPaths() {
+  const withCase = projects.filter((p) => p.figures.length > 0);
+  return withCase.map((p, i) => ({
+    params: { slug: p.slug },
+    props: { project: p, next: withCase[(i + 1) % withCase.length] },
+  }));
+}
+
+interface Props { project: Project; next: Project }
+const { project: p, next } = Astro.props;
+const desktop = p.figures.filter((f) => f.kind === 'desktop');
+const vertical = p.figures.filter((f) => f.kind !== 'desktop');
+const verticalTitle = vertical.every((f) => f.kind === 'mobile') ? 'En el celular' : 'Detalle de la ficha';
+---
+<Base title={`${p.name} — ${p.kind} en ${p.platform} | Nicolás Ferreira`} description={p.summary} type="article">
+  <article class="case">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Migas de pan">
+        <a href="/#trabajos">Trabajos</a><span aria-hidden="true">/</span><span aria-current="page">{p.name}</span>
+      </nav>
+      <div class="case__intro">
+        <SheetHead project={p} as="h1" />
+        <p class="case__summary">{p.summary}</p>
+      </div>
+
+      <div class="case__plate" data-callouts>
+        <Plate project={p} eager />
+        <CalloutList project={p} layout="row" showImpl />
+      </div>
+      {p.link && (
+        <a class="btn btn--blue case__visit" href={p.link.href} target="_blank" rel="noopener noreferrer">
+          Visitar {p.link.label}<Icon name="arrow-up-right" />
+        </a>
+      )}
+
+      <section class="case__brief" aria-labelledby="obj">
+        <h2 class="case__goal" id="obj">{p.goal}</h2>
+        <div class="case__cols">
+          <div>
+            <h2 class="case__k">Mi participación</h2>
+            <ul class="case__role">{p.role.map((r) => <li>{r}</li>)}</ul>
+          </div>
+          <div>
+            <h2 class="case__k">Solución</h2>
+            <p>{p.solution}</p>
+            <p class="case__stack">{p.stack.join(' · ')}</p>
+          </div>
+        </div>
+      </section>
+
+      {vertical.length > 0 && (
+        <section class="case__sec" aria-labelledby="g-mobile">
+          <h2 class="h2" id="g-mobile">{verticalTitle}</h2>
+          <ul class="case__mobile">
+            {vertical.map((f) => (
+              <li>
+                <figure>
+                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[300, 450, 600]} sizes="(min-width: 64rem) 22rem, 78vw" loading="lazy" /></div>
+                  <figcaption>{f.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {desktop.length > 0 && (
+        <section class="case__sec" aria-labelledby="g-desktop">
+          <h2 class="h2" id="g-desktop">En detalle</h2>
+          <ul class="case__desktop">
+            {desktop.map((f) => (
+              <li>
+                <figure>
+                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 90rem) 82rem, 100vw" loading="lazy" /></div>
+                  <figcaption>{f.caption}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {(p.facts || p.notes) && (
+        <section class="case__sec case__data" aria-labelledby="datos">
+          <h2 class="h2" id="datos">Datos del proyecto</h2>
+          <div>
+            {p.facts && (
+              <dl class="case__facts">
+                {p.facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+                <div><dt>Estado</dt><dd>{p.statusNote}</dd></div>
+              </dl>
+            )}
+            {p.notes && (
+              <ul class="case__notes">
+                {p.notes.map((n) => <li>{n}</li>)}
+                <li>Estado actual: {p.statusNote.toLowerCase()}.</li>
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
+
+      <a class="case__next" href={`/trabajos/${next.slug}/`}>
+        <span class="case__next-tab" aria-hidden="true">{next.ref}</span>
+        <span class="case__next-name">{next.name}<Icon name="arrow-right" /></span>
+        <span class="case__next-kind">Siguiente: {next.kind} · {next.platform}</span>
+      </a>
+    </div>
+  </article>
+  <Contact />
+</Base>
+
+<script>
+  import '../../scripts/callouts';
+</script>
+
+<style>
+  .case { padding-top: clamp(1.5rem, 1rem + 2vw, 3rem); }
+  .crumbs { display: flex; align-items: center; gap: 0.6rem; font-size: var(--fs-sm); color: var(--ink-3); margin-bottom: 1.25rem; }
+  .crumbs a { display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); }
+  .case__intro { display: grid; gap: 1.5rem 4rem; align-items: end; }
+  .case__summary { font-size: var(--fs-lead); line-height: 1.45; max-width: 46ch; text-wrap: pretty; }
+
+  .case__plate { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); display: grid; gap: 1.5rem; }
+  .case__visit { margin-top: 1.5rem; }
+
+  .case__brief { margin-top: clamp(4rem, 3rem + 4vw, 8rem); display: grid; gap: 1rem; }
+  .case__k { font-size: 1rem; font-weight: 700; color: var(--ink-3); }
+  .case__goal {
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+    font-stretch: 105%;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    max-width: 30ch;
+    text-wrap: balance;
+  }
+  .case__cols { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); display: grid; gap: 2.5rem 4rem; }
+  .case__cols > div { display: grid; gap: 0.75rem; align-content: start; }
+  .case__cols p, .case__role { color: var(--ink-2); max-width: 58ch; }
+  .case__role li { padding: 0.5rem 0; border-top: 1px solid var(--line); }
+  .case__stack { font-size: var(--fs-sm); color: var(--ink-3); }
+
+  .case__sec { margin-top: clamp(4rem, 3rem + 4vw, 8rem); }
+  .case__sec > .h2 { margin-bottom: 2rem; }
+  .frame { background: var(--paper-2); padding: clamp(0.5rem, 0.2rem + 1.2vw, 1.5rem); }
+  .frame :global(img) { display: block; width: 100%; height: auto; outline: 1px solid var(--ink); }
+  figure { margin: 0; }
+  figcaption { margin-top: 0.6rem; font-size: var(--fs-sm); color: var(--ink-2); }
+
+  .case__mobile {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(78vw, 21rem);
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+  }
+  .case__mobile li { scroll-snap-align: start; }
+  .case__desktop { display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem); }
+
+  .case__data > div { display: grid; gap: 2rem 3rem; }
+  .case__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 2rem; }
+  .case__facts > div { display: grid; gap: 0.35rem; align-content: start; padding-block: 1rem; border-top: 1px solid var(--ink); }
+  .case__facts dt { color: var(--ink-3); font-size: var(--fs-sm); }
+  .case__facts dd { font-size: 1.0625rem; }
+  .case__notes { border-top: 1px solid var(--ink); color: var(--ink-2); }
+  .case__notes li { padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
+
+  .case__next {
+    margin-top: clamp(4rem, 3rem + 4vw, 8rem);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .case__next-tab {
+    grid-row: span 2;
+    display: grid;
+    place-items: center;
+    width: clamp(3.5rem, 2.5rem + 3vw, 5.5rem);
+    aspect-ratio: 1;
+    background: var(--blue);
+    color: var(--on-blue);
+    font-weight: 780;
+    font-stretch: 62%;
+    font-size: clamp(1.75rem, 1.2rem + 2vw, 3rem);
+    line-height: 1;
+  }
+  .case__next-kind { grid-column: 2; color: var(--ink-2); font-size: var(--fs-sm); }
+  .case__next-name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: var(--fs-h2);
+    font-stretch: 125%;
+    font-weight: 760;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .case__next-name :global(svg) { width: 0.7em; height: 0.7em; color: var(--blue); transition: transform 220ms var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) {
+    .case__next:hover :global(svg) { transform: translateX(0.35rem); }
+  }
+
+  @media (min-width: 64rem) {
+    .case__intro { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .case__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .case__mobile { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(16rem, 21rem)); justify-content: space-evenly; overflow: visible; }
+  }
+</style>

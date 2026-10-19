@@ -1,0 +1,112 @@
+---
+import Icon from './Icon.astro';
+import { site, waLink } from '../data/site';
+
+const options = [
+  { id: 'tienda', label: 'Tienda online', msg: 'Hola Nicolás, quiero hablar de una tienda online.' },
+  { id: 'sitio', label: 'Sitio o landing', msg: 'Hola Nicolás, quiero hablar de un sitio o una landing.' },
+  { id: 'ia', label: 'Automatización con IA', msg: 'Hola Nicolás, quiero hablar de una automatización con IA.' },
+  { id: 'otro', label: 'Otra cosa', msg: 'Hola Nicolás, vi tu portfolio y quiero consultarte por un proyecto.' },
+];
+const fallback = options[3].msg;
+---
+<section class="ct" id="contacto" aria-labelledby="ct-title">
+  <div class="wrap ct__grid">
+    <h2 class="ct__title" id="ct-title">¿Qué necesitás construir?</h2>
+    <form class="ct__form" data-contact action={`https://wa.me/${site.whatsapp}`} method="get" target="_blank">
+      <fieldset>
+        <legend>Elegí una opción y te abro el chat con el mensaje listo.</legend>
+        <div class="ct__opts">
+          {options.map((o, i) => (
+            <label class="ct__opt">
+              <input type="radio" name="tipo" form="ct-sin-envio" value={o.id} data-msg={o.msg} checked={i === 0} />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <input type="hidden" name="text" value={options[0].msg} data-text />
+      <button class="btn btn--paper ct__send" type="submit">
+        <Icon name="chat" />Escribir por WhatsApp<Icon name="arrow-right" />
+      </button>
+    </form>
+    <ul class="ct__alt">
+      <li><a href={`mailto:${site.email}`}><Icon name="mail" />{site.email}</a></li>
+      <li><a href={site.linkedin} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" />LinkedIn</a></li>
+      <li><a href={waLink(fallback)} target="_blank" rel="noopener noreferrer"><Icon name="chat" />+54 9 11 3815-8237</a></li>
+    </ul>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-contact]').forEach((form) => {
+    const text = form.querySelector<HTMLInputElement>('[data-text]');
+    form.addEventListener('change', (e) => {
+      const input = e.target as HTMLInputElement;
+      if (input.name === 'tipo' && text) text.value = input.dataset.msg ?? text.value;
+    });
+  });
+</script>
+
+<style>
+  .ct {
+    margin-top: clamp(5rem, 3rem + 6vw, 10rem);
+    background: var(--blue);
+    color: var(--on-blue);
+    padding-block: clamp(3.5rem, 2rem + 5vw, 7rem);
+  }
+  .ct ::selection { background: var(--paper); color: var(--blue); }
+  .ct :focus-visible { outline-color: var(--paper); }
+  .ct__grid { display: grid; gap: 2.5rem 4rem; }
+  .ct__title {
+    font-size: var(--fs-display);
+    font-stretch: var(--display-stretch, 125%);
+    font-weight: 760;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    overflow-wrap: break-word;
+    text-wrap: balance;
+    max-width: 12ch;
+  }
+  .ct__form fieldset { border: 0; padding: 0; margin: 0; }
+  .ct__form legend { color: var(--on-blue-2); margin-bottom: 1rem; font-size: var(--fs-sm); }
+  .ct__opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+  .ct__opt { position: relative; display: block; cursor: pointer; }
+  .ct__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .ct__opt span {
+    display: flex;
+    align-items: center;
+    min-height: 3.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid rgb(241 241 236 / 0.5);
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
+  }
+  .ct__opt input:checked + span { background: var(--paper); color: var(--blue); border-color: var(--paper); }
+  .ct__opt input:focus-visible + span { outline: 2px solid var(--paper); outline-offset: 3px; }
+  @media (hover: hover) and (pointer: fine) {
+    .ct__opt:hover span { border-color: var(--paper); }
+  }
+  .ct__send { margin-top: 1.25rem; width: 100%; min-height: 3.5rem; font-size: 1.0625rem; }
+  .ct__alt { display: grid; gap: 0.25rem; align-content: start; border-top: 1px solid rgb(241 241 236 / 0.35); }
+  .ct__alt a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    color: var(--on-blue);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(241 241 236 / 0.35);
+    font-weight: 540;
+    overflow-wrap: anywhere;
+  }
+  .ct__alt svg { width: 1.2rem; height: 1.2rem; flex: none; }
+  @media (hover: hover) and (pointer: fine) {
+    .ct__alt a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+  }
+
+  @media (min-width: 64rem) {
+    .ct__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 4fr) minmax(0, 2.5fr); align-items: end; }
+  }
+</style>

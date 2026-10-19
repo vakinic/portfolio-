@@ -1,0 +1,42 @@
+---
+import { site, waLink } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="wrap ftr__grid">
+    <p class="ftr__name">Nicolás Ferreira</p>
+    <p class="ftr__meta">{site.role}<br />{site.location}</p>
+    <ul class="ftr__links">
+      <li><a class="link" href={waLink('Hola Nicolás, quiero consultarte por un proyecto.')} target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+      <li><a class="link" href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a class="link" href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+    </ul>
+    <p class="ftr__copy">© {year} Nicolás Ferreira</p>
+  </div>
+</footer>
+
+<style>
+  .ftr {
+    border-top: 1px solid var(--ink);
+    padding-block: 2.5rem max(2.5rem, calc(1.5rem + env(safe-area-inset-bottom)));
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
+  }
+  .ftr__grid {
+    display: grid;
+    gap: 1.25rem 2rem;
+    grid-template-columns: 1fr;
+  }
+  .ftr__name {
+    font-weight: 760;
+    font-stretch: 80%;
+    font-size: 1.0625rem;
+    color: var(--ink);
+  }
+  .ftr__links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; }
+  .ftr__links a { display: inline-block; padding-block: 0.4rem; color: var(--ink); }
+  .ftr__copy { color: var(--ink-3); }
+  @media (min-width: 64rem) {
+    .ftr__grid { grid-template-columns: 1fr 1.4fr 2fr auto; align-items: start; }
+  }
+</style>

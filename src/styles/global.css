@@ -1,45 +1,194 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import "@fontsource-variable/archivo/wdth.css";
 
-@variant dark (&:where(.dark, .dark *));
+/* ── Tokens ───────────────────────────────────────────────────────────── */
+:root {
+  --paper: #f1f1ec;
+  --paper-2: #e3e3dc;
+  --surface: #fbfbf8;
+  --ink: #111111;
+  --ink-2: #45453f;
+  --ink-3: #62625b;
+  --line: rgb(17 17 17 / 0.16);
+  --line-strong: #111111;
 
-@theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --blue: #1e3bd6;
+  --blue-deep: #1429a3;
+  --blue-wash: #dfe4fa;
+  --on-blue: #f1f1ec;
+  --on-blue-2: #c9d1f7;
+  --blue-light: #93a4ff;
+
+  /* Ink band (dark pause): text and rules on --ink */
+  --on-ink: #f1f1ec;
+  --on-ink-2: #b4b4ac;
+  --line-on-ink: rgb(241 241 236 / 0.2);
+  --mount-on-ink: #1f1f1d;
+
+  --ok: #136b31;
+  --ready: #8a2f6b;
+  --warn: #9a5800;
+
+  --font: "Archivo Variable", "Archivo", system-ui, sans-serif;
+
+  --fs-display: clamp(2.125rem, 0.5rem + 5.4vw, 5.5rem);
+  --fs-figure: clamp(3.25rem, 0.6rem + 9.4vw, 9.5rem);
+  --fs-h2: clamp(1.875rem, 1.2rem + 2.4vw, 3rem);
+  --fs-h3: clamp(1.25rem, 1.05rem + 0.7vw, 1.625rem);
+  --fs-lead: clamp(1.125rem, 1.02rem + 0.45vw, 1.375rem);
+  --fs-body: 1.0625rem;
+  --fs-sm: 0.9375rem;
+  --fs-label: 0.8125rem;
+
+  --gutter: clamp(1rem, 0.4rem + 2.6vw, 2.5rem);
+  --max: 90rem;
+  --header-h: 3.5rem;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+  color-scheme: light;
 }
 
+/* ── Base ─────────────────────────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
-  /* Prevent iOS from boosting font sizes on orientation change */
+  scroll-padding-top: calc(var(--header-h) + 1rem);
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background: var(--paper);
+  scrollbar-color: var(--ink-3) var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 body {
-  font-family: var(--font-sans);
+  font-family: var(--font);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
   -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+  caret-color: var(--blue);
+  overflow-x: clip;
 }
 
-/* Remove blue flash on tap for all elements on iOS/Android */
-* {
-  -webkit-tap-highlight-color: transparent;
+::selection { background: var(--blue); color: var(--on-blue); }
+
+* { -webkit-tap-highlight-color: transparent; }
+
+a, button, [role="button"], label { touch-action: manipulation; }
+
+:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
 }
 
-/* Eliminate 300ms click delay on touch devices */
-button,
-a,
-[role="button"] {
-  touch-action: manipulation;
+img { max-width: 100%; height: auto; }
+
+/* ── Shared atoms ─────────────────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-/* Mobile menu slide-in animation */
-#mobile-menu {
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.18s ease, transform 0.18s ease;
+@media (max-width: 30rem) {
+  :root { --display-stretch: 104%; }
 }
-#mobile-menu.is-open {
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateY(0);
+
+.h2 {
+  font-size: var(--fs-h2);
+  font-stretch: 112%;
+  font-weight: 720;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+  transition: text-decoration-color 160ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-thickness: 2px; }
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0 1.4rem;
+  font-size: var(--fs-sm);
+  font-weight: 640;
+  font-stretch: 92%;
+  line-height: 1;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition: background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out);
+  cursor: pointer;
+}
+.btn:active { transform: scale(0.97); }
+.btn svg { width: 1.05em; height: 1.05em; flex: none; }
+
+.btn--blue { background: var(--blue); color: var(--on-blue); }
+.btn--ink { background: var(--ink); color: var(--paper); }
+.btn--paper { background: var(--paper); color: var(--blue); }
+.btn--line { border-color: var(--ink); color: var(--ink); background: transparent; }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn--blue:hover { background: var(--blue-deep); }
+  .btn--ink:hover { background: #2a2a28; }
+  .btn--paper:hover { background: #ffffff; }
+  .btn--line:hover { background: var(--ink); color: var(--paper); }
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  white-space: nowrap;
+}
+.status::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.status--online { color: var(--ok); }
+.status--listo { color: var(--ready); }
+.status--desarrollo { color: var(--warn); }
+.status--prototipo { color: var(--ink-3); }
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--blue);
+  color: var(--on-blue);
+  font-weight: 600;
+}
+.skip-link:focus { top: 0.5rem; }
+
+/* Entrance: only when JS runs and motion is allowed; content is visible by default. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 900ms var(--ease-in-out);
+  }
+  .js [data-reveal].is-in { clip-path: inset(0 0 0 0); }
 }

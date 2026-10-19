@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+---
+<Base title="Página no encontrada — Nicolás Ferreira" description="Esta página no existe.">
+  <section class="nf wrap">
+    <span class="nf__tab" aria-hidden="true">404</span>
+    <h1 class="nf__title">Esta referencia no está en el catálogo.</h1>
+    <p class="nf__text">Puede que el enlace haya cambiado. Volvé al índice para ver todos los trabajos.</p>
+    <a class="btn btn--blue" href="/#trabajos">Ir a los trabajos<Icon name="arrow-right" /></a>
+  </section>
+</Base>
+
+<style>
+  .nf { padding-block: clamp(4rem, 3rem + 6vw, 9rem); display: grid; gap: 1.5rem; justify-items: start; }
+  .nf__tab { display: grid; place-items: center; min-width: 4.5rem; height: 4.5rem; padding: 0 0.6rem; background: var(--blue); color: var(--on-blue); font-weight: 780; font-stretch: 62%; font-size: 2.25rem; line-height: 1; }
+  .nf__title {
+    font-size: var(--fs-display);
+    font-stretch: var(--display-stretch, 125%);
+    font-weight: 760;
+    letter-spacing: -0.04em;
+    line-height: 0.92;
+    overflow-wrap: break-word;
+    max-width: 14ch;
+    text-wrap: balance;
+  }
+  .nf__text { color: var(--ink-2); font-size: var(--fs-lead); max-width: 40ch; }
+</style>

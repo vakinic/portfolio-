@@ -1,0 +1,56 @@
+---
+// The order is the method itself, so steps keep their sequence number.
+const steps = [
+  { t: 'Relevamiento', d: 'Entiendo qué vendés, a quién y qué tiene que pasar en la web para que te compren.', out: 'Alcance y prioridades por escrito.' },
+  { t: 'Prototipo aprobado', d: 'Diseño un prototipo navegable en desktop y mobile y lo ajustamos antes de programar.', out: 'Prototipo para revisar desde tu celular.' },
+  { t: 'Desarrollo aislado', d: 'Construyo en un borrador, tienda de prueba o rama aparte. Tu sitio sigue funcionando.', out: 'Versión de prueba con tu contenido.' },
+  { t: 'QA y publicación', d: 'Pruebo en varios tamaños de pantalla, documento y publico dejando un respaldo.', out: 'Sitio publicado y versión anterior guardada.' },
+];
+---
+<section class="mth" aria-labelledby="mth-title">
+  <div class="wrap mth__grid">
+    <h2 class="h2" id="mth-title">Cómo trabajo</h2>
+    <ol class="mth__list">
+      {steps.map((s, i) => (
+        <li class="mth__step">
+          <span class="mth__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div class="mth__body">
+            <h3 class="mth__t">{s.t}</h3>
+            <p class="mth__d">{s.d}</p>
+            <p class="mth__out">{s.out}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .mth { padding-top: clamp(5rem, 3rem + 6vw, 10rem); }
+  .mth__grid { display: grid; gap: 2rem 4rem; }
+  .mth__list { display: grid; gap: 0 3rem; }
+  .mth__step {
+    display: grid;
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: 0 1rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--line);
+  }
+  .mth__n {
+    font-weight: 780;
+    font-stretch: 62%;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .mth__body { display: grid; gap: 0.3rem; }
+  .mth__t { font-weight: 700; font-stretch: 105%; font-size: var(--fs-h3); line-height: 1.15; letter-spacing: -0.01em; }
+  .mth__d { color: var(--ink-2); font-size: var(--fs-sm); max-width: 48ch; }
+  .mth__out { font-size: var(--fs-sm); font-weight: 560; }
+
+  @media (min-width: 64rem) {
+    .mth__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
+    .mth__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mth__step { padding-block: 1.5rem; }
+  }
+</style>

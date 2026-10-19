@@ -122,7 +122,10 @@ const pct = (n: number) => `${n}%`;
   @keyframes cap-in { from { opacity: 0; transform: translateY(-4px); } }
 
   @media (min-width: 64rem) {
-    .plate__caption { display: none; }
+    /* Desktop reads the callout list beside the plate; showing the caption here would reflow the plate under the cursor */
+    .plate__caption,
+    .plate__caption.is-on,
+    .plate__caption.has-hint { display: none; }
   }
   @media (max-width: 30rem) {
     /* Smaller marks on phones so they sit beside the content, not on it; ::after keeps a 44px target */

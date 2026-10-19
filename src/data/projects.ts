@@ -174,7 +174,7 @@ export const projects: Project[] = [
           detail: 'Grotesca con carácter para leer rápido y una sola palabra en serif itálica como acento. Fuentes autoalojadas.',
           impl: 'next/font · tokens.css',
           region: { x: 3.6, y: 27.6, w: 52.4, h: 28 },
-          pin: { x: 47.5, y: 27.4 },
+          pin: { x: 47.5, y: 24 },
         },
         {
           title: 'Textos editables desde Sanity',
@@ -239,7 +239,7 @@ export const projects: Project[] = [
           detail: 'La financiación aparece donde se decide la compra, como hacen las ópticas líderes de venta online en Argentina.',
           impl: 'sección gv-main-product',
           region: { x: 56.1, y: 43.4, w: 41, h: 7.6 },
-          pin: { x: 92.4, y: 44.2 },
+          pin: { x: 84, y: 46.6 },
         },
         {
           title: 'Variantes de color reales',

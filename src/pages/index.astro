@@ -11,10 +11,10 @@ import { projects } from '../data/projects';
 <Base>
   <Cover />
   <section id="trabajos" aria-label="Trabajos">
-    {projects.map((p, i) => <ProjectSheet project={p} eager={i === 0} />)}
+    {projects.map((p, i) => <ProjectSheet project={p} eager={i === 0} hint={i === 0} />)}
   </section>
   <Services />
-  <Method />
   <Track />
+  <Method />
   <Contact />
 </Base>

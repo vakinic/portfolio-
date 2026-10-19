@@ -1,90 +1,56 @@
 ---
-// A process spec sheet: the order is the method, so steps keep their sequence number.
+// The order is the method itself, so steps keep their sequence number.
 const steps = [
-  {
-    t: 'Relevamiento',
-    d: 'Entiendo qué vendés, a quién y qué tiene que pasar en la web para que te compren. Reviso lo que ya existe antes de proponer.',
-    out: 'Alcance y prioridades por escrito',
-    you: 'Contarme el negocio y compartir accesos de lectura',
-  },
-  {
-    t: 'Prototipo aprobado',
-    d: 'Diseño un prototipo navegable en desktop y mobile y lo ajustamos antes de escribir código definitivo.',
-    out: 'Prototipo navegable desktop y mobile',
-    you: 'Revisarlo y aprobarlo',
-  },
-  {
-    t: 'Desarrollo aislado',
-    d: 'Construyo en un borrador, tienda de prueba o rama aparte. Tu sitio publicado sigue funcionando mientras tanto.',
-    out: 'Versión de prueba para revisar en tu celular',
-    you: 'Cargar o validar contenido y fotos',
-  },
-  {
-    t: 'QA y publicación',
-    d: 'Pruebo en varios tamaños de pantalla, documento lo hecho y publico dejando una versión de respaldo.',
-    out: 'Sitio publicado, documentación y respaldo',
-    you: 'Dar el visto bueno final',
-  },
+  { t: 'Relevamiento', d: 'Entiendo qué vendés, a quién y qué tiene que pasar en la web para que te compren.', out: 'Alcance y prioridades por escrito.' },
+  { t: 'Prototipo aprobado', d: 'Diseño un prototipo navegable en desktop y mobile y lo ajustamos antes de programar.', out: 'Prototipo para revisar desde tu celular.' },
+  { t: 'Desarrollo aislado', d: 'Construyo en un borrador, tienda de prueba o rama aparte. Tu sitio sigue funcionando.', out: 'Versión de prueba con tu contenido.' },
+  { t: 'QA y publicación', d: 'Pruebo en varios tamaños de pantalla, documento y publico dejando un respaldo.', out: 'Sitio publicado y versión anterior guardada.' },
 ];
 ---
 <section class="mth" aria-labelledby="mth-title">
-  <div class="wrap">
+  <div class="wrap mth__grid">
     <h2 class="h2" id="mth-title">Cómo trabajo</h2>
-    <div class="mth__table" role="table" aria-labelledby="mth-title">
-      <div class="mth__row mth__row--head label" role="row">
-        <span role="columnheader">Paso</span>
-        <span role="columnheader">Qué hago</span>
-        <span role="columnheader">Qué recibís</span>
-        <span role="columnheader">Tu parte</span>
-      </div>
+    <ol class="mth__list">
       {steps.map((s, i) => (
-        <div class="mth__row" role="row">
-          <div class="mth__step" role="rowheader">
-            <span class="mth__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-            <span class="mth__t">{s.t}</span>
+        <li class="mth__step">
+          <span class="mth__n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+          <div class="mth__body">
+            <h3 class="mth__t">{s.t}</h3>
+            <p class="mth__d">{s.d}</p>
+            <p class="mth__out">{s.out}</p>
           </div>
-          <p class="mth__d" role="cell">{s.d}</p>
-          <p class="mth__out" role="cell"><span class="label mth__k">Recibís</span>{s.out}</p>
-          <p class="mth__you" role="cell"><span class="label mth__k">Tu parte</span>{s.you}</p>
-        </div>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
 
 <style>
   .mth { padding-top: clamp(5rem, 3rem + 6vw, 10rem); }
-  .mth__table { margin-top: 2rem; border-top: 2px solid var(--ink); }
-  .mth__row {
+  .mth__grid { display: grid; gap: 2rem 4rem; }
+  .mth__list { display: grid; gap: 0 3rem; }
+  .mth__step {
     display: grid;
-    gap: 0.6rem;
-    padding-block: 1.25rem;
-    border-bottom: 1px solid var(--line);
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+    gap: 0 1rem;
+    padding-block: 1.1rem;
+    border-top: 1px solid var(--line);
   }
-  .mth__row--head { display: none; color: var(--ink-3); }
-  .mth__step { display: flex; align-items: baseline; gap: 0.9rem; }
   .mth__n {
     font-weight: 780;
     font-stretch: 62%;
-    font-size: 2.25rem;
-    line-height: 0.85;
-    color: var(--blue);
-    min-width: 2.25rem;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--ink);
   }
-  .mth__t { font-weight: 700; font-stretch: 105%; font-size: 1.1875rem; line-height: 1.2; }
-  .mth__d { color: var(--ink-2); font-size: var(--fs-sm); max-width: 52ch; }
-  .mth__out, .mth__you { font-size: var(--fs-sm); font-weight: 560; display: grid; gap: 0.15rem; }
-  .mth__k { color: var(--ink-3); }
+  .mth__body { display: grid; gap: 0.3rem; }
+  .mth__t { font-weight: 700; font-stretch: 105%; font-size: var(--fs-h3); line-height: 1.15; letter-spacing: -0.01em; }
+  .mth__d { color: var(--ink-2); font-size: var(--fs-sm); max-width: 48ch; }
+  .mth__out { font-size: var(--fs-sm); font-weight: 560; }
 
   @media (min-width: 64rem) {
-    .mth__row {
-      grid-template-columns: minmax(0, 3fr) minmax(0, 4fr) minmax(0, 2.5fr) minmax(0, 2.5fr);
-      gap: 2rem;
-      align-items: baseline;
-      padding-block: 1.5rem;
-    }
-    .mth__row--head { display: grid; padding-block: 0.7rem; }
-    .mth__k { display: none; }
-    .mth__n { font-size: 3rem; min-width: 3rem; }
+    .mth__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
+    .mth__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .mth__step { padding-block: 1.5rem; }
   }
 </style>

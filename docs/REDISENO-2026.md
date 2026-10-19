@@ -49,7 +49,38 @@ Portada con índice de referencias → 4 fichas (SawDust, Médicos Digitales, Go
 - Detector de impeccable: sin hallazgos.
 - Peso de imágenes: p. ej. captura principal de SawDust 1,9 MB → 176 KB (WebP).
 
-## 7. Pendientes
+## 7. Revisión visual y segunda versión (2026-10-19)
+Una crítica con dos evaluaciones independientes (diseño + detector) concluyó que la primera versión era más «ficha técnica» que «publicación premium»: 22/32 en heurísticas. Problemas principales:
+- 4 fichas iguales.
+- Capturas chicas.
+- Exceso de rótulos.
+- Los proyectos listados tres veces.
+- Tres tablas seguidas en el medio.
+- Home mobile de ~13.950 px.
+- Ninguna imagen en el primer viewport a 1280 px.
+
+El usuario aprobó las mejoras P1 + P2, sin sumar foto ni nota personal, y reducir la metáfora a tres gestos: pestaña REF azul, llamadas sobre la captura y banda azul de contacto.
+
+Cambios:
+- Una composición por proyecto (`layout` en `projects.ts`: `bleed`, `pair`, `product`, `ink`).
+- Índice con miniaturas en lugar de la tira duplicada.
+- Titular con tope de 5.5rem.
+- Sin tablas de datos, sin «FIG.» y sin mayúsculas en la home.
+- Trayectoria como pausa oscura con «$8M → $130M».
+- Método como lista compacta.
+- En mobile, la explicación de cada llamada aparece debajo de la captura al tocar el número; la lista completa vive en el caso.
+- Casos con apertura a ancho completo, objetivo en grande y detalles a ancho completo.
+- Menú con sección activa.
+- Estados con colores distintos (online verde, listo ciruela, en desarrollo ámbar, prototipo gris).
+
+Validación final:
+- Revisión independiente: 13 correcciones resueltas en dos rondas.
+- Lighthouse home: mobile 96 / 100 / 100 / 100, desktop 100 en todas las categorías; CLS 0.
+- Home mobile: ~8.900 px.
+
+Capturas en `docs/capturas/` (`revision-1280.jpg` compara las dos versiones a 1280 px).
+
+## 8. Pendientes
 - Revisar y aprobar la rama; recién ahí mergear a `main` (Vercel publica automáticamente).
 - Confirmar si querés mostrar Gold Vision con capturas (hoy aparece aclarando que es una tienda de prueba).
 - Cuando Médicos Digitales tenga dominio, agregar el enlace en `src/data/projects.ts`.

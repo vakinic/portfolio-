@@ -15,11 +15,11 @@ const fallback = options[3].msg;
     <h2 class="ct__title" id="ct-title">¿Qué necesitás construir?</h2>
     <form class="ct__form" data-contact action={`https://wa.me/${site.whatsapp}`} method="get" target="_blank">
       <fieldset>
-        <legend class="label">Elegí una opción y te abro el chat con el mensaje listo</legend>
+        <legend>Elegí una opción y te abro el chat con el mensaje listo.</legend>
         <div class="ct__opts">
           {options.map((o, i) => (
             <label class="ct__opt">
-              <input type="radio" name="tipo" value={o.id} data-msg={o.msg} checked={i === 0} />
+              <input type="radio" name="tipo" form="ct-sin-envio" value={o.id} data-msg={o.msg} checked={i === 0} />
               <span>{o.label}</span>
             </label>
           ))}
@@ -69,7 +69,7 @@ const fallback = options[3].msg;
     max-width: 12ch;
   }
   .ct__form fieldset { border: 0; padding: 0; margin: 0; }
-  .ct__form legend { color: var(--on-blue-2); margin-bottom: 1rem; }
+  .ct__form legend { color: var(--on-blue-2); margin-bottom: 1rem; font-size: var(--fs-sm); }
   .ct__opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
   .ct__opt { position: relative; display: block; cursor: pointer; }
   .ct__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }

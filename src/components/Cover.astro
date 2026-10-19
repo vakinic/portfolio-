@@ -25,54 +25,30 @@ import { waLink } from '../data/site';
       </div>
     </div>
 
-    <nav class="index" aria-label="Índice de trabajos">
-      <p class="label index__head"><span>Ref.</span><span>Trabajo</span><span>Estado</span></p>
+    <nav class="index" aria-label="Trabajos">
       <ol>
-        {projects.map((p) => (
+        {projects.map((p, i) => (
           <li>
             <a class="index__row" href={`#${p.slug}`}>
               <span class="index__tab" aria-hidden="true">{p.ref}</span>
+              <span class="index__thumb" aria-hidden="true">
+                <Image src={p.plate.src} alt="" widths={[160, 240, 320]} sizes="(min-width: 48rem) 7.5rem, 5rem" loading={i < 2 ? 'eager' : 'lazy'} class="index__img" />
+              </span>
               <span class="index__body">
                 <span class="index__name">{p.name}</span>
                 <span class="index__kind">{p.kind} · {p.platform}</span>
               </span>
-              <span class:list={['index__status label status', `status--${p.status}`]}>{p.statusLabel}</span>
+              <span class:list={['index__status status', `status--${p.status}`]}>{p.statusLabel}</span>
             </a>
           </li>
         ))}
       </ol>
     </nav>
   </div>
-  <div class="wrap">
-    <p class="cover__strip label">
-      <span>Catálogo de trabajos — Edición 2026</span>
-      <span>Diseño · Desarrollo · E-commerce · IA</span>
-      <span>Buenos Aires, Argentina</span>
-    </p>
-    <ul class="plates" aria-label="Vista previa de los trabajos">
-      {projects.map((p, i) => (
-        <li>
-          <a class="plates__item" href={`#${p.slug}`}>
-            <span class="plates__mount">
-              <Image src={p.plate.src} alt="" widths={[360, 540, 720]} sizes="(min-width: 64rem) 22vw, 64vw" loading={i < 2 ? 'eager' : 'lazy'} class="plates__img" />
-            </span>
-            <span class="label plates__cap"><span>Ref. {p.ref}</span>{p.name}</span>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
 </section>
 
 <style>
-  .cover { padding-top: clamp(1.75rem, 0.8rem + 2.6vw, 3rem); }
-  .cover__grid {
-    display: grid;
-    gap: 3rem;
-    grid-template-columns: minmax(0, 1fr);
-    align-items: end;
-    margin-top: clamp(1.25rem, 1rem + 0.8vw, 1.75rem);
-  }
+  .cover { padding-top: clamp(2rem, 0.8rem + 3vw, 3.5rem); }
   .cover__title {
     font-size: var(--fs-display);
     font-stretch: var(--display-stretch, 125%);
@@ -80,8 +56,14 @@ import { waLink } from '../data/site';
     letter-spacing: -0.04em;
     line-height: 0.92;
     text-wrap: balance;
-    max-width: 17ch;
+    max-width: 22ch;
     overflow-wrap: break-word;
+  }
+  .cover__grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
   }
   .cover__lede {
     font-size: var(--fs-lead);
@@ -92,23 +74,14 @@ import { waLink } from '../data/site';
   }
   .cover__actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
-  .index { border-top: 2px solid var(--ink); }
-  .index__head {
-    display: grid;
-    grid-template-columns: 3.25rem 1fr auto;
-    gap: 1rem;
-    padding-block: 0.6rem;
-    color: var(--ink-3);
-    border-bottom: 1px solid var(--line);
-  }
+  .index { border-top: 1px solid var(--ink); }
   .index li { border-bottom: 1px solid var(--line); }
   .index__row {
     display: grid;
-    grid-template-columns: 3.25rem 1fr auto;
-    gap: 1rem;
+    grid-template-columns: 2.75rem 5rem minmax(0, 1fr);
+    gap: 0.4rem 1rem;
     align-items: center;
-    min-height: 4rem;
-    padding-block: 0.5rem;
+    padding-block: 0.6rem;
     color: var(--ink);
     text-decoration: none;
   }
@@ -120,80 +93,47 @@ import { waLink } from '../data/site';
     color: var(--on-blue);
     font-weight: 760;
     font-stretch: 62%;
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     line-height: 1;
     transition: background-color 160ms ease;
   }
-  .index__body { display: grid; gap: 0.15rem; min-width: 0; }
+  .index__thumb {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--paper-2);
+    outline: 1px solid var(--line);
+  }
+  .index__thumb :global(img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    transition: transform 400ms var(--ease-out);
+  }
+  .index__body { display: grid; gap: 0.1rem; min-width: 0; }
   .index__name {
-    font-size: 1.375rem;
+    font-size: 1.25rem;
     font-weight: 700;
     font-stretch: 112%;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
   .index__kind { font-size: var(--fs-sm); color: var(--ink-2); }
-  .index__status { justify-self: end; }
+  .index__status { grid-column: 3; font-size: var(--fs-sm); font-weight: 560; }
   @media (hover: hover) and (pointer: fine) {
     .index__row:hover .index__tab { background: var(--ink); }
+    .index__row:hover .index__thumb :global(img) { transform: scale(1.06); }
     .index__row:hover .index__name { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 0.18em; }
   }
 
-  .cover__strip {
-    margin-top: clamp(2rem, 1.5rem + 1vw, 2.5rem);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.5rem 2rem;
-    padding-block: 0.7rem;
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    color: var(--ink-2);
+  @media (min-width: 48rem) {
+    .index__row { grid-template-columns: 3rem 7.5rem minmax(0, 1fr) auto; }
+    .index__status { grid-column: auto; justify-self: end; }
   }
-
-  .plates {
-    margin-top: 1.25rem;
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: min(64vw, 18rem);
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding-bottom: 0.5rem;
-  }
-  .plates li { scroll-snap-align: start; }
-  .plates__item { display: grid; gap: 0.5rem; color: var(--ink); text-decoration: none; }
-  .plates__mount {
-    display: block;
-    padding: 0.6rem;
-    background: var(--paper-2);
-    outline: 1px solid var(--ink);
-  }
-  .plates__img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top center;
-    transition: transform 400ms var(--ease-out);
-  }
-  .plates__mount { overflow: hidden; }
-  .plates__cap { display: flex; gap: 0.6rem; }
-  .plates__cap span { color: var(--blue); }
-  @media (hover: hover) and (pointer: fine) {
-    .plates__item:hover .plates__img { transform: translateY(-2%); }
-  }
-
-  @media (max-width: 30rem) {
-    .index__head span:last-child { display: none; }
-    .index__row { grid-template-columns: 3.25rem 1fr; }
-    .index__status { grid-column: 2; justify-self: start; margin-top: -0.2rem; }
-    .index__head { grid-template-columns: 3.25rem 1fr; }
-  }
-
   @media (min-width: 64rem) {
-    .cover__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 5rem; align-items: start; }
-    .plates { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; }
-    .cover__lede { padding-top: 0.6rem; }
+    .cover__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 4rem; align-items: start; }
+    .cover__lede { padding-top: 0.4rem; }
   }
 </style>

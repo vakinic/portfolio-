@@ -46,8 +46,14 @@ export interface Figure {
   kind: 'desktop' | 'mobile' | 'detail';
 }
 
+export type SheetLayout = 'bleed' | 'pair' | 'product' | 'ink';
+
 export interface Project {
   ref: string;
+  /** Composition of the sheet on the home page. */
+  layout: SheetLayout;
+  /** Optional second image shown next to the plate (pair layout). */
+  companion?: Figure;
   slug: string;
   name: string;
   /** What it is, in a few words. */
@@ -72,6 +78,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     ref: '01',
+    layout: 'bleed',
     slug: 'sawdust',
     name: 'SawDust',
     kind: 'Tienda online',
@@ -135,6 +142,8 @@ export const projects: Project[] = [
   },
   {
     ref: '02',
+    layout: 'pair',
+    companion: { src: mdHomeM, alt: 'Hero de Médicos Digitales en mobile.', caption: 'La misma portada en el celular', kind: 'mobile' },
     slug: 'medicos-digitales',
     name: 'Médicos Digitales',
     kind: 'Sitio con CMS',
@@ -165,7 +174,7 @@ export const projects: Project[] = [
           detail: 'Grotesca con carácter para leer rápido y una sola palabra en serif itálica como acento. Fuentes autoalojadas.',
           impl: 'next/font · tokens.css',
           region: { x: 3.6, y: 27.6, w: 52.4, h: 28 },
-          pin: { x: 47.5, y: 29 },
+          pin: { x: 47.5, y: 27.4 },
         },
         {
           title: 'Textos editables desde Sanity',
@@ -199,6 +208,7 @@ export const projects: Project[] = [
   },
   {
     ref: '03',
+    layout: 'product',
     slug: 'gold-vision',
     name: 'Gold Vision',
     kind: 'Tienda online',
@@ -259,6 +269,7 @@ export const projects: Project[] = [
   },
   {
     ref: '04',
+    layout: 'ink',
     slug: 'agente-de-agenda',
     name: 'Agente de agenda',
     kind: 'Automatización con IA',

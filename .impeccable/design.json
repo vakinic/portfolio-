@@ -1,47 +1,273 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-19T00:00:00Z",
+  "generatedAt": "2026-10-19T12:00:00Z",
   "title": "Design System: Nicolás Ferreira — Portfolio",
   "extensions": {
     "colorMeta": {
-      "blue": { "role": "primary", "displayName": "Azul de proceso", "tonalRamp": ["oklch(22% 0.12 266)", "oklch(32% 0.17 266)", "oklch(42% 0.22 266)", "oklch(48% 0.24 266)", "oklch(60% 0.18 266)", "oklch(72% 0.12 266)", "oklch(84% 0.06 266)", "oklch(94% 0.025 266)"] },
-      "blue-deep": { "role": "primary", "displayName": "Azul de proceso profundo" },
-      "blue-wash": { "role": "primary", "displayName": "Lavado azul" },
-      "on-blue": { "role": "primary", "displayName": "Papel sobre azul" },
-      "on-blue-2": { "role": "primary", "displayName": "Azul pálido sobre azul" },
-      "paper": { "role": "neutral", "displayName": "Papel mate frío", "tonalRamp": ["oklch(18% 0.004 110)", "oklch(30% 0.005 110)", "oklch(42% 0.006 110)", "oklch(55% 0.006 110)", "oklch(68% 0.006 110)", "oklch(80% 0.006 110)", "oklch(90.5% 0.008 110)", "oklch(95.5% 0.006 110)"] },
-      "paper-2": { "role": "neutral", "displayName": "Gris de catálogo" },
-      "surface": { "role": "neutral", "displayName": "Papel claro" },
-      "ink": { "role": "neutral", "displayName": "Tinta", "tonalRamp": ["oklch(18% 0 0)", "oklch(28% 0.004 110)", "oklch(38% 0.008 110)", "oklch(49% 0.008 110)", "oklch(60% 0.006 110)", "oklch(72% 0.005 110)", "oklch(84% 0.004 110)", "oklch(95% 0.004 110)"] },
-      "ink-2": { "role": "neutral", "displayName": "Tinta media" },
-      "ink-3": { "role": "neutral", "displayName": "Tinta suave" },
-      "line": { "role": "neutral", "displayName": "Filete" },
-      "line-strong": { "role": "neutral", "displayName": "Filete de cabecera" },
-      "ok": { "role": "semantic", "displayName": "Verde operativo", "tonalRamp": ["oklch(22% 0.06 150)", "oklch(32% 0.09 150)", "oklch(46% 0.11 150)", "oklch(56% 0.13 150)", "oklch(66% 0.12 150)", "oklch(76% 0.09 150)", "oklch(86% 0.05 150)", "oklch(95% 0.02 150)"] },
-      "warn": { "role": "semantic", "displayName": "Ámbar de taller", "tonalRamp": ["oklch(25% 0.06 65)", "oklch(35% 0.09 65)", "oklch(48% 0.12 65)", "oklch(56% 0.13 65)", "oklch(66% 0.13 65)", "oklch(76% 0.1 65)", "oklch(86% 0.06 65)", "oklch(95% 0.025 65)"] }
+      "blue": {
+        "role": "primary",
+        "displayName": "Azul de proceso",
+        "tonalRamp": [
+          "oklch(18% 0.2 266)",
+          "oklch(28% 0.2 266)",
+          "oklch(40% 0.2 266)",
+          "oklch(52% 0.2 266)",
+          "oklch(64% 0.2 266)",
+          "oklch(76% 0.2 266)",
+          "oklch(87% 0.2 266)",
+          "oklch(95% 0.2 266)"
+        ]
+      },
+      "blue-deep": {
+        "role": "primary",
+        "displayName": "Azul de proceso profundo"
+      },
+      "blue-light": {
+        "role": "primary",
+        "displayName": "Azul luz (sobre tinta)"
+      },
+      "on-blue": {
+        "role": "primary",
+        "displayName": "Papel sobre azul"
+      },
+      "on-blue-2": {
+        "role": "primary",
+        "displayName": "Azul pálido sobre azul"
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Papel mate frío",
+        "tonalRamp": [
+          "oklch(18% 0.006 110)",
+          "oklch(28% 0.006 110)",
+          "oklch(40% 0.006 110)",
+          "oklch(52% 0.006 110)",
+          "oklch(64% 0.006 110)",
+          "oklch(76% 0.006 110)",
+          "oklch(87% 0.006 110)",
+          "oklch(95% 0.006 110)"
+        ]
+      },
+      "paper-2": {
+        "role": "neutral",
+        "displayName": "Gris de catálogo"
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Tinta",
+        "tonalRamp": [
+          "oklch(18% 0.004 110)",
+          "oklch(28% 0.004 110)",
+          "oklch(40% 0.004 110)",
+          "oklch(52% 0.004 110)",
+          "oklch(64% 0.004 110)",
+          "oklch(76% 0.004 110)",
+          "oklch(87% 0.004 110)",
+          "oklch(95% 0.004 110)"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Tinta media"
+      },
+      "ink-3": {
+        "role": "neutral",
+        "displayName": "Tinta suave"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Filete"
+      },
+      "on-ink": {
+        "role": "neutral",
+        "displayName": "Papel sobre tinta"
+      },
+      "on-ink-2": {
+        "role": "neutral",
+        "displayName": "Gris sobre tinta"
+      },
+      "line-on-ink": {
+        "role": "neutral",
+        "displayName": "Filete sobre tinta"
+      },
+      "mount-on-ink": {
+        "role": "neutral",
+        "displayName": "Montaje sobre tinta"
+      },
+      "ok": {
+        "role": "semantic",
+        "displayName": "Verde operativo",
+        "tonalRamp": [
+          "oklch(18% 0.1 150)",
+          "oklch(28% 0.1 150)",
+          "oklch(40% 0.1 150)",
+          "oklch(52% 0.1 150)",
+          "oklch(64% 0.1 150)",
+          "oklch(76% 0.1 150)",
+          "oklch(87% 0.1 150)",
+          "oklch(95% 0.1 150)"
+        ]
+      },
+      "ready": {
+        "role": "semantic",
+        "displayName": "Ciruela de imprenta",
+        "tonalRamp": [
+          "oklch(18% 0.11 340)",
+          "oklch(28% 0.11 340)",
+          "oklch(40% 0.11 340)",
+          "oklch(52% 0.11 340)",
+          "oklch(64% 0.11 340)",
+          "oklch(76% 0.11 340)",
+          "oklch(87% 0.11 340)",
+          "oklch(95% 0.11 340)"
+        ]
+      },
+      "warn": {
+        "role": "semantic",
+        "displayName": "Ámbar de taller",
+        "tonalRamp": [
+          "oklch(18% 0.11 65)",
+          "oklch(28% 0.11 65)",
+          "oklch(40% 0.11 65)",
+          "oklch(52% 0.11 65)",
+          "oklch(64% 0.11 65)",
+          "oklch(76% 0.11 65)",
+          "oklch(87% 0.11 65)",
+          "oklch(95% 0.11 65)"
+        ]
+      }
     },
     "typographyMeta": {
-      "display": { "displayName": "Display", "purpose": "Titular de portada, nombre de proyecto en la ficha y título de contacto. Ancho 125 %, 104 % bajo 30rem." },
-      "headline": { "displayName": "Headline", "purpose": "Títulos de sección (.h2)." },
-      "title": { "displayName": "Title", "purpose": "Nombres en índice, servicios, pasos del método y menú móvil." },
-      "lead": { "displayName": "Lead", "purpose": "Bajadas de portada y ficha." },
-      "body": { "displayName": "Body", "purpose": "Texto corrido con cifras tabulares." },
-      "small": { "displayName": "Small", "purpose": "Detalles, specs, footer, botones." },
-      "label": { "displayName": "Label", "purpose": "Cabeceras de columna, dt, captions Fig./Anexo, estados. Mayúsculas, ancho 75 %." },
-      "ref-numeral": { "displayName": "Numeral REF", "purpose": "Números de referencia, llamadas y pasos; ancho 62 %." }
+      "display": {
+        "displayName": "display",
+        "purpose": "Titular de portada, contacto y 404. Tope 5.5rem; 104 % de ancho bajo 30rem."
+      },
+      "figure": {
+        "displayName": "figure",
+        "purpose": "Sólo la cifra $8M → $130M de Trayectoria, sobre tinta."
+      },
+      "sheet-name": {
+        "displayName": "sheet-name",
+        "purpose": "Nombre del proyecto en cabecera de ficha y caso."
+      },
+      "sheet-name-ink": {
+        "displayName": "sheet-name-ink",
+        "purpose": "Nombre del proyecto en la ficha de tinta (intro 6/6)."
+      },
+      "headline": {
+        "displayName": "headline",
+        "purpose": "Títulos de sección (.h2) y siguiente trabajo."
+      },
+      "case-goal": {
+        "displayName": "case-goal",
+        "purpose": "Objetivo del proyecto en la página de caso."
+      },
+      "title": {
+        "displayName": "title",
+        "purpose": "Servicios y pasos del método."
+      },
+      "title-menu": {
+        "displayName": "title-menu",
+        "purpose": "Filas del menú móvil."
+      },
+      "title-row": {
+        "displayName": "title-row",
+        "purpose": "Nombre en filas del índice."
+      },
+      "lead": {
+        "displayName": "lead",
+        "purpose": "Bajadas de portada, ficha, servicios y caso; caption de la cifra."
+      },
+      "lead-short": {
+        "displayName": "lead-short",
+        "purpose": "Primer párrafo de Trayectoria."
+      },
+      "body": {
+        "displayName": "body",
+        "purpose": "Texto corrido, títulos de llamada (660), datos del caso."
+      },
+      "body-heading": {
+        "displayName": "body-heading",
+        "purpose": "Encabezados de columna del caso, en ink-3, caja normal."
+      },
+      "small": {
+        "displayName": "small",
+        "purpose": "Detalles, metadatos, stack, captions, footer, botones, estados."
+      },
+      "wordmark": {
+        "displayName": "wordmark",
+        "purpose": "Nombre en header y footer, ancho 80 %."
+      },
+      "ref-tab": {
+        "displayName": "ref-tab",
+        "purpose": "Número en la pestaña REF de la ficha."
+      },
+      "ref-next": {
+        "displayName": "ref-next",
+        "purpose": "Número en la pestaña de siguiente trabajo."
+      },
+      "ref-404": {
+        "displayName": "ref-404",
+        "purpose": "Pestaña 404."
+      },
+      "ref-step": {
+        "displayName": "ref-step",
+        "purpose": "Número de paso del método, en tinta."
+      },
+      "ref-index": {
+        "displayName": "ref-index",
+        "purpose": "Pestaña REF del índice de portada."
+      },
+      "ref-marker": {
+        "displayName": "ref-marker",
+        "purpose": "Marcadores y números de llamada."
+      },
+      "ref-chip": {
+        "displayName": "ref-chip",
+        "purpose": "Referencias cuadradas de servicios."
+      },
+      "ref-marker-sm": {
+        "displayName": "ref-marker-sm",
+        "purpose": "Marcadores bajo 30rem."
+      }
     },
     "shadows": [
-      { "name": "callout-scrim", "value": "0 0 0 200vmax rgb(17 17 17 / 0.55)", "purpose": "Velo que aísla la región señalada de una captura cuando una llamada está activa. Única sombra; es un estado, no elevación." }
+      {
+        "name": "callout-scrim",
+        "value": "0 0 0 200vmax rgb(17 17 17 / 0.55)",
+        "purpose": "Velo que aísla la región señalada de una captura mientras una llamada está activa. Única sombra; es un estado."
+      }
     ],
     "motion": [
-      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Estados: press de botón (140ms), velo de llamada (220ms), caption móvil (240ms), subrayado de nav (220ms)." },
-      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Entrada por recorte vertical (clip-path, 900ms) sólo con JS y sin reduced-motion." },
-      { "name": "color-state", "value": "160ms ease", "purpose": "Cambios de fondo y color en hover/selección." }
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.23, 1, 0.32, 1)",
+        "purpose": "Estados: press de botón y marcador (140ms), velo de llamada (220ms), leyenda móvil (220ms), subrayado de nav (220ms), zoom de miniatura (400ms)."
+      },
+      {
+        "name": "ease-in-out",
+        "value": "cubic-bezier(0.77, 0, 0.175, 1)",
+        "purpose": "Entrada por recorte vertical (clip-path, 900ms) sólo con JS y sin reduced-motion."
+      },
+      {
+        "name": "color-state",
+        "value": "160ms ease",
+        "purpose": "Cambios de fondo, color y contorno en hover y selección."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "30rem" },
-      { "name": "md", "value": "48rem" },
-      { "name": "lg", "value": "64rem" }
+      {
+        "name": "phone-sm",
+        "value": "30rem"
+      },
+      {
+        "name": "nav",
+        "value": "48rem"
+      },
+      {
+        "name": "columns",
+        "value": "64rem"
+      }
     ]
   },
   "components": [
@@ -49,101 +275,148 @@
       "name": "Botón azul",
       "kind": "button",
       "refersTo": "button-blue",
-      "description": "Acción principal (WhatsApp, enviar).",
-      "html": "<a class=\"ds-btn ds-btn--blue\" href=\"#\">Escribime por WhatsApp</a>",
-      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 3rem; padding: 0 1.4rem; font-family: var(--font); font-size: 0.9375rem; font-weight: 640; font-stretch: 92%; line-height: 1; text-decoration: none; border: 1px solid transparent; border-radius: 0; cursor: pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn--blue { background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); } .ds-btn--blue:hover { background: var(--blue-deep, #1429a3); } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+      "description": "Acción principal (WhatsApp, ir a trabajos).",
+      "html": "<a class=\"ds-btn ds-btn-blue\" href=\"#\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.9A8 8 0 1 1 21 12z\"/></svg>Escribime por WhatsApp</a>",
+      "css": ".ds-btn { font-family: var(--font); display:inline-flex; align-items:center; gap:0.6rem; min-height:3rem; padding:0 1.4rem; font-size:var(--fs-sm); font-weight:640; font-stretch:92%; line-height:1; text-decoration:none; border:1px solid transparent; border-radius:0; transition: background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out); cursor:pointer; } .ds-btn svg { width:1.05em; height:1.05em; } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline:2px solid var(--blue); outline-offset:3px; } .ds-btn-blue { background:var(--blue); color:var(--on-blue); } .ds-btn-blue:hover { background:var(--blue-deep); }"
     },
     {
       "name": "Botón línea",
       "kind": "button",
       "refersTo": "button-line",
-      "description": "Acción secundaria; se invierte a tinta en hover.",
+      "description": "Acción secundaria sobre papel.",
       "html": "<a class=\"ds-btn-line\" href=\"#\">Ver trabajos</a>",
-      "css": ".ds-btn-line { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.4rem; font-family: var(--font); font-size: 0.9375rem; font-weight: 640; font-stretch: 92%; line-height: 1; text-decoration: none; border: 1px solid var(--ink, #111); border-radius: 0; color: var(--ink, #111); background: transparent; transition: background-color 160ms ease, color 160ms ease; } .ds-btn-line:hover { background: var(--ink, #111); color: var(--paper, #f1f1ec); } .ds-btn-line:active { transform: scale(0.97); } .ds-btn-line:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
-    },
-    {
-      "name": "Navegación",
-      "kind": "nav",
-      "refersTo": "nav",
-      "description": "Header sticky sobre papel translúcido con subrayado que crece.",
-      "html": "<header class=\"ds-hdr\"><a class=\"ds-hdr__name\" href=\"#\">Nicolás Ferreira</a><nav><a href=\"#\">Trabajos</a><a href=\"#\">Servicios</a><a href=\"#\">Contacto</a></nav></header>",
-      "css": ".ds-hdr { display: flex; align-items: center; gap: 1.75rem; height: 3.5rem; padding: 0 1.25rem; background: color-mix(in srgb, var(--paper, #f1f1ec) 94%, transparent); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); font-family: var(--font); } .ds-hdr__name { margin-right: auto; font-weight: 760; font-stretch: 80%; font-size: 1.0625rem; color: var(--ink, #111); text-decoration: none; } .ds-hdr nav { display: flex; gap: 1.75rem; } .ds-hdr nav a { font-size: 0.9375rem; font-weight: 520; color: var(--ink-2, #45453f); text-decoration: none; padding-block: 0.5rem; background: linear-gradient(var(--ink, #111), var(--ink, #111)) left bottom / 0 1px no-repeat; transition: color 160ms ease, background-size 220ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-hdr nav a:hover { color: var(--ink, #111); background-size: 100% 1px; } .ds-hdr a:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+      "css": ".ds-btn-line { font-family: var(--font); display:inline-flex; align-items:center; min-height:3rem; padding:0 1.4rem; font-size:var(--fs-sm); font-weight:640; font-stretch:92%; border:1px solid var(--ink); color:var(--ink); background:transparent; text-decoration:none; transition: background-color 160ms ease, color 160ms ease; } .ds-btn-line:hover { background:var(--ink); color:var(--paper); } .ds-btn-line:active { transform: scale(0.97); } .ds-btn-line:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }"
     },
     {
       "name": "Estado",
       "kind": "chip",
       "refersTo": "status",
-      "description": "Punto + etiqueta condensada con el estado real del proyecto.",
-      "html": "<span class=\"ds-status ds-status--ok\">Online</span> <span class=\"ds-status ds-status--warn\">En desarrollo</span>",
-      "css": ".ds-status { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; } .ds-status::before { content: ''; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; } .ds-status--ok { color: var(--ok, #136b31); } .ds-status--warn { color: var(--warn, #9a5800); }"
+      "description": "Estado real del proyecto: punto + texto en su color semántico.",
+      "html": "<span class=\"ds-status ds-ok\">Online</span> <span class=\"ds-status ds-ready\">Listo para publicar</span> <span class=\"ds-status ds-warn\">En desarrollo</span> <span class=\"ds-status ds-proto\">Prototipo</span>",
+      "css": ".ds-status { font-family: var(--font); display:inline-flex; align-items:center; gap:0.45em; margin-right:1rem; font-size:var(--fs-sm); font-weight:560; white-space:nowrap; } .ds-status::before { content:''; width:0.5rem; height:0.5rem; border-radius:50%; background:currentColor; } .ds-ok { color:var(--ok); } .ds-ready { color:var(--ready); } .ds-warn { color:var(--warn); } .ds-proto { color:var(--ink-3); }"
     },
     {
       "name": "Fila del índice REF",
+      "kind": "nav",
+      "refersTo": "index-tab",
+      "description": "Fila del índice de portada: pestaña REF, miniatura montada, nombre, tipo y estado.",
+      "html": "<a class=\"ds-idx\" href=\"#\"><span class=\"ds-idx-tab\">01</span><span class=\"ds-idx-thumb\"></span><span class=\"ds-idx-body\"><span class=\"ds-idx-name\">SawDust</span><span class=\"ds-idx-kind\">Tienda online · Tiendanube</span></span><span class=\"ds-idx-st\">Online</span></a>",
+      "css": ".ds-idx { font-family: var(--font); display:grid; grid-template-columns:3rem 7.5rem minmax(0,1fr) auto; gap:0.4rem 1rem; align-items:center; padding-block:0.6rem; border-top:1px solid var(--ink); border-bottom:1px solid var(--line); color:var(--ink); text-decoration:none; } .ds-idx-tab { align-self:stretch; display:grid; place-items:center; background:var(--blue); color:var(--on-blue); font-weight:760; font-stretch:62%; font-size:1.25rem; line-height:1; transition:background-color 160ms ease; } .ds-idx-thumb { display:block; aspect-ratio:16/10; background:var(--paper-2); outline:1px solid var(--line); } .ds-idx-body { display:grid; gap:0.1rem; } .ds-idx-name { font-size:1.25rem; font-weight:700; font-stretch:112%; letter-spacing:-0.02em; line-height:1.1; } .ds-idx-kind { font-size:var(--fs-sm); color:var(--ink-2); } .ds-idx-st { font-size:var(--fs-sm); font-weight:560; color:var(--ok); } .ds-idx:hover .ds-idx-tab { background:var(--ink); } .ds-idx:hover .ds-idx-name { text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:0.18em; } .ds-idx:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }"
+    },
+    {
+      "name": "Cabecera de ficha",
       "kind": "custom",
       "refersTo": "ref-tab",
-      "description": "Fila del índice con pestaña azul numerada; hover vuelve la pestaña tinta.",
-      "html": "<a class=\"ds-idx\" href=\"#\"><span class=\"ds-idx__tab\">01</span><span><span class=\"ds-idx__name\">SawDust</span><br><span class=\"ds-idx__kind\">Tienda online · Tiendanube</span></span></a>",
-      "css": ".ds-idx { display: grid; grid-template-columns: 3.25rem 1fr; gap: 1rem; align-items: center; min-height: 4rem; padding-block: 0.5rem; border-top: 2px solid var(--ink, #111); border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); color: var(--ink, #111); text-decoration: none; font-family: var(--font); } .ds-idx__tab { align-self: stretch; display: grid; place-items: center; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); font-weight: 760; font-stretch: 62%; font-size: 1.375rem; line-height: 1; transition: background-color 160ms ease; } .ds-idx__name { font-size: 1.375rem; font-weight: 700; font-stretch: 112%; letter-spacing: -0.02em; } .ds-idx__kind { font-size: 0.9375rem; color: var(--ink-2, #45453f); } .ds-idx:hover .ds-idx__tab { background: var(--ink, #111); } .ds-idx:hover .ds-idx__name { text-decoration: underline 2px; text-underline-offset: 0.18em; } .ds-idx:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+      "description": "Pestaña REF cuadrada + nombre del proyecto en display expandido + metadatos.",
+      "html": "<header class=\"ds-sh\"><span class=\"ds-sh-tab\">02</span><div><h2 class=\"ds-sh-name\">Médicos Digitales</h2><p class=\"ds-sh-meta\">Sitio con CMS · Next.js + Sanity · 2025</p></div></header>",
+      "css": ".ds-sh { font-family: var(--font); display:grid; grid-template-columns:auto minmax(0,1fr); gap:1rem 1.25rem; align-items:start; color:var(--ink); } .ds-sh-tab { display:grid; place-items:center; width:clamp(3.25rem, 2.4rem + 3vw, 5.5rem); aspect-ratio:1; background:var(--blue); color:var(--on-blue); font-weight:780; font-stretch:62%; font-size:clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem); line-height:1; } .ds-sh-name { margin:0; font-size:clamp(2.375rem, 0.9rem + 6vw, 5.5rem); font-stretch:125%; font-weight:760; letter-spacing:-0.04em; line-height:0.88; } .ds-sh-meta { margin:0.7rem 0 0; font-size:var(--fs-sm); color:var(--ink-2); }"
     },
     {
-      "name": "Placa montada con llamada",
-      "kind": "card",
-      "refersTo": "plate-mount",
-      "description": "Captura real sobre gris de catálogo con contorno de tinta, marcador numerado y caption Fig.",
-      "html": "<figure class=\"ds-plate\"><div class=\"ds-plate__frame\"><div class=\"ds-plate__img\"></div><button class=\"ds-plate__marker\" type=\"button\">1</button></div><figcaption class=\"ds-plate__cap\"><span>Fig. 01.0 · Captura real</span><span class=\"ds-plate__hint\">Señalá un número</span></figcaption></figure>",
-      "css": ".ds-plate { margin: 0; padding: 0.6rem 0.6rem 0.75rem; background: var(--paper-2, #e3e3dc); font-family: var(--font); } .ds-plate__frame { position: relative; outline: 1px solid var(--ink, #111); background: var(--surface, #fbfbf8); } .ds-plate__img { aspect-ratio: 16 / 10; } .ds-plate__marker { position: absolute; left: 20%; top: 25%; width: 2rem; height: 2rem; display: grid; place-items: center; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); border: 0; border-radius: 0; font: inherit; font-weight: 760; font-stretch: 62%; font-size: 1.125rem; line-height: 1; cursor: pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-plate__marker:hover, .ds-plate__marker[aria-pressed='true'] { background: var(--paper, #f1f1ec); color: var(--blue, #1e3bd6); } .ds-plate__marker:active { transform: scale(0.94); } .ds-plate__marker:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; } .ds-plate__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.6rem; color: var(--ink-3, #62625b); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; } .ds-plate__hint { color: var(--blue, #1e3bd6); }"
-    },
-    {
-      "name": "Tabla de especificaciones",
+      "name": "Placa con llamadas",
       "kind": "custom",
-      "refersTo": "spec-table",
-      "description": "Tabla reglada: filete de 2 px arriba, filas de 1 px, dt en etiqueta.",
-      "html": "<dl class=\"ds-spec\"><div><dt>Stack</dt><dd>Tiendanube · CSS propio</dd></div><div><dt>Estado</dt><dd>Online</dd></div></dl>",
-      "css": ".ds-spec { margin: 0; border-top: 2px solid var(--ink, #111); font-family: var(--font); } .ds-spec > div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); } .ds-spec dt { color: var(--ink-3, #62625b); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 0.2rem; } .ds-spec dd { margin: 0; font-weight: 540; }"
+      "refersTo": "callout-marker",
+      "description": "Captura montada con marcadores numerados; el marcador activo aísla su zona con el velo.",
+      "html": "<figure class=\"ds-plate\"><div class=\"ds-plate-frame\"><span class=\"ds-region\"></span><button class=\"ds-mk\" style=\"left:8%;top:10%\">1</button><button class=\"ds-mk is-on\" style=\"left:50%;top:36%\">2</button></div></figure>",
+      "css": ".ds-plate { margin:0; padding:clamp(0.5rem, 0.2rem + 1.4vw, 1.75rem); background:var(--paper-2); } .ds-plate-frame { position:relative; overflow:hidden; height:14rem; background:#fbfbf8; outline:1px solid var(--ink); } .ds-region { position:absolute; left:50%; top:36%; width:40%; height:40%; outline:2px solid var(--blue); outline-offset:-1px; box-shadow:0 0 0 200vmax rgb(17 17 17 / 0.55); } .ds-mk { font-family: var(--font); position:absolute; z-index:2; transform:translate(0.5rem,0.5rem); width:2rem; height:2rem; display:grid; place-items:center; background:var(--blue); color:var(--on-blue); border:0; font-weight:760; font-stretch:62%; font-size:1.125rem; line-height:1; cursor:pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out); } .ds-mk.is-on { background:var(--paper); color:var(--blue); } .ds-mk:active { transform:translate(0.5rem,0.5rem) scale(0.94); } .ds-mk:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }"
     },
     {
-      "name": "Opción de contacto",
+      "name": "Lista de llamadas",
+      "kind": "custom",
+      "refersTo": "callout-number",
+      "description": "Fila de llamada: número con contorno azul que se rellena al activarse.",
+      "html": "<ol class=\"ds-co\"><li><button class=\"ds-co-item\"><span class=\"ds-co-n\">1</span><span class=\"ds-co-t\"><b>Catálogo por categoría</b><span>Filtros y orden pensados para el stock real.</span></span></button></li><li><button class=\"ds-co-item is-on\"><span class=\"ds-co-n\">2</span><span class=\"ds-co-t\"><b>Cuotas visibles</b><span>Precio en cuotas junto al precio de lista.</span></span></button></li></ol>",
+      "css": ".ds-co { font-family: var(--font); list-style:none; margin:0; padding:0; } .ds-co li { border-top:1px solid var(--line); } .ds-co-item { display:grid; grid-template-columns:2rem 1fr; gap:0.9rem; width:100%; padding:1rem 0; text-align:left; font:inherit; color:var(--ink); background:none; border:0; cursor:pointer; } .ds-co-n { width:2rem; height:2rem; display:grid; place-items:center; border:1px solid var(--blue); color:var(--blue); font-weight:760; font-stretch:62%; font-size:1.125rem; line-height:1; transition: background-color 160ms ease, color 160ms ease; } .ds-co-t { display:grid; gap:0.3rem; } .ds-co-t b { font-weight:660; font-size:1.0625rem; line-height:1.3; } .ds-co-t span { color:var(--ink-2); font-size:var(--fs-sm); } .ds-co-item:hover .ds-co-n, .ds-co-item.is-on .ds-co-n { background:var(--blue); color:var(--on-blue); } .ds-co-item:focus-visible { outline:2px solid var(--blue); outline-offset:3px; }"
+    },
+    {
+      "name": "Banda de tinta",
+      "kind": "card",
+      "refersTo": "ink-band",
+      "description": "Pausa oscura a sangre con sus tokens gemelos y la cifra en figure.",
+      "html": "<section class=\"ds-ink\"><h2 class=\"ds-ink-h\">Antes de diseñar tiendas, las operé.</h2><p class=\"ds-ink-fig\">$8M → $130M</p><p class=\"ds-ink-cap\">Facturación mensual del canal de Mercado Libre, del inicio al pico.</p><div class=\"ds-ink-mount\"></div></section>",
+      "css": ".ds-ink { font-family: var(--font); background:var(--ink); color:var(--on-ink); padding:clamp(3.5rem, 2.5rem + 4vw, 7rem) var(--gutter); } .ds-ink-h { margin:0; font-size:var(--fs-h2); font-stretch:112%; font-weight:720; letter-spacing:-0.03em; line-height:1.02; } .ds-ink-fig { margin:1.5rem 0 0; font-size:var(--fs-figure); font-stretch:125%; font-weight:780; letter-spacing:-0.045em; line-height:0.86; color:var(--paper); } .ds-ink-cap { margin-top:1rem; font-size:var(--fs-lead); color:var(--on-ink-2); max-width:40ch; } .ds-ink-mount { margin-top:2rem; height:8rem; background:var(--mount-on-ink); outline:1px solid var(--line-on-ink); } .ds-ink :focus-visible { outline:2px solid var(--blue-light); outline-offset:3px; }"
+    },
+    {
+      "name": "Banda de contacto",
       "kind": "input",
       "refersTo": "contact-option",
-      "description": "Radio como bloque recto sobre la banda azul; se invierte a papel al elegirse.",
-      "html": "<div class=\"ds-ct\"><label class=\"ds-opt\"><input type=\"radio\" name=\"t\" checked><span>Tienda online</span></label><label class=\"ds-opt\"><input type=\"radio\" name=\"t\"><span>Automatización</span></label></div>",
-      "css": ".ds-ct { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; padding: 1.5rem; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); font-family: var(--font); } .ds-opt { position: relative; display: block; cursor: pointer; } .ds-opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; } .ds-opt span { display: flex; align-items: center; min-height: 3.5rem; padding: 0.75rem 1rem; border: 1px solid rgb(241 241 236 / 0.5); font-weight: 600; line-height: 1.2; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; } .ds-opt:hover span { border-color: var(--paper, #f1f1ec); } .ds-opt input:checked + span { background: var(--paper, #f1f1ec); color: var(--blue, #1e3bd6); border-color: var(--paper, #f1f1ec); } .ds-opt input:focus-visible + span { outline: 2px solid var(--paper, #f1f1ec); outline-offset: 3px; }"
+      "description": "Cierre azul: opciones de tipo de proyecto y botón papel.",
+      "html": "<section class=\"ds-ct\"><h2 class=\"ds-ct-h\">¿Qué necesitás construir?</h2><div class=\"ds-ct-opts\"><label class=\"ds-ct-opt\"><input type=\"radio\" name=\"ds-t\" checked><span>Tienda online</span></label><label class=\"ds-ct-opt\"><input type=\"radio\" name=\"ds-t\"><span>Sitio o landing</span></label></div><button class=\"ds-ct-send\">Escribir por WhatsApp</button></section>",
+      "css": ".ds-ct { font-family: var(--font); background:var(--blue); color:var(--on-blue); padding:clamp(3.5rem, 2rem + 5vw, 7rem) var(--gutter); } .ds-ct-h { margin:0 0 2rem; font-size:var(--fs-display); font-stretch:125%; font-weight:760; letter-spacing:-0.04em; line-height:0.92; max-width:12ch; } .ds-ct-opts { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:0.5rem; } .ds-ct-opt { position:relative; display:block; cursor:pointer; } .ds-ct-opt input { position:absolute; opacity:0; inset:0; margin:0; } .ds-ct-opt span { display:flex; align-items:center; min-height:3.5rem; padding:0.75rem 1rem; border:1px solid rgb(241 241 236 / 0.5); font-weight:600; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; } .ds-ct-opt:hover span { border-color:var(--paper); } .ds-ct-opt input:checked + span { background:var(--paper); color:var(--blue); border-color:var(--paper); } .ds-ct-opt input:focus-visible + span { outline:2px solid var(--paper); outline-offset:3px; } .ds-ct-send { font-family: var(--font); margin-top:1.25rem; width:100%; min-height:3.5rem; font-size:1.0625rem; font-weight:640; background:var(--paper); color:var(--blue); border:0; cursor:pointer; } .ds-ct-send:hover { background:#ffffff; } .ds-ct-send:focus-visible { outline:2px solid var(--paper); outline-offset:3px; }"
     }
   ],
   "narrative": {
-    "northStar": "Catálogo de importadora",
-    "overview": "El portfolio se lee como el catálogo impreso de una importadora de herramientas: cada trabajo es una ficha con número de referencia, una captura real montada como placa, una tabla de especificaciones y llamadas numeradas que señalan qué se construyó. Papel mate frío, tinta casi negra y un único azul de proceso que marca todo lo que es índice, referencia o acción. Nada flota: la jerarquía sale de filetes, escala tipográfica y ancho variable de Archivo.\n\nLa densidad es de catálogo, no de landing: tablas regladas, etiquetas condensadas en mayúsculas, cifras tabulares, y al lado un titular expandido enorme. El contraste entre palabra gigante y etiqueta mínima es el gesto principal. Las capturas siempre son reales y siempre aparecen montadas sobre gris de catálogo con un filete de tinta, como una lámina pegada en la página.\n\nRechazos confirmados por el build: grilla de tarjetas iguales con imagen + título + tags, esquinas redondeadas, sombras de elevación y gradientes decorativos.",
+    "northStar": "Catálogo de importadora, destilado",
+    "overview": "El portfolio es un catálogo de trabajos editado como publicación. Del catálogo quedan sólo tres gestos, y son la firma del sistema: la **pestaña REF azul** (número de referencia condensado sobre azul de proceso), las **llamadas numeradas** que aíslan zonas de capturas reales, y la **banda azul de contacto**. Todo lo demás es silencio editorial: papel mate, tinta casi negra, un titular expandido grande, texto corrido cómodo y filetes finos que ordenan sin encajonar.\n\nEl ritmo lo dan las composiciones, no las cajas. Cada trabajo tiene su propia puesta (a sangre, par desktop/mobile, producto con llamadas al costado, banda de tinta) para que la página nunca sea una pila de fichas iguales. Las dos bandas de tinta (la ficha del agente y Trayectoria) son pausas oscuras dentro del papel; la banda azul cierra la página.\n\nRechazos confirmados por el build y por el usuario: grilla de tarjetas iguales, rótulos en mayúsculas, captions tipo \"FIG.\", tablas de especificaciones en la home, esquinas redondeadas, sombras de elevación y gradientes decorativos.",
     "keyCharacteristics": [
-      "Papel mate frío + tinta + un azul de proceso; sin segundo acento de marca.",
-      "Archivo variable usado por ancho: 62 % para números REF, 75 % para etiquetas, 112–125 % para titulares.",
-      "Filetes de 1 px (tinta al 16 %) y de 2 px en tinta plena como cabecera de cada tabla o ficha.",
-      "Esquinas rectas en todo, sin excepción.",
-      "Capturas reales montadas en placas sobre `paper-2`, con llamadas numeradas interactivas."
+      "Papel mate frío + tinta + un único azul de proceso; los colores de estado son semánticos, no de marca.",
+      "Una sola familia (Archivo variable) que cambia de voz por el eje de ancho: 62 % números REF, 80 % firma, 100 % texto, 105–112 % títulos, 125 % display y cifra.",
+      "Display tope 5.5rem; la única cifra más grande es la de Trayectoria (`figure`, hasta 9.5rem).",
+      "Esquinas rectas en todo; el único círculo es el punto de estado.",
+      "Capturas reales siempre montadas: gris de catálogo sobre papel, `mount-on-ink` sobre tinta.",
+      "Texto en caja normal siempre; nada en mayúsculas."
     ],
     "rules": [
-      { "name": "The Process Blue Rule", "body": "El azul sólo marca referencia, llamada o acción (REF, número de llamada, CTA, contacto, foco). Nunca es decoración ni fondo de sección fuera de la banda de contacto.", "section": "colors" },
-      { "name": "The Real Status Rule", "body": "Todo proyecto muestra su estado real con un punto de color + etiqueta; el color del estado nunca se usa para otra cosa.", "section": "colors" },
-      { "name": "The Width Axis Rule", "body": "La jerarquía se arma con el eje de ancho, no con familias nuevas: 62 % números, 75 % etiquetas, 100 % cuerpo, 112 % títulos, 125 % display.", "section": "typography" },
-      { "name": "The Giant/Tiny Rule", "body": "El display siempre convive con etiquetas mínimas condensadas; no hay tamaños intermedios decorativos entre ambos extremos.", "section": "typography" },
-      { "name": "The Mounted Plate Rule", "body": "Toda captura real va montada: fondo `paper-2`, contorno de tinta de 1 px y caption en etiqueta debajo. Nunca una captura suelta sobre el papel.", "section": "elevation" },
-      { "name": "The Ruled Table Rule", "body": "Toda lista de datos abre con un filete de tinta de 2 px y separa filas con filetes de 1 px al 16 %. Las tablas no llevan fondos de fila ni cajas.", "section": "elevation" }
+      {
+        "name": "The Three Gestures Rule",
+        "body": "El azul sólo aparece en los tres gestos del catálogo (pestaña REF, llamada numerada, banda de contacto) y en acciones y foco. Nunca como decoración, fondo de sección intermedia ni color de estado.",
+        "section": "colors"
+      },
+      {
+        "name": "The Real Status Rule",
+        "body": "Todo proyecto muestra su estado real con un punto de 0.5rem + texto, en su color semántico (`ok`, `ready`, `warn`, prototipo). Esos colores no se usan para nada más.",
+        "section": "colors"
+      },
+      {
+        "name": "The Ink Twin Rule",
+        "body": "Dentro de una banda de tinta cada rol usa su gemelo: `on-ink` / `on-ink-2` para texto, `line-on-ink` para filetes, `mount-on-ink` para montajes, `blue-light` para números de llamada con contorno, región aislada y foco, botón `paper` en lugar de `ink`. Las superficies azules rellenas (pestaña REF, marcadores) siguen en `blue`.",
+        "section": "colors"
+      },
+      {
+        "name": "The Width Axis Rule",
+        "body": "La jerarquía se arma con el eje de ancho y el peso, nunca con otra familia: 62 % números, 80 % firma, 100 % texto, 105–112 % títulos, 125 % display.",
+        "section": "typography"
+      },
+      {
+        "name": "The Display Ceiling Rule",
+        "body": "Ningún titular supera 5.5rem. La cifra de Trayectoria es la única excepción y vive sobre tinta.",
+        "section": "typography"
+      },
+      {
+        "name": "The Sentence Case Rule",
+        "body": "Todo texto va en caja normal. No hay etiquetas en mayúsculas, kickers sobre títulos ni captions \"Fig.\"; los captions son frases.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mounted Plate Rule",
+        "body": "Toda captura real va montada: `paper-2` con contorno de tinta de 1 px sobre papel; `mount-on-ink` con contorno `line-on-ink` sobre tinta. Nunca una captura suelta.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Scrim-Only Rule",
+        "body": "La única sombra es el velo de llamada y sólo existe mientras una llamada está activa.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "**Do** montar toda captura real sobre `paper-2` con contorno de tinta de 1 px y caption \"Fig.\" en etiqueta.",
-      "**Do** abrir cada tabla, índice o ficha con un filete de tinta de 2 px y separar filas con filetes `line` de 1 px.",
-      "**Do** usar el eje de ancho de Archivo para jerarquía: 62 % números REF, 75 % etiquetas, 112–125 % titulares.",
-      "**Do** reservar el azul de proceso para referencia, llamada, acción y foco.",
-      "**Do** mostrar el estado real de cada proyecto con punto + etiqueta en su color semántico.",
-      "**Do** mantener hovers detrás de `(hover: hover) and (pointer: fine)` y respetar `prefers-reduced-motion`.",
-      "**Do** bajar el ancho del display a 104 % por debajo de 30rem."
+      "**Do** limitar el catálogo a sus tres gestos: pestaña REF azul, llamadas numeradas sobre capturas reales y banda azul de contacto.",
+      "**Do** montar toda captura real: `paper-2` + contorno de tinta sobre papel, `mount-on-ink` + `line-on-ink` sobre tinta.",
+      "**Do** darle a cada trabajo una composición propia (bleed, pair, product, ink) en lugar de repetir la misma ficha.",
+      "**Do** usar el eje de ancho de Archivo para la jerarquía: 62 % números REF, 112 % títulos, 125 % display.",
+      "**Do** mantener el display en 5.5rem como máximo; sólo la cifra de Trayectoria usa `figure`.",
+      "**Do** usar los gemelos `on-ink`, `on-ink-2`, `line-on-ink`, `mount-on-ink` y `blue-light` dentro de las bandas de tinta.",
+      "**Do** mostrar el estado real de cada proyecto con punto + texto en `ok`, `ready`, `warn` o tinta suave.",
+      "**Do** en móvil mostrar la leyenda de la llamada debajo de la captura, nunca encima de la zona señalada.",
+      "**Do** mantener hovers detrás de `(hover: hover) and (pointer: fine)` y respetar `prefers-reduced-motion`."
     ],
     "donts": [
-      "**Don't** usar grillas de tarjetas iguales con imagen + título + tags.",
+      "**Don't** usar grillas de tarjetas iguales ni pilas de fichas idénticas.",
+      "**Don't** poner texto en mayúsculas, kickers o eyebrows sobre títulos, ni captions \"FIG.\" / \"Anexo\".",
+      "**Don't** volver a meter tablas de especificaciones en la home; los datos del proyecto viven en la página de caso.",
       "**Don't** redondear esquinas; el único círculo es el punto de estado.",
-      "**Don't** usar sombras de elevación ni gradientes decorativos; el velo de llamada es la única sombra y es un estado.",
-      "**Don't** sumar un segundo color de acento ni usar `ok`/`warn` fuera de los estados.",
-      "**Don't** poner etiquetas tipo kicker o eyebrow encima de los títulos; la etiqueta vive en cabeceras de columna, `dt` y captions.",
-      "**Don't** mostrar capturas sin montar ni usar imágenes que no sean del trabajo real."
+      "**Don't** usar sombras de elevación ni gradientes decorativos; el velo de llamada es la única sombra.",
+      "**Don't** usar el azul como color de estado ni como fondo de sección fuera de la banda de contacto.",
+      "**Don't** usar azul pleno como texto, contorno o foco sobre tinta; ahí va `blue-light` (los rellenos azules de pestaña y marcador se mantienen).",
+      "**Don't** mostrar capturas sin montar ni imágenes que no sean del trabajo real."
     ]
   }
 }

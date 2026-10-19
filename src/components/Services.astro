@@ -1,4 +1,6 @@
 ---
+import { projects } from '../data/projects';
+const nameOf = (slug: string) => projects.find((p) => p.slug === slug)?.name ?? slug;
 const lines = [
   {
     name: 'Tiendas online',
@@ -46,12 +48,13 @@ const lines = [
           <h3 class="svc__name">{l.name}</h3>
           <p class="svc__text">{l.text}</p>
           <div class="svc__meta">
-            <p class="label svc__tools">{l.tools.join(' · ')}</p>
+            <p class="svc__tools">{l.tools.join(' · ')}</p>
             {l.refs.length > 0 && (
-              <p class="svc__refs">
-                <span class="label">Ver</span>
-                {l.refs.map((r) => <a href={`#${r.slug}`}>Ref. {r.n}</a>)}
-              </p>
+              <ul class="svc__refs" aria-label="Ejemplos">
+                {l.refs.map((r) => (
+                  <li><a href={`#${r.slug}`}><span class="svc__tab" aria-hidden="true">{r.n}</span>{nameOf(r.slug)}</a></li>
+                ))}
+              </ul>
             )}
           </div>
         </li>
@@ -69,7 +72,7 @@ const lines = [
     padding-bottom: 2rem;
   }
   .svc__intro { font-size: var(--fs-lead); color: var(--ink-2); max-width: 40ch; line-height: 1.45; }
-  .svc__list { border-top: 2px solid var(--ink); }
+  .svc__list { border-top: 1px solid var(--ink); }
   .svc__row {
     display: grid;
     gap: 0.75rem 3rem;
@@ -85,23 +88,36 @@ const lines = [
   }
   .svc__text { color: var(--ink-2); max-width: 60ch; }
   .svc__meta { display: grid; gap: 0.6rem; align-content: start; }
-  .svc__tools { color: var(--ink); }
-  .svc__refs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; font-size: var(--fs-sm); }
-  .svc__refs .label { color: var(--ink-3); }
+  .svc__tools { color: var(--ink-3); font-size: var(--fs-sm); }
+  .svc__refs { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; font-size: var(--fs-sm); }
   .svc__refs a {
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
     min-height: 2.75rem;
-    color: var(--blue);
-    font-weight: 640;
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-    text-decoration-thickness: 1px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .svc__tab {
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    background: var(--blue);
+    color: var(--on-blue);
+    font-weight: 760;
+    font-stretch: 62%;
+    font-size: 0.95rem;
+    line-height: 1;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .svc__refs a:hover { text-decoration: underline; text-underline-offset: 0.25em; }
   }
 
   @media (min-width: 64rem) {
     .svc__head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
     .svc__row { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); align-items: start; padding-block: 2rem; }
-    .svc__refs a { min-height: 0; }
+    .svc__refs a { min-height: 2rem; }
   }
 </style>

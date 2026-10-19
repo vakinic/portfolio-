@@ -19,56 +19,54 @@ export function getStaticPaths() {
 interface Props { project: Project; next: Project }
 const { project: p, next } = Astro.props;
 const desktop = p.figures.filter((f) => f.kind === 'desktop');
-const mobile = p.figures.filter((f) => f.kind !== 'desktop');
-const verticalTitle = mobile.every((f) => f.kind === 'mobile') ? 'En el celular' : 'Detalle de la ficha';
-const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f) + 1}`;
+const vertical = p.figures.filter((f) => f.kind !== 'desktop');
+const verticalTitle = vertical.every((f) => f.kind === 'mobile') ? 'En el celular' : 'Detalle de la ficha';
 ---
 <Base title={`${p.name} — ${p.kind} en ${p.platform} | Nicolás Ferreira`} description={p.summary} type="article">
   <article class="case">
     <div class="wrap">
-      <nav class="crumbs label" aria-label="Migas de pan">
+      <nav class="crumbs" aria-label="Migas de pan">
         <a href="/#trabajos">Trabajos</a><span aria-hidden="true">/</span><span aria-current="page">{p.name}</span>
       </nav>
-      <SheetHead project={p} as="h1" />
-      <p class="case__summary">{p.summary}</p>
-
-      <div class="case__brief">
-        <section aria-labelledby="obj">
-          <h2 class="label case__k" id="obj">Objetivo</h2>
-          <p>{p.goal}</p>
-        </section>
-        <section aria-labelledby="rol">
-          <h2 class="label case__k" id="rol">Mi participación</h2>
-          <ul class="case__role">{p.role.map((r) => <li>{r}</li>)}</ul>
-        </section>
-        <section aria-labelledby="sol">
-          <h2 class="label case__k" id="sol">Solución</h2>
-          <p>{p.solution}</p>
-          <p class="label case__stack">{p.stack.join(' · ')}</p>
-        </section>
+      <div class="case__intro">
+        <SheetHead project={p} as="h1" />
+        <p class="case__summary">{p.summary}</p>
       </div>
 
       <div class="case__plate" data-callouts>
-        <div><Plate project={p} eager /></div>
-        <aside>
-          <CalloutList project={p} />
-          {p.link && (
-            <a class="btn btn--blue case__visit" href={p.link.href} target="_blank" rel="noopener noreferrer">
-              Visitar {p.link.label}<Icon name="arrow-up-right" />
-            </a>
-          )}
-        </aside>
+        <Plate project={p} eager />
+        <CalloutList project={p} layout="row" showImpl />
       </div>
+      {p.link && (
+        <a class="btn btn--blue case__visit" href={p.link.href} target="_blank" rel="noopener noreferrer">
+          Visitar {p.link.label}<Icon name="arrow-up-right" />
+        </a>
+      )}
 
-      {mobile.length > 0 && (
+      <section class="case__brief" aria-labelledby="obj">
+        <h2 class="case__goal" id="obj">{p.goal}</h2>
+        <div class="case__cols">
+          <div>
+            <h2 class="case__k">Mi participación</h2>
+            <ul class="case__role">{p.role.map((r) => <li>{r}</li>)}</ul>
+          </div>
+          <div>
+            <h2 class="case__k">Solución</h2>
+            <p>{p.solution}</p>
+            <p class="case__stack">{p.stack.join(' · ')}</p>
+          </div>
+        </div>
+      </section>
+
+      {vertical.length > 0 && (
         <section class="case__sec" aria-labelledby="g-mobile">
           <h2 class="h2" id="g-mobile">{verticalTitle}</h2>
           <ul class="case__mobile">
-            {mobile.map((f) => (
+            {vertical.map((f) => (
               <li>
                 <figure>
-                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[300, 450, 600]} sizes="(min-width: 64rem) 22rem, 80vw" loading="lazy" /></div>
-                  <figcaption class="label"><span>Fig. {figNo(f)}</span> {f.caption}</figcaption>
+                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[300, 450, 600]} sizes="(min-width: 64rem) 22rem, 78vw" loading="lazy" /></div>
+                  <figcaption>{f.caption}</figcaption>
                 </figure>
               </li>
             ))}
@@ -83,8 +81,8 @@ const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f
             {desktop.map((f) => (
               <li>
                 <figure>
-                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[640, 960, 1280, 1600]} sizes="(min-width: 90rem) 42rem, (min-width: 64rem) 46vw, 100vw" loading="lazy" /></div>
-                  <figcaption class="label"><span>Fig. {figNo(f)}</span> {f.caption}</figcaption>
+                  <div class="frame"><Image src={f.src} alt={f.alt} widths={[640, 960, 1280, 1600, 1920]} sizes="(min-width: 90rem) 82rem, 100vw" loading="lazy" /></div>
+                  <figcaption>{f.caption}</figcaption>
                 </figure>
               </li>
             ))}
@@ -98,8 +96,8 @@ const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f
           <div>
             {p.facts && (
               <dl class="case__facts">
-                {p.facts.map((f) => <div><dt class="label">{f.label}</dt><dd>{f.value}</dd></div>)}
-                <div><dt class="label">Estado</dt><dd>{p.statusNote}</dd></div>
+                {p.facts.map((f) => <div><dt>{f.label}</dt><dd>{f.value}</dd></div>)}
+                <div><dt>Estado</dt><dd>{p.statusNote}</dd></div>
               </dl>
             )}
             {p.notes && (
@@ -128,51 +126,56 @@ const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f
 
 <style>
   .case { padding-top: clamp(1.5rem, 1rem + 2vw, 3rem); }
-  .crumbs { display: flex; gap: 0.6rem; color: var(--ink-3); margin-bottom: 1.5rem; }
+  .crumbs { display: flex; gap: 0.6rem; font-size: var(--fs-sm); color: var(--ink-3); margin-bottom: 1.75rem; }
   .crumbs a { color: var(--ink); }
-  .case__summary { margin-top: 1.5rem; font-size: var(--fs-lead); line-height: 1.45; max-width: 52ch; }
+  .case__intro { display: grid; gap: 1.5rem 4rem; align-items: end; }
+  .case__summary { font-size: var(--fs-lead); line-height: 1.45; max-width: 46ch; text-wrap: pretty; }
 
-  .case__brief {
-    margin-top: clamp(2.5rem, 2rem + 2vw, 4rem);
-    display: grid;
-    gap: 2rem 3rem;
-    border-top: 2px solid var(--ink);
-    padding-top: 1.5rem;
+  .case__plate { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); display: grid; gap: 1.5rem; }
+  .case__visit { margin-top: 1.5rem; }
+
+  .case__brief { margin-top: clamp(4rem, 3rem + 4vw, 8rem); display: grid; gap: 1rem; }
+  .case__k { font-size: 1rem; font-weight: 700; color: var(--ink-3); }
+  .case__goal {
+    font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+    font-stretch: 105%;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    max-width: 30ch;
+    text-wrap: balance;
   }
-  .case__brief p, .case__role { color: var(--ink-2); max-width: 60ch; }
-  .case__k { color: var(--ink-3); margin-bottom: 0.75rem; }
-  .case__role li { padding: 0.45rem 0; border-bottom: 1px solid var(--line); }
-  .case__role li:first-child { padding-top: 0; }
-  .case__stack { margin-top: 1rem; color: var(--ink); }
-
-  .case__plate { margin-top: clamp(3rem, 2rem + 4vw, 6rem); display: grid; gap: 2rem; }
-  .case__visit { margin-top: 1.75rem; }
+  .case__cols { margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem); display: grid; gap: 2.5rem 4rem; }
+  .case__cols > div { display: grid; gap: 0.75rem; align-content: start; }
+  .case__cols p, .case__role { color: var(--ink-2); max-width: 58ch; }
+  .case__role li { padding: 0.5rem 0; border-top: 1px solid var(--line); }
+  .case__stack { font-size: var(--fs-sm); color: var(--ink-3); }
 
   .case__sec { margin-top: clamp(4rem, 3rem + 4vw, 8rem); }
   .case__sec > .h2 { margin-bottom: 2rem; }
-  .frame { outline: 1px solid var(--ink); background: var(--paper-2); }
-  .frame img { display: block; width: 100%; height: auto; }
+  .frame { background: var(--paper-2); padding: clamp(0.5rem, 0.2rem + 1.2vw, 1.5rem); }
+  .frame :global(img) { display: block; width: 100%; height: auto; outline: 1px solid var(--ink); }
   figure { margin: 0; }
-  figcaption { margin-top: 0.6rem; color: var(--ink-2); }
-  figcaption span { color: var(--ink-3); margin-right: 0.35rem; }
+  figcaption { margin-top: 0.6rem; font-size: var(--fs-sm); color: var(--ink-2); }
 
   .case__mobile {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: min(78vw, 20rem);
+    grid-auto-columns: min(78vw, 21rem);
     gap: 1.25rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     padding-bottom: 0.75rem;
   }
   .case__mobile li { scroll-snap-align: start; }
-  .case__desktop { display: grid; gap: 2.5rem 1.5rem; }
+  .case__desktop { display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem); }
 
   .case__data > div { display: grid; gap: 2rem 3rem; }
-  .case__facts { border-top: 2px solid var(--ink); }
-  .case__facts > div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
-  .case__facts dt { color: var(--ink-3); padding-top: 0.2rem; }
-  .case__notes { border-top: 2px solid var(--ink); color: var(--ink-2); }
+  .case__facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 0 2rem; }
+  .case__facts > div { display: grid; gap: 0.35rem; align-content: start; padding-block: 1rem; border-top: 1px solid var(--ink); }
+  .case__facts dt { color: var(--ink-3); font-size: var(--fs-sm); }
+  .case__facts dd { font-size: 1.0625rem; }
+  .case__notes { border-top: 1px solid var(--ink); color: var(--ink-2); }
   .case__notes li { padding-block: 0.85rem; border-bottom: 1px solid var(--line); }
 
   .case__next {
@@ -182,7 +185,7 @@ const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f
     align-items: center;
     gap: 0.5rem 1.25rem;
     padding-block: 1.5rem;
-    border-top: 2px solid var(--ink);
+    border-top: 1px solid var(--ink);
     border-bottom: 1px solid var(--ink);
     color: var(--ink);
     text-decoration: none;
@@ -211,17 +214,14 @@ const figNo = (f: (typeof p.figures)[number]) => `${p.ref}.${p.figures.indexOf(f
     letter-spacing: -0.04em;
     line-height: 1;
   }
-  .case__next-name svg { width: 0.7em; height: 0.7em; color: var(--blue); transition: transform 220ms var(--ease-out); }
+  .case__next-name :global(svg) { width: 0.7em; height: 0.7em; color: var(--blue); transition: transform 220ms var(--ease-out); }
   @media (hover: hover) and (pointer: fine) {
-    .case__next:hover svg { transform: translateX(0.35rem); }
+    .case__next:hover :global(svg) { transform: translateX(0.35rem); }
   }
 
   @media (min-width: 64rem) {
-    .case__brief { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .case__plate { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 3rem; align-items: start; }
-    .case__plate aside { position: sticky; top: calc(var(--header-h) + 1.5rem); }
-    .case__mobile { grid-auto-flow: row; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); overflow: visible; }
-    .case__desktop { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .case__data > div { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .case__intro { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .case__cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .case__mobile { grid-auto-flow: row; grid-template-columns: repeat(auto-fit, minmax(16rem, 21rem)); justify-content: space-evenly; overflow: visible; }
   }
 </style>

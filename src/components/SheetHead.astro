@@ -4,73 +4,52 @@ interface Props { project: Project; as?: 'h1' | 'h2' }
 const { project: p, as: Tag = 'h2' } = Astro.props;
 ---
 <header class="sh">
-  <p class="sh__ref" aria-label={`Referencia ${p.ref}`}>
-    <span class="label">Ref.</span><span class="sh__num">{p.ref}</span>
-  </p>
-  <Tag class="sh__name" id={`${p.slug}-title`}>{p.name}</Tag>
-  <dl class="sh__meta">
-    <div><dt class="label">Tipo</dt><dd>{p.kind}</dd></div>
-    <div><dt class="label">Plataforma</dt><dd>{p.platform}</dd></div>
-    <div><dt class="label">Año</dt><dd>{p.year}</dd></div>
-    <div><dt class="label">Estado</dt><dd><span class:list={['status', `status--${p.status}`]}>{p.statusLabel}</span></dd></div>
-  </dl>
+  <span class="sh__tab" aria-hidden="true">{p.ref}</span>
+  <div class="sh__titles">
+    <Tag class="sh__name" id={`${p.slug}-title`}>{p.name}</Tag>
+    <p class="sh__meta">
+      <span>{p.kind} · {p.platform} · {p.year}</span>
+      <span class:list={['status', `status--${p.status}`]}>{p.statusLabel}</span>
+    </p>
+  </div>
 </header>
 
 <style>
   .sh {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto minmax(0, 1fr);
     gap: 1rem 1.25rem;
-    align-items: end;
-    padding-top: 1rem;
-    border-top: 2px solid var(--ink);
+    align-items: start;
   }
-  .sh__ref {
+  .sh__tab {
     display: grid;
-    align-content: space-between;
-    width: clamp(4.25rem, 3rem + 4vw, 7rem);
+    place-items: center;
+    width: clamp(3.25rem, 2.4rem + 3vw, 5.5rem);
     aspect-ratio: 1;
-    padding: 0.55rem 0.6rem;
+    margin-top: 0.15em;
     background: var(--blue);
     color: var(--on-blue);
-  }
-  .sh__ref .label { color: var(--on-blue-2); }
-  .sh__num {
     font-weight: 780;
     font-stretch: 62%;
-    font-size: clamp(2.25rem, 1.5rem + 3vw, 4.25rem);
-    line-height: 0.8;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
+    line-height: 1;
   }
+  .sh__titles { display: grid; gap: 0.7rem; min-width: 0; }
   .sh__name {
-    font-size: clamp(2.375rem, 0.9rem + 6.4vw, 6rem);
+    font-size: clamp(2.375rem, 0.9rem + 6vw, 5.5rem);
     font-stretch: var(--display-stretch, 125%);
     font-weight: 760;
     letter-spacing: -0.04em;
     line-height: 0.88;
     overflow-wrap: anywhere;
+    text-wrap: balance;
   }
   .sh__meta {
-    grid-column: 1 / -1;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.25rem;
+    font-size: var(--fs-sm);
+    color: var(--ink-2);
   }
-  .sh__meta > div {
-    padding: 0.7rem 0.75rem 0.7rem 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    gap: 0.2rem;
-  }
-  .sh__meta dt { color: var(--ink-3); }
-  .sh__meta dd { font-weight: 560; }
-
-  @media (min-width: 48rem) {
-    .sh__meta { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  }
-  @media (min-width: 64rem) {
-    .sh { grid-template-columns: auto minmax(0, 1fr) minmax(0, 26rem); }
-    .sh__meta { grid-column: auto; grid-template-columns: repeat(2, minmax(0, 1fr)); align-self: end; border-top: 0; }
-    .sh__meta > div:nth-child(-n + 2) { border-top: 1px solid var(--line); }
-  }
+  .sh__meta .status { font-weight: 560; }
 </style>

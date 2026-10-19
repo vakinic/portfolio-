@@ -1,9 +1,16 @@
 ---
 import type { Project } from '../data/projects';
-interface Props { project: Project }
-const { project } = Astro.props;
+interface Props {
+  project: Project;
+  /** row: callouts side by side under the image; column: stacked beside it. */
+  layout?: 'row' | 'column';
+  /** Show where each feature lives in the code (case pages only). */
+  showImpl?: boolean;
+  tone?: 'paper' | 'ink';
+}
+const { project, layout = 'column', showImpl = false, tone = 'paper' } = Astro.props;
 ---
-<ol class="co" aria-label={`Qué se construyó en ${project.name}`}>
+<ol class:list={['co', `co--${layout}`, `co--${tone}`]} aria-label={`Qué se construyó en ${project.name}`}>
   {project.plate.callouts.map((c, i) => (
     <li>
       <button type="button" class="co__item" data-target={i + 1} aria-pressed="false">
@@ -11,7 +18,7 @@ const { project } = Astro.props;
         <span class="co__text">
           <span class="co__title">{c.title}</span>
           <span class="co__detail">{c.detail}</span>
-          {c.impl && <span class="co__impl label">{c.impl}</span>}
+          {showImpl && c.impl && <span class="co__impl">En el código: {c.impl}</span>}
         </span>
       </button>
     </li>
@@ -19,13 +26,15 @@ const { project } = Astro.props;
 </ol>
 
 <style>
-  .co { border-top: 1px solid var(--ink); }
-  .co li { border-bottom: 1px solid var(--line); }
+  .co { display: grid; }
+  .co li { border-top: 1px solid var(--line); }
+  .co--ink li { border-top-color: var(--line-on-ink); }
   .co__item {
     display: grid;
     grid-template-columns: 2rem 1fr;
     gap: 0.9rem;
     width: 100%;
+    height: 100%;
     padding: 1rem 0;
     text-align: left;
     font: inherit;
@@ -47,12 +56,18 @@ const { project } = Astro.props;
     line-height: 1;
     transition: background-color 160ms ease, color 160ms ease;
   }
-  .co__text { display: grid; gap: 0.3rem; }
+  .co--ink .co__n { border-color: var(--blue-light); color: var(--blue-light); }
+  .co__text { display: grid; gap: 0.3rem; align-content: start; }
   .co__title { font-weight: 660; font-size: 1.0625rem; line-height: 1.3; }
   .co__detail { color: var(--ink-2); font-size: var(--fs-sm); line-height: 1.5; }
-  .co__impl { color: var(--blue); margin-top: 0.2rem; }
-  .co__item[aria-pressed='true'] .co__n { background: var(--blue); color: var(--on-blue); }
+  .co--ink .co__detail { color: var(--on-ink-2); }
+  .co__impl { color: var(--ink-3); font-size: var(--fs-sm); margin-top: 0.2rem; }
+  .co__item[aria-pressed='true'] .co__n { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
   @media (hover: hover) and (pointer: fine) {
-    .co__item:hover .co__n { background: var(--blue); color: var(--on-blue); }
+    .co__item:hover .co__n { background: var(--blue); color: var(--on-blue); border-color: var(--blue); }
+  }
+
+  @media (min-width: 64rem) {
+    .co--row { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); column-gap: 2rem; }
   }
 </style>

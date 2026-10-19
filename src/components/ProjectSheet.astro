@@ -1,45 +1,62 @@
 ---
+import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import SheetHead from './SheetHead.astro';
 import Plate from './Plate.astro';
 import CalloutList from './CalloutList.astro';
-import FigureStrip from './FigureStrip.astro';
 import type { Project } from '../data/projects';
 
-interface Props { project: Project; eager?: boolean }
-const { project: p, eager = false } = Astro.props;
+interface Props { project: Project; eager?: boolean; hint?: boolean }
+const { project: p, eager = false, hint = false } = Astro.props;
+const hasCase = p.figures.length > 0;
+const tone = p.layout === 'ink' ? 'ink' : 'paper';
+const calloutLayout = p.layout === 'product' ? 'column' : 'row';
+const plateSizes = {
+  bleed: '(min-width: 90rem) 82rem, 100vw',
+  pair: '(min-width: 64rem) 66vw, 100vw',
+  product: '(min-width: 64rem) 62vw, 100vw',
+  ink: '(min-width: 90rem) 82rem, 100vw',
+}[p.layout];
 ---
-<article class="sheet" id={p.slug} aria-labelledby={`${p.slug}-title`}>
+<article
+  class:list={['sheet', `sheet--${p.layout}`, { 'sheet--has-case': hasCase }]}
+  id={p.slug}
+  aria-labelledby={`${p.slug}-title`}
+>
   <div class="wrap">
-    <SheetHead project={p} />
-    <p class="sheet__summary">{p.summary}</p>
-
-    <div class="sheet__body" data-callouts>
-      <div class="sheet__plate"><Plate project={p} eager={eager} /></div>
-      <aside class="sheet__aside">
-        <dl class="spec">
-          <div><dt class="label">Stack</dt><dd>{p.stack.join(' · ')}</dd></div>
-          <div><dt class="label">Estado</dt><dd>{p.statusNote}</dd></div>
-        </dl>
-        <CalloutList project={p} />
-        <div class="sheet__links">
-          {p.figures.length > 0 && (
-            <a class="btn btn--ink" href={`/trabajos/${p.slug}/`}>
-              Ver caso completo<Icon name="arrow-right" />
-            </a>
-          )}
-          {p.link && (
-            <a class="link sheet__ext" href={p.link.href} target="_blank" rel="noopener noreferrer">
-              {p.link.label}<Icon name="arrow-up-right" />
-            </a>
-          )}
-        </div>
-      </aside>
+    <div class="sheet__intro">
+      <SheetHead project={p} />
+      <div class="sheet__about">
+        <p class="sheet__summary">{p.summary}</p>
+        <p class="sheet__stack">{p.stack.join(' · ')}</p>
+      </div>
     </div>
 
-    {p.figures.length > 0 && (
-      <div class="sheet__figs">
-        <FigureStrip figures={p.figures.slice(0, 3)} refNum={p.ref} label={`Más capturas de ${p.name}`} />
+    <div class="sheet__body" data-callouts>
+      {p.layout === 'pair' && p.companion && (
+        <figure class="sheet__companion">
+          <div class="sheet__companion-frame" data-reveal>
+            <Image src={p.companion.src} alt={p.companion.alt} widths={[300, 450, 600]} sizes="(min-width: 64rem) 20vw, 40vw" loading="lazy" />
+          </div>
+          <figcaption>{p.companion.caption}</figcaption>
+        </figure>
+      )}
+      <div class="sheet__plate"><Plate project={p} eager={eager} tone={tone} sizes={plateSizes} hint={hint ? 'Tocá los números para ver qué se hizo en cada parte.' : undefined} /></div>
+      <div class="sheet__callouts"><CalloutList project={p} layout={calloutLayout} tone={tone} /></div>
+    </div>
+
+    {(hasCase || p.link) && (
+      <div class="sheet__links">
+        {hasCase && (
+          <a class:list={['btn', tone === 'ink' ? 'btn--paper' : 'btn--ink']} href={`/trabajos/${p.slug}/`}>
+            Ver caso completo<Icon name="arrow-right" />
+          </a>
+        )}
+        {p.link && (
+          <a class="link sheet__ext" href={p.link.href} target="_blank" rel="noopener noreferrer">
+            {p.link.label}<Icon name="arrow-up-right" />
+          </a>
+        )}
       </div>
     )}
   </div>
@@ -50,49 +67,56 @@ const { project: p, eager = false } = Astro.props;
 </script>
 
 <style>
-  .sheet { padding-block: clamp(4rem, 2.5rem + 5vw, 8rem) 0; }
-  .sheet__summary {
-    margin-top: 1.5rem;
-    font-size: var(--fs-lead);
-    line-height: 1.45;
-    max-width: 52ch;
-    text-wrap: pretty;
+  .sheet { padding-top: clamp(4.5rem, 3rem + 5vw, 9rem); }
+  .sheet__intro { display: grid; gap: 1.5rem 4rem; align-items: end; }
+  .sheet__about { display: grid; gap: 0.75rem; }
+  .sheet__summary { font-size: var(--fs-lead); line-height: 1.45; max-width: 46ch; text-wrap: pretty; }
+  .sheet__stack { font-size: var(--fs-sm); color: var(--ink-3); }
+  .sheet__body { margin-top: clamp(1.75rem, 1.25rem + 2vw, 3rem); display: grid; gap: 1.5rem 3rem; }
+  .sheet__links { margin-top: 1.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
+  .sheet__ext { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; font-weight: 600; }
+  .sheet__ext :global(svg) { width: 1.1em; height: 1.1em; }
+
+  /* Pair: the phone screen stands next to the desktop plate */
+  .sheet__companion { margin: 0; display: grid; gap: 0.6rem; align-content: end; }
+  .sheet__companion-frame { background: var(--paper-2); padding: clamp(0.5rem, 0.2rem + 1.2vw, 1.25rem); }
+  .sheet__companion-frame :global(img) { display: block; width: 100%; height: auto; outline: 1px solid var(--ink); }
+  .sheet__companion figcaption { font-size: var(--fs-sm); color: var(--ink-3); }
+
+  /* Ink: a full-bleed dark band */
+  .sheet--ink {
+    margin-top: clamp(4.5rem, 3rem + 5vw, 9rem);
+    padding-block: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+    background: var(--ink);
+    color: var(--on-ink);
   }
-  .sheet__body {
-    margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
-    display: grid;
-    gap: 2rem;
+  .sheet--ink .sheet__summary { color: var(--on-ink); }
+  .sheet--ink :global(.sh__meta),
+  .sheet--ink :global(.status--prototipo),
+  .sheet--ink .sheet__stack { color: var(--on-ink-2); }
+  .sheet--ink :global(.sh__name) { font-size: clamp(2.25rem, 1rem + 4.4vw, 4.25rem); }
+  .sheet--ink ::selection { background: var(--paper); color: var(--ink); }
+  .sheet--ink :focus-visible { outline-color: var(--blue-light); }
+
+  @media (max-width: 63.99rem) {
+    /* Home on phones: image + tap captions; the full list lives in the case study */
+    .sheet--has-case .sheet__callouts { display: none; }
+    .sheet__companion { display: none; }
   }
-  .spec { border-top: 1px solid var(--ink); }
-  .spec > div {
-    display: grid;
-    grid-template-columns: 6rem 1fr;
-    gap: 1rem;
-    padding-block: 0.75rem;
-    border-bottom: 1px solid var(--line);
-    font-size: var(--fs-sm);
-  }
-  .spec dt { color: var(--ink-3); padding-top: 0.15rem; }
-  .sheet__aside :global(.co) { margin-top: 2rem; }
-  .sheet__links {
-    margin-top: 1.75rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1rem 1.5rem;
-  }
-  .sheet__ext {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-    min-height: 2.75rem;
-    font-weight: 600;
-  }
-  .sheet__ext svg { width: 1.1em; height: 1.1em; }
-  .sheet__figs { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); }
 
   @media (min-width: 64rem) {
-    .sheet__body { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 3rem; align-items: start; }
-    .sheet__aside { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+    .sheet__intro { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+
+    .sheet--pair .sheet__body { grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); align-items: end; }
+    .sheet--pair .sheet__callouts { grid-column: 1 / -1; }
+
+    .sheet--product .sheet__intro { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+    .sheet--product .sheet__about { order: 1; }
+    .sheet--product .sheet__intro > :global(.sh) { order: 2; }
+    .sheet--product .sheet__body { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
+    .sheet--product .sheet__plate { grid-column: 2; grid-row: 1; }
+    .sheet--product .sheet__callouts { grid-column: 1; grid-row: 1; position: sticky; top: calc(var(--header-h) + 1.5rem); }
+
+    .sheet--ink .sheet__intro { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
   }
 </style>

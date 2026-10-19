@@ -64,6 +64,7 @@ import { nav, site, waLink } from '../data/site';
     background: linear-gradient(var(--ink), var(--ink)) left bottom / 0 1px no-repeat;
     transition: color 160ms ease, background-size 220ms var(--ease-out);
   }
+  .hdr__nav a[aria-current='true'] { color: var(--ink); background-size: 100% 1px; }
   @media (hover: hover) and (pointer: fine) {
     .hdr__nav a:hover { color: var(--ink); background-size: 100% 1px; }
   }
@@ -135,4 +136,29 @@ import { nav, site, waLink } from '../data/site';
       toggle.focus();
     }
   });
+
+  // Mark the section currently in view (home only; other pages have no matching ids).
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.hdr__nav a'));
+  const sections = links
+    .map((a) => document.getElementById(a.hash.slice(1)))
+    .filter((el): el is HTMLElement => Boolean(el));
+  if (sections.length && 'IntersectionObserver' in window) {
+    const visible = new Set<string>();
+    const mark = () => {
+      // The last section (in page order) that crosses the middle band wins; none means the cover.
+      const current = sections.filter((s) => visible.has(s.id)).pop()?.id;
+      links.forEach((a) => {
+        if (current && a.hash === `#${current}`) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => (e.isIntersecting ? visible.add(e.target.id) : visible.delete(e.target.id)));
+        mark();
+      },
+      { rootMargin: '-45% 0px -50% 0px' },
+    );
+    sections.forEach((s) => io.observe(s));
+  }
 </script>

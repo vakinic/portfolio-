@@ -1,0 +1,107 @@
+---
+const lines = [
+  {
+    name: 'Tiendas online',
+    text: 'Diseño del storefront, personalización de themes y secciones propias, arquitectura de categorías y experiencia mobile. Respetando lo nativo de la plataforma: variantes, promos, cuotas, envíos.',
+    tools: ['Tiendanube', 'Shopify'],
+    refs: [{ n: '01', slug: 'sawdust' }, { n: '03', slug: 'gold-vision' }],
+  },
+  {
+    name: 'Sitios y landings',
+    text: 'Sitios institucionales y landings a medida, con un CMS para que edites tus textos sin depender de nadie. SEO técnico, accesibilidad y velocidad desde el primer día.',
+    tools: ['Next.js', 'Astro', 'Sanity'],
+    refs: [{ n: '02', slug: 'medicos-digitales' }],
+  },
+  {
+    name: 'Diseño UI/UX',
+    text: 'Arquitectura de información, sistema visual y prototipos navegables que se aprueban antes de programar, para no pagar dos veces el mismo trabajo.',
+    tools: ['Prototipos', 'Sistemas visuales'],
+    refs: [{ n: '01', slug: 'sawdust' }, { n: '03', slug: 'gold-vision' }],
+  },
+  {
+    name: 'Automatizaciones con IA',
+    text: 'Flujos que responden, registran y agendan solos: WhatsApp, agentes con IA, bases de datos e integraciones con las herramientas que ya usás.',
+    tools: ['n8n', 'WhatsApp', 'Supabase', 'OpenAI'],
+    refs: [{ n: '04', slug: 'agente-de-agenda' }],
+  },
+  {
+    name: 'Productos digitales',
+    text: 'Herramientas internas y paneles a medida cuando una planilla ya no alcanza: cotizadores, calculadoras, gestión de pedidos.',
+    tools: ['Next.js', 'TypeScript', 'Supabase'],
+    refs: [],
+  },
+];
+---
+<section class="svc" id="servicios" aria-labelledby="svc-title">
+  <div class="wrap">
+    <div class="svc__head">
+      <h2 class="h2" id="svc-title">Qué puedo construir para tu negocio</h2>
+      <p class="svc__intro">
+        Ni solo diseño ni solo código: me ocupo de que se vea bien, funcione bien y ayude a vender.
+      </p>
+    </div>
+    <ul class="svc__list">
+      {lines.map((l) => (
+        <li class="svc__row">
+          <h3 class="svc__name">{l.name}</h3>
+          <p class="svc__text">{l.text}</p>
+          <div class="svc__meta">
+            <p class="label svc__tools">{l.tools.join(' · ')}</p>
+            {l.refs.length > 0 && (
+              <p class="svc__refs">
+                <span class="label">Ver</span>
+                {l.refs.map((r) => <a href={`#${r.slug}`}>Ref. {r.n}</a>)}
+              </p>
+            )}
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .svc { padding-top: clamp(5rem, 3rem + 6vw, 10rem); }
+  .svc__head {
+    display: grid;
+    gap: 1rem 4rem;
+    align-items: end;
+    padding-bottom: 2rem;
+  }
+  .svc__intro { font-size: var(--fs-lead); color: var(--ink-2); max-width: 40ch; line-height: 1.45; }
+  .svc__list { border-top: 2px solid var(--ink); }
+  .svc__row {
+    display: grid;
+    gap: 0.75rem 3rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .svc__name {
+    font-size: var(--fs-h3);
+    font-stretch: 112%;
+    font-weight: 720;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .svc__text { color: var(--ink-2); max-width: 60ch; }
+  .svc__meta { display: grid; gap: 0.6rem; align-content: start; }
+  .svc__tools { color: var(--ink); }
+  .svc__refs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; font-size: var(--fs-sm); }
+  .svc__refs .label { color: var(--ink-3); }
+  .svc__refs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    color: var(--blue);
+    font-weight: 640;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1px;
+  }
+
+  @media (min-width: 64rem) {
+    .svc__head { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+    .svc__row { grid-template-columns: minmax(0, 4fr) minmax(0, 5fr) minmax(0, 3fr); align-items: start; padding-block: 2rem; }
+    .svc__refs a { min-height: 0; }
+  }
+</style>

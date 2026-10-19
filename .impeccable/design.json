@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-19T00:00:00Z",
+  "title": "Design System: Nicolás Ferreira — Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "blue": { "role": "primary", "displayName": "Azul de proceso", "tonalRamp": ["oklch(22% 0.12 266)", "oklch(32% 0.17 266)", "oklch(42% 0.22 266)", "oklch(48% 0.24 266)", "oklch(60% 0.18 266)", "oklch(72% 0.12 266)", "oklch(84% 0.06 266)", "oklch(94% 0.025 266)"] },
+      "blue-deep": { "role": "primary", "displayName": "Azul de proceso profundo" },
+      "blue-wash": { "role": "primary", "displayName": "Lavado azul" },
+      "on-blue": { "role": "primary", "displayName": "Papel sobre azul" },
+      "on-blue-2": { "role": "primary", "displayName": "Azul pálido sobre azul" },
+      "paper": { "role": "neutral", "displayName": "Papel mate frío", "tonalRamp": ["oklch(18% 0.004 110)", "oklch(30% 0.005 110)", "oklch(42% 0.006 110)", "oklch(55% 0.006 110)", "oklch(68% 0.006 110)", "oklch(80% 0.006 110)", "oklch(90.5% 0.008 110)", "oklch(95.5% 0.006 110)"] },
+      "paper-2": { "role": "neutral", "displayName": "Gris de catálogo" },
+      "surface": { "role": "neutral", "displayName": "Papel claro" },
+      "ink": { "role": "neutral", "displayName": "Tinta", "tonalRamp": ["oklch(18% 0 0)", "oklch(28% 0.004 110)", "oklch(38% 0.008 110)", "oklch(49% 0.008 110)", "oklch(60% 0.006 110)", "oklch(72% 0.005 110)", "oklch(84% 0.004 110)", "oklch(95% 0.004 110)"] },
+      "ink-2": { "role": "neutral", "displayName": "Tinta media" },
+      "ink-3": { "role": "neutral", "displayName": "Tinta suave" },
+      "line": { "role": "neutral", "displayName": "Filete" },
+      "line-strong": { "role": "neutral", "displayName": "Filete de cabecera" },
+      "ok": { "role": "semantic", "displayName": "Verde operativo", "tonalRamp": ["oklch(22% 0.06 150)", "oklch(32% 0.09 150)", "oklch(46% 0.11 150)", "oklch(56% 0.13 150)", "oklch(66% 0.12 150)", "oklch(76% 0.09 150)", "oklch(86% 0.05 150)", "oklch(95% 0.02 150)"] },
+      "warn": { "role": "semantic", "displayName": "Ámbar de taller", "tonalRamp": ["oklch(25% 0.06 65)", "oklch(35% 0.09 65)", "oklch(48% 0.12 65)", "oklch(56% 0.13 65)", "oklch(66% 0.13 65)", "oklch(76% 0.1 65)", "oklch(86% 0.06 65)", "oklch(95% 0.025 65)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular de portada, nombre de proyecto en la ficha y título de contacto. Ancho 125 %, 104 % bajo 30rem." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección (.h2)." },
+      "title": { "displayName": "Title", "purpose": "Nombres en índice, servicios, pasos del método y menú móvil." },
+      "lead": { "displayName": "Lead", "purpose": "Bajadas de portada y ficha." },
+      "body": { "displayName": "Body", "purpose": "Texto corrido con cifras tabulares." },
+      "small": { "displayName": "Small", "purpose": "Detalles, specs, footer, botones." },
+      "label": { "displayName": "Label", "purpose": "Cabeceras de columna, dt, captions Fig./Anexo, estados. Mayúsculas, ancho 75 %." },
+      "ref-numeral": { "displayName": "Numeral REF", "purpose": "Números de referencia, llamadas y pasos; ancho 62 %." }
+    },
+    "shadows": [
+      { "name": "callout-scrim", "value": "0 0 0 200vmax rgb(17 17 17 / 0.55)", "purpose": "Velo que aísla la región señalada de una captura cuando una llamada está activa. Única sombra; es un estado, no elevación." }
+    ],
+    "motion": [
+      { "name": "ease-out", "value": "cubic-bezier(0.23, 1, 0.32, 1)", "purpose": "Estados: press de botón (140ms), velo de llamada (220ms), caption móvil (240ms), subrayado de nav (220ms)." },
+      { "name": "ease-in-out", "value": "cubic-bezier(0.77, 0, 0.175, 1)", "purpose": "Entrada por recorte vertical (clip-path, 900ms) sólo con JS y sin reduced-motion." },
+      { "name": "color-state", "value": "160ms ease", "purpose": "Cambios de fondo y color en hover/selección." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "30rem" },
+      { "name": "md", "value": "48rem" },
+      { "name": "lg", "value": "64rem" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón azul",
+      "kind": "button",
+      "refersTo": "button-blue",
+      "description": "Acción principal (WhatsApp, enviar).",
+      "html": "<a class=\"ds-btn ds-btn--blue\" href=\"#\">Escribime por WhatsApp</a>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; min-height: 3rem; padding: 0 1.4rem; font-family: var(--font); font-size: 0.9375rem; font-weight: 640; font-stretch: 92%; line-height: 1; text-decoration: none; border: 1px solid transparent; border-radius: 0; cursor: pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-btn--blue { background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); } .ds-btn--blue:hover { background: var(--blue-deep, #1429a3); } .ds-btn:active { transform: scale(0.97); } .ds-btn:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+    },
+    {
+      "name": "Botón línea",
+      "kind": "button",
+      "refersTo": "button-line",
+      "description": "Acción secundaria; se invierte a tinta en hover.",
+      "html": "<a class=\"ds-btn-line\" href=\"#\">Ver trabajos</a>",
+      "css": ".ds-btn-line { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 1.4rem; font-family: var(--font); font-size: 0.9375rem; font-weight: 640; font-stretch: 92%; line-height: 1; text-decoration: none; border: 1px solid var(--ink, #111); border-radius: 0; color: var(--ink, #111); background: transparent; transition: background-color 160ms ease, color 160ms ease; } .ds-btn-line:hover { background: var(--ink, #111); color: var(--paper, #f1f1ec); } .ds-btn-line:active { transform: scale(0.97); } .ds-btn-line:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navegación",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Header sticky sobre papel translúcido con subrayado que crece.",
+      "html": "<header class=\"ds-hdr\"><a class=\"ds-hdr__name\" href=\"#\">Nicolás Ferreira</a><nav><a href=\"#\">Trabajos</a><a href=\"#\">Servicios</a><a href=\"#\">Contacto</a></nav></header>",
+      "css": ".ds-hdr { display: flex; align-items: center; gap: 1.75rem; height: 3.5rem; padding: 0 1.25rem; background: color-mix(in srgb, var(--paper, #f1f1ec) 94%, transparent); backdrop-filter: saturate(1.2) blur(8px); border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); font-family: var(--font); } .ds-hdr__name { margin-right: auto; font-weight: 760; font-stretch: 80%; font-size: 1.0625rem; color: var(--ink, #111); text-decoration: none; } .ds-hdr nav { display: flex; gap: 1.75rem; } .ds-hdr nav a { font-size: 0.9375rem; font-weight: 520; color: var(--ink-2, #45453f); text-decoration: none; padding-block: 0.5rem; background: linear-gradient(var(--ink, #111), var(--ink, #111)) left bottom / 0 1px no-repeat; transition: color 160ms ease, background-size 220ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-hdr nav a:hover { color: var(--ink, #111); background-size: 100% 1px; } .ds-hdr a:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+    },
+    {
+      "name": "Estado",
+      "kind": "chip",
+      "refersTo": "status",
+      "description": "Punto + etiqueta condensada con el estado real del proyecto.",
+      "html": "<span class=\"ds-status ds-status--ok\">Online</span> <span class=\"ds-status ds-status--warn\">En desarrollo</span>",
+      "css": ".ds-status { display: inline-flex; align-items: center; gap: 0.45em; font-family: var(--font); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; } .ds-status::before { content: ''; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: currentColor; } .ds-status--ok { color: var(--ok, #136b31); } .ds-status--warn { color: var(--warn, #9a5800); }"
+    },
+    {
+      "name": "Fila del índice REF",
+      "kind": "custom",
+      "refersTo": "ref-tab",
+      "description": "Fila del índice con pestaña azul numerada; hover vuelve la pestaña tinta.",
+      "html": "<a class=\"ds-idx\" href=\"#\"><span class=\"ds-idx__tab\">01</span><span><span class=\"ds-idx__name\">SawDust</span><br><span class=\"ds-idx__kind\">Tienda online · Tiendanube</span></span></a>",
+      "css": ".ds-idx { display: grid; grid-template-columns: 3.25rem 1fr; gap: 1rem; align-items: center; min-height: 4rem; padding-block: 0.5rem; border-top: 2px solid var(--ink, #111); border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); color: var(--ink, #111); text-decoration: none; font-family: var(--font); } .ds-idx__tab { align-self: stretch; display: grid; place-items: center; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); font-weight: 760; font-stretch: 62%; font-size: 1.375rem; line-height: 1; transition: background-color 160ms ease; } .ds-idx__name { font-size: 1.375rem; font-weight: 700; font-stretch: 112%; letter-spacing: -0.02em; } .ds-idx__kind { font-size: 0.9375rem; color: var(--ink-2, #45453f); } .ds-idx:hover .ds-idx__tab { background: var(--ink, #111); } .ds-idx:hover .ds-idx__name { text-decoration: underline 2px; text-underline-offset: 0.18em; } .ds-idx:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; }"
+    },
+    {
+      "name": "Placa montada con llamada",
+      "kind": "card",
+      "refersTo": "plate-mount",
+      "description": "Captura real sobre gris de catálogo con contorno de tinta, marcador numerado y caption Fig.",
+      "html": "<figure class=\"ds-plate\"><div class=\"ds-plate__frame\"><div class=\"ds-plate__img\"></div><button class=\"ds-plate__marker\" type=\"button\">1</button></div><figcaption class=\"ds-plate__cap\"><span>Fig. 01.0 · Captura real</span><span class=\"ds-plate__hint\">Señalá un número</span></figcaption></figure>",
+      "css": ".ds-plate { margin: 0; padding: 0.6rem 0.6rem 0.75rem; background: var(--paper-2, #e3e3dc); font-family: var(--font); } .ds-plate__frame { position: relative; outline: 1px solid var(--ink, #111); background: var(--surface, #fbfbf8); } .ds-plate__img { aspect-ratio: 16 / 10; } .ds-plate__marker { position: absolute; left: 20%; top: 25%; width: 2rem; height: 2rem; display: grid; place-items: center; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); border: 0; border-radius: 0; font: inherit; font-weight: 760; font-stretch: 62%; font-size: 1.125rem; line-height: 1; cursor: pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms cubic-bezier(0.23, 1, 0.32, 1); } .ds-plate__marker:hover, .ds-plate__marker[aria-pressed='true'] { background: var(--paper, #f1f1ec); color: var(--blue, #1e3bd6); } .ds-plate__marker:active { transform: scale(0.94); } .ds-plate__marker:focus-visible { outline: 2px solid var(--blue, #1e3bd6); outline-offset: 3px; } .ds-plate__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.6rem; color: var(--ink-3, #62625b); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; } .ds-plate__hint { color: var(--blue, #1e3bd6); }"
+    },
+    {
+      "name": "Tabla de especificaciones",
+      "kind": "custom",
+      "refersTo": "spec-table",
+      "description": "Tabla reglada: filete de 2 px arriba, filas de 1 px, dt en etiqueta.",
+      "html": "<dl class=\"ds-spec\"><div><dt>Stack</dt><dd>Tiendanube · CSS propio</dd></div><div><dt>Estado</dt><dd>Online</dd></div></dl>",
+      "css": ".ds-spec { margin: 0; border-top: 2px solid var(--ink, #111); font-family: var(--font); } .ds-spec > div { display: grid; grid-template-columns: 7rem 1fr; gap: 1rem; padding-block: 0.85rem; border-bottom: 1px solid var(--line, rgb(17 17 17 / 0.16)); } .ds-spec dt { color: var(--ink-3, #62625b); font-size: 0.8125rem; font-stretch: 75%; font-weight: 620; letter-spacing: 0.04em; text-transform: uppercase; padding-top: 0.2rem; } .ds-spec dd { margin: 0; font-weight: 540; }"
+    },
+    {
+      "name": "Opción de contacto",
+      "kind": "input",
+      "refersTo": "contact-option",
+      "description": "Radio como bloque recto sobre la banda azul; se invierte a papel al elegirse.",
+      "html": "<div class=\"ds-ct\"><label class=\"ds-opt\"><input type=\"radio\" name=\"t\" checked><span>Tienda online</span></label><label class=\"ds-opt\"><input type=\"radio\" name=\"t\"><span>Automatización</span></label></div>",
+      "css": ".ds-ct { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; padding: 1.5rem; background: var(--blue, #1e3bd6); color: var(--on-blue, #f1f1ec); font-family: var(--font); } .ds-opt { position: relative; display: block; cursor: pointer; } .ds-opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; } .ds-opt span { display: flex; align-items: center; min-height: 3.5rem; padding: 0.75rem 1rem; border: 1px solid rgb(241 241 236 / 0.5); font-weight: 600; line-height: 1.2; transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease; } .ds-opt:hover span { border-color: var(--paper, #f1f1ec); } .ds-opt input:checked + span { background: var(--paper, #f1f1ec); color: var(--blue, #1e3bd6); border-color: var(--paper, #f1f1ec); } .ds-opt input:focus-visible + span { outline: 2px solid var(--paper, #f1f1ec); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Catálogo de importadora",
+    "overview": "El portfolio se lee como el catálogo impreso de una importadora de herramientas: cada trabajo es una ficha con número de referencia, una captura real montada como placa, una tabla de especificaciones y llamadas numeradas que señalan qué se construyó. Papel mate frío, tinta casi negra y un único azul de proceso que marca todo lo que es índice, referencia o acción. Nada flota: la jerarquía sale de filetes, escala tipográfica y ancho variable de Archivo.\n\nLa densidad es de catálogo, no de landing: tablas regladas, etiquetas condensadas en mayúsculas, cifras tabulares, y al lado un titular expandido enorme. El contraste entre palabra gigante y etiqueta mínima es el gesto principal. Las capturas siempre son reales y siempre aparecen montadas sobre gris de catálogo con un filete de tinta, como una lámina pegada en la página.\n\nRechazos confirmados por el build: grilla de tarjetas iguales con imagen + título + tags, esquinas redondeadas, sombras de elevación y gradientes decorativos.",
+    "keyCharacteristics": [
+      "Papel mate frío + tinta + un azul de proceso; sin segundo acento de marca.",
+      "Archivo variable usado por ancho: 62 % para números REF, 75 % para etiquetas, 112–125 % para titulares.",
+      "Filetes de 1 px (tinta al 16 %) y de 2 px en tinta plena como cabecera de cada tabla o ficha.",
+      "Esquinas rectas en todo, sin excepción.",
+      "Capturas reales montadas en placas sobre `paper-2`, con llamadas numeradas interactivas."
+    ],
+    "rules": [
+      { "name": "The Process Blue Rule", "body": "El azul sólo marca referencia, llamada o acción (REF, número de llamada, CTA, contacto, foco). Nunca es decoración ni fondo de sección fuera de la banda de contacto.", "section": "colors" },
+      { "name": "The Real Status Rule", "body": "Todo proyecto muestra su estado real con un punto de color + etiqueta; el color del estado nunca se usa para otra cosa.", "section": "colors" },
+      { "name": "The Width Axis Rule", "body": "La jerarquía se arma con el eje de ancho, no con familias nuevas: 62 % números, 75 % etiquetas, 100 % cuerpo, 112 % títulos, 125 % display.", "section": "typography" },
+      { "name": "The Giant/Tiny Rule", "body": "El display siempre convive con etiquetas mínimas condensadas; no hay tamaños intermedios decorativos entre ambos extremos.", "section": "typography" },
+      { "name": "The Mounted Plate Rule", "body": "Toda captura real va montada: fondo `paper-2`, contorno de tinta de 1 px y caption en etiqueta debajo. Nunca una captura suelta sobre el papel.", "section": "elevation" },
+      { "name": "The Ruled Table Rule", "body": "Toda lista de datos abre con un filete de tinta de 2 px y separa filas con filetes de 1 px al 16 %. Las tablas no llevan fondos de fila ni cajas.", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** montar toda captura real sobre `paper-2` con contorno de tinta de 1 px y caption \"Fig.\" en etiqueta.",
+      "**Do** abrir cada tabla, índice o ficha con un filete de tinta de 2 px y separar filas con filetes `line` de 1 px.",
+      "**Do** usar el eje de ancho de Archivo para jerarquía: 62 % números REF, 75 % etiquetas, 112–125 % titulares.",
+      "**Do** reservar el azul de proceso para referencia, llamada, acción y foco.",
+      "**Do** mostrar el estado real de cada proyecto con punto + etiqueta en su color semántico.",
+      "**Do** mantener hovers detrás de `(hover: hover) and (pointer: fine)` y respetar `prefers-reduced-motion`.",
+      "**Do** bajar el ancho del display a 104 % por debajo de 30rem."
+    ],
+    "donts": [
+      "**Don't** usar grillas de tarjetas iguales con imagen + título + tags.",
+      "**Don't** redondear esquinas; el único círculo es el punto de estado.",
+      "**Don't** usar sombras de elevación ni gradientes decorativos; el velo de llamada es la única sombra y es un estado.",
+      "**Don't** sumar un segundo color de acento ni usar `ok`/`warn` fuera de los estados.",
+      "**Don't** poner etiquetas tipo kicker o eyebrow encima de los títulos; la etiqueta vive en cabeceras de columna, `dt` y captions.",
+      "**Don't** mostrar capturas sin montar ni usar imágenes que no sean del trabajo real."
+    ]
+  }
+}

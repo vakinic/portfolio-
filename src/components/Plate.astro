@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import type { Project } from '../data/projects';
+
+interface Props { project: Project; eager?: boolean }
+const { project, eager = false } = Astro.props;
+const { plate, ref } = project;
+const pct = (n: number) => `${n}%`;
+---
+<figure class="plate">
+  <div class="plate__mount">
+  <div class="plate__frame" data-reveal>
+    <Image
+      src={plate.src}
+      alt={plate.alt}
+      widths={[640, 960, 1280, 1600]}
+      sizes="(min-width: 90rem) 58rem, (min-width: 64rem) 64vw, 100vw"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      class="plate__img"
+    />
+    {plate.callouts.map((c, i) => (
+      <span
+        class="plate__region"
+        data-region={i + 1}
+        style={{ left: pct(c.region.x), top: pct(c.region.y), width: pct(c.region.w), height: pct(c.region.h) }}
+        aria-hidden="true"
+      />
+    ))}
+    {plate.callouts.map((c, i) => (
+      <button
+        type="button"
+        class="plate__marker"
+        data-target={i + 1}
+        style={{ left: pct(c.pin?.x ?? c.region.x), top: pct(c.pin?.y ?? c.region.y) }}
+        aria-label={`Señalar ${i + 1}: ${c.title}`}
+        aria-pressed="false"
+      >{i + 1}</button>
+    ))}
+    <p class="plate__caption" aria-live="polite"></p>
+  </div>
+  <figcaption class="plate__figcap label">
+    <span>Fig. {ref}.0 · {project.name}, captura real</span>
+    <span class="plate__hint">Señalá un número</span>
+  </figcaption>
+  </div>
+</figure>
+
+<style>
+  .plate { margin: 0; }
+  .plate__mount {
+    padding: clamp(0.6rem, 0.3rem + 1.4vw, 1.75rem) clamp(0.6rem, 0.3rem + 1.4vw, 1.75rem) 0.75rem;
+    background: var(--paper-2);
+  }
+  .plate__hint { color: var(--blue); }
+  .plate__frame {
+    position: relative;
+    overflow: hidden;
+    background: var(--paper-2);
+    outline: 1px solid var(--ink);
+    outline-offset: 0;
+  }
+  .plate__img { display: block; width: 100%; height: auto; }
+
+  .plate__region {
+    position: absolute;
+    outline: 2px solid var(--blue);
+    outline-offset: -1px;
+    box-shadow: 0 0 0 200vmax rgb(17 17 17 / 0.55);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 220ms var(--ease-out);
+  }
+  .plate__region.is-on { opacity: 1; }
+
+  .plate__marker {
+    position: absolute;
+    z-index: 2;
+    transform: translate(0.5rem, 0.5rem);
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    background: var(--blue);
+    color: var(--on-blue);
+    border: 0;
+    font: inherit;
+    font-weight: 760;
+    font-stretch: 62%;
+    font-size: 1.125rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out);
+  }
+  .plate__marker::after {
+    /* larger touch target than the visible square */
+    content: '';
+    position: absolute;
+    inset: -0.375rem;
+  }
+  .plate__marker[aria-pressed='true'] { background: var(--paper); color: var(--blue); }
+  .plate__marker:active { transform: translate(0.5rem, 0.5rem) scale(0.94); }
+
+  .plate__caption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    margin: 0;
+    padding: 0.7rem 0.9rem;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: var(--fs-sm);
+    line-height: 1.35;
+    transform: translateY(101%);
+    transition: transform 240ms var(--ease-out);
+  }
+  .plate__caption.is-on { transform: translateY(0); }
+
+  .plate__figcap {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.6rem;
+    color: var(--ink-3);
+  }
+
+  @media (min-width: 64rem) {
+    .plate__caption { display: none; }
+  }
+  @media (max-width: 30rem) {
+    .plate__marker { width: 1.75rem; height: 1.75rem; font-size: 1rem; transform: translate(0.35rem, 0.35rem); }
+    .plate__marker:active { transform: translate(0.35rem, 0.35rem) scale(0.94); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .plate__region, .plate__caption { transition: opacity 120ms linear; }
+    .plate__caption { transform: none; opacity: 0; }
+    .plate__caption.is-on { opacity: 1; }
+  }
+</style>

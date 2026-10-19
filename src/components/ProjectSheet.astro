@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+import SheetHead from './SheetHead.astro';
+import Plate from './Plate.astro';
+import CalloutList from './CalloutList.astro';
+import FigureStrip from './FigureStrip.astro';
+import type { Project } from '../data/projects';
+
+interface Props { project: Project; eager?: boolean }
+const { project: p, eager = false } = Astro.props;
+---
+<article class="sheet" id={p.slug} aria-labelledby={`${p.slug}-title`}>
+  <div class="wrap">
+    <SheetHead project={p} />
+    <p class="sheet__summary">{p.summary}</p>
+
+    <div class="sheet__body" data-callouts>
+      <div class="sheet__plate"><Plate project={p} eager={eager} /></div>
+      <aside class="sheet__aside">
+        <dl class="spec">
+          <div><dt class="label">Stack</dt><dd>{p.stack.join(' · ')}</dd></div>
+          <div><dt class="label">Estado</dt><dd>{p.statusNote}</dd></div>
+        </dl>
+        <CalloutList project={p} />
+        <div class="sheet__links">
+          {p.figures.length > 0 && (
+            <a class="btn btn--ink" href={`/trabajos/${p.slug}/`}>
+              Ver caso completo<Icon name="arrow-right" />
+            </a>
+          )}
+          {p.link && (
+            <a class="link sheet__ext" href={p.link.href} target="_blank" rel="noopener noreferrer">
+              {p.link.label}<Icon name="arrow-up-right" />
+            </a>
+          )}
+        </div>
+      </aside>
+    </div>
+
+    {p.figures.length > 0 && (
+      <div class="sheet__figs">
+        <FigureStrip figures={p.figures.slice(0, 3)} refNum={p.ref} label={`Más capturas de ${p.name}`} />
+      </div>
+    )}
+  </div>
+</article>
+
+<script>
+  import '../scripts/callouts';
+</script>
+
+<style>
+  .sheet { padding-block: clamp(4rem, 2.5rem + 5vw, 8rem) 0; }
+  .sheet__summary {
+    margin-top: 1.5rem;
+    font-size: var(--fs-lead);
+    line-height: 1.45;
+    max-width: 52ch;
+    text-wrap: pretty;
+  }
+  .sheet__body {
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3rem);
+    display: grid;
+    gap: 2rem;
+  }
+  .spec { border-top: 1px solid var(--ink); }
+  .spec > div {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 1rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid var(--line);
+    font-size: var(--fs-sm);
+  }
+  .spec dt { color: var(--ink-3); padding-top: 0.15rem; }
+  .sheet__aside :global(.co) { margin-top: 2rem; }
+  .sheet__links {
+    margin-top: 1.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+  }
+  .sheet__ext {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    min-height: 2.75rem;
+    font-weight: 600;
+  }
+  .sheet__ext svg { width: 1.1em; height: 1.1em; }
+  .sheet__figs { margin-top: clamp(2rem, 1.5rem + 2vw, 3rem); }
+
+  @media (min-width: 64rem) {
+    .sheet__body { grid-template-columns: minmax(0, 8fr) minmax(0, 4fr); gap: 3rem; align-items: start; }
+    .sheet__aside { position: sticky; top: calc(var(--header-h) + 1.5rem); }
+  }
+</style>

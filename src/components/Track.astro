@@ -1,0 +1,102 @@
+---
+import { Image } from 'astro:assets';
+import perfil from '../assets/trayectoria/perfil-vendedor.jpg';
+import publicidad from '../assets/trayectoria/publicidad.png';
+import reputacion from '../assets/trayectoria/reputacion.png';
+import amazon from '../assets/trayectoria/amazon.png';
+
+const rows = [
+  { k: 'Canal', v: 'Mercado Libre de una importadora de herramientas, 5+ años' },
+  { k: 'Facturación', v: 'De $8M a $130M mensuales en el pico del canal' },
+  { k: 'Cuenta', v: 'MercadoLíder Platinum · +10.000 ventas · +500 productos' },
+  { k: 'Publicidad', v: 'ROAS 13× en Product Ads (30 días)' },
+  { k: 'Reputación', v: 'Reclamos 0,45 % · mediaciones 0 % (60 días)' },
+  { k: 'También', v: 'Amazon Seller Central, envíos FBA y sourcing desde China' },
+];
+
+const figs = [
+  { src: perfil, alt: 'Perfil de vendedor MercadoLíder Platinum con más de 10 mil ventas.', cap: 'Perfil del vendedor' },
+  { src: publicidad, alt: 'Métricas de Product Ads: inversión, ingresos, ventas e impresiones en 30 días.', cap: 'Product Ads, 30 días' },
+  { src: reputacion, alt: 'Variables de reputación: reclamos 0,45 %, mediaciones 0 %, cancelaciones 0,38 %.', cap: 'Reputación, 60 días' },
+  { src: amazon, alt: 'Panel de Amazon Seller Central con unidades vendidas y tendencias por año.', cap: 'Amazon Seller Central' },
+];
+---
+<section class="trk" id="trayectoria" aria-labelledby="trk-title">
+  <div class="wrap trk__grid">
+    <div class="trk__text">
+      <h2 class="h2" id="trk-title">Antes de diseñar tiendas, las operé.</h2>
+      <p>
+        Durante más de cinco años gestioné el canal de Mercado Libre de una empresa importadora: catálogo, precios,
+        promociones, publicidad, métricas y coordinación del equipo operativo.
+      </p>
+      <p>
+        Por eso diseño pensando en lo que pasa después del lanzamiento: el stock, las cuotas, las preguntas del
+        cliente y el margen real de cada venta.
+      </p>
+    </div>
+    <dl class="trk__table">
+      {rows.map((r) => (
+        <div><dt class="label">{r.k}</dt><dd>{r.v}</dd></div>
+      ))}
+    </dl>
+  </div>
+  <div class="wrap">
+    <ul class="trk__figs" aria-label="Capturas de la gestión del canal">
+      {figs.map((f, i) => (
+        <li>
+          <figure>
+            <div class="trk__frame">
+              <Image src={f.src} alt={f.alt} widths={[360, 540, 720]} sizes="(min-width: 64rem) 22vw, 70vw" loading="lazy" class="trk__img" />
+            </div>
+            <figcaption class="label"><span>Anexo {String.fromCharCode(65 + i)}</span> {f.cap}</figcaption>
+          </figure>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trk { padding-top: clamp(5rem, 3rem + 6vw, 10rem); }
+  .trk__grid { display: grid; gap: 2.5rem 4rem; }
+  .trk__text { display: grid; gap: 1.1rem; align-content: start; }
+  .trk__text p { color: var(--ink-2); max-width: 54ch; }
+  .trk__text h2 { margin-bottom: 0.5rem; max-width: 16ch; }
+  .trk__table { border-top: 2px solid var(--ink); align-self: start; }
+  .trk__table > div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 1rem;
+    padding-block: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .trk__table dt { color: var(--ink-3); padding-top: 0.2rem; }
+  .trk__table dd { font-weight: 540; }
+
+  .trk__figs {
+    margin-top: 3rem;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(70vw, 20rem);
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.75rem;
+  }
+  .trk__figs li { scroll-snap-align: start; }
+  .trk__figs figure { margin: 0; background: var(--paper-2); padding: 0.6rem 0.6rem 0.7rem; height: 100%; }
+  .trk__frame {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    outline: 1px solid var(--ink);
+    background: #fff;
+  }
+  .trk__img { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+  .trk__figs figcaption { margin-top: 0.55rem; color: var(--ink-2); }
+  .trk__figs figcaption span { color: var(--ink-3); margin-right: 0.35rem; }
+
+  @media (min-width: 64rem) {
+    .trk__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); }
+    .trk__figs { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); overflow: visible; }
+  }
+</style>

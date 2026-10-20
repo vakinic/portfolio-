@@ -5,12 +5,12 @@ import { projects } from '../data/projects';
 import { waLink } from '../data/site';
 ---
 <section class="cover" aria-labelledby="cover-title">
-  <div class="wrap">
-    <h1 id="cover-title" class="cover__title">
-      Tiendas, sitios y automatizaciones pensados para vender.
-    </h1>
-  </div>
   <div class="wrap cover__grid">
+    <div class="cover__head">
+      <h1 id="cover-title" class="cover__title">
+        Tiendas, sitios y automatizaciones pensados para vender.
+      </h1>
+    </div>
     <div class="cover__main">
       <p class="cover__lede">
         Soy Nicolás Ferreira. Diseño y desarrollo tiendas en Tiendanube y Shopify, sitios con CMS y
@@ -59,12 +59,14 @@ import { waLink } from '../data/site';
     max-width: 22ch;
     overflow-wrap: break-word;
   }
+  /* Una sola grilla: título y bajada a la izquierda, índice a la derecha ocupando ambas filas. */
   .cover__grid {
     display: grid;
-    gap: 2.5rem;
     grid-template-columns: minmax(0, 1fr);
-    margin-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem);
+    grid-template-areas: "head" "main" "index";
   }
+  .cover__head { grid-area: head; min-width: 0; container-type: inline-size; }
+  .cover__main { grid-area: main; min-width: 0; margin-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem); }
   .cover__lede {
     font-size: var(--fs-lead);
     line-height: 1.45;
@@ -74,7 +76,13 @@ import { waLink } from '../data/site';
   }
   .cover__actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
-  .index { border-top: 1px solid var(--ink); }
+  .index {
+    grid-area: index;
+    min-width: 0;
+    margin-top: 2.5rem;
+    border-top: 1px solid var(--ink);
+    container-type: inline-size;
+  }
   .index li { border-bottom: 1px solid var(--line); }
   .index__row {
     display: grid;
@@ -129,11 +137,36 @@ import { waLink } from '../data/site';
   }
 
   @media (min-width: 48rem) {
+    .index__row { grid-template-columns: 3rem 7.5rem minmax(0, 1fr); }
+  }
+  /* El estado pasa a su propia columna sólo cuando el índice tiene ancho para eso. */
+  @container (min-width: 36rem) {
     .index__row { grid-template-columns: 3rem 7.5rem minmax(0, 1fr) auto; }
     .index__status { grid-column: auto; justify-self: end; }
   }
   @media (min-width: 64rem) {
-    .cover__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 4rem; align-items: start; }
-    .cover__lede { padding-top: 0.4rem; }
+    .cover__grid {
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "head  index"
+        "main  index";
+      column-gap: clamp(2.5rem, 5vw, 5rem);
+      align-items: start;
+    }
+    /* El título se ajusta al ancho de su columna: "automatizaciones" mide ~10.3em. */
+    .cover__title { font-size: min(var(--fs-display), 9.4cqi); max-width: none; }
+    .cover__main { margin-top: clamp(1.75rem, 0.5rem + 2vw, 3rem); }
+    .index {
+      margin-top: 0;
+      align-self: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Las filas se reparten la altura de las dos filas de la izquierda. */
+    .index ol { flex: 1; display: grid; grid-auto-rows: 1fr; }
+    .index li { display: grid; }
+    .index__row { align-content: center; }
+    .index__tab, .index__thumb { grid-row: span 2; }
   }
 </style>

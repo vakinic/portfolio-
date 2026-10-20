@@ -107,6 +107,17 @@ const fallback = options[3].msg;
   }
 
   @media (min-width: 64rem) {
-    .ct__grid { grid-template-columns: minmax(0, 6fr) minmax(0, 4fr) minmax(0, 2.5fr); align-items: start; }
+    /* La columna del título mide su palabra más larga (una por línea), así el
+       column-gap es la única separación visible entre los tres bloques. */
+    .ct__grid {
+      grid-template-columns: min-content minmax(0, 4fr) minmax(0, 2.5fr);
+      /* La primera fila mide lo que el formulario; si el título es más alto,
+         su excedente cae en la segunda fila y no descentra el contacto. */
+      grid-template-rows: auto 1fr;
+      row-gap: 0;
+      align-items: start;
+    }
+    .ct__title { grid-row: span 2; }
+    .ct__alt { align-self: center; }
   }
 </style>

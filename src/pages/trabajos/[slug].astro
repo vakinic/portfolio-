@@ -103,7 +103,7 @@ const verticalTitle = vertical.every((f) => f.kind === 'mobile') ? 'En el celula
             {p.notes && (
               <ul class="case__notes">
                 {p.notes.map((n) => <li>{n}</li>)}
-                <li>Estado actual: {p.statusNote.toLowerCase()}.</li>
+                {!p.facts && <li>Estado actual: {p.statusNote.charAt(0).toLowerCase() + p.statusNote.slice(1)}.</li>}
               </ul>
             )}
           </div>

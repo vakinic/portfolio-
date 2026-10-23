@@ -2,6 +2,8 @@ import type { ImageMetadata } from 'astro';
 
 import sdHome from '../assets/work/sawdust/home-desktop.png';
 import sdHomeM from '../assets/work/sawdust/home-mobile.png';
+import sdSpot from '../assets/work/sawdust/protagonista-desktop.png';
+import sdSpotM from '../assets/work/sawdust/protagonista-mobile.png';
 import sdCat from '../assets/work/sawdust/categoria-desktop.png';
 import sdCatM from '../assets/work/sawdust/categoria-mobile.png';
 import sdPdp from '../assets/work/sawdust/producto-desktop.png';
@@ -14,13 +16,16 @@ import mdComp from '../assets/work/medicos/competencias-desktop.png';
 import mdEco from '../assets/work/medicos/ecosistema-desktop.png';
 import mdProg from '../assets/work/medicos/programa-desktop.png';
 import mdTall from '../assets/work/medicos/talleres-desktop.png';
+import mdEquipo from '../assets/work/medicos/equipo-desktop.png';
 import mdRec from '../assets/work/medicos/recursos-desktop.png';
 import mdCursos from '../assets/work/medicos/cursos-desktop.png';
+import mdRefs from '../assets/work/medicos/referencias-desktop.png';
+import mdFaq from '../assets/work/medicos/faq-desktop.png';
 
-import gvProd from '../assets/work/goldvision/producto.png';
 import gvHome from '../assets/work/goldvision/home.png';
-import gvMas from '../assets/work/goldvision/mas-vendidos.png';
 import gvGrad from '../assets/work/goldvision/graduacion.png';
+import gvRecetados from '../assets/work/goldvision/recetados.png';
+import gvComoComprar from '../assets/work/goldvision/como-comprar.png';
 
 import agAgenda from '../assets/work/automatizacion/agente-agenda.png';
 
@@ -81,53 +86,58 @@ export const projects: Project[] = [
     layout: 'bleed',
     slug: 'sawdust',
     name: 'SawDust',
-    kind: 'Tienda online',
+    kind: 'Rediseño de tienda online',
     platform: 'Tiendanube',
     year: '2026',
     status: 'online',
     statusLabel: 'Online',
-    statusNote: 'Publicada en sawdust.com.ar',
+    statusNote: 'Theme rediseñado publicado en sawdust.com.ar desde octubre de 2026; las mejoras siguen por fases',
     summary:
-      'Rediseño del storefront de una marca que pasó a vender rubros muy distintos: autos a radio control, fresas CNC, lockers y más, ordenados bajo un mismo criterio.',
+      'Rediseño comercial y theme propio para una tienda polirrubro: radio control, fresas CNC, lockers, bidones flexibles y accesorios de viaje, ordenados bajo un mismo criterio.',
     goal:
-      'Que un cliente entienda en segundos qué vende la marca, encuentre su rubro y compre con confianza, y que se puedan sumar rubros nuevos desde el administrador, sin rediseñar.',
+      'Que un cliente entienda en segundos qué vende la marca, encuentre su rubro y compre con confianza, y que la tienda pueda sumar o destacar rubros desde el editor, sin rediseñar.',
     role: [
-      'Dirección visual y sistema de diseño (color, tipografía, cards, botones)',
-      'Arquitectura de rubros, menú desktop y mobile',
-      'Desarrollo del theme sobre Ipanema: secciones propias, header, filtros y fichas',
+      'Dirección visual y sistema de diseño: color, tipografía, espaciados, cards y botones',
+      'Arquitectura de rubros y navegación: menú desktop y mobile, header compacto al hacer scroll',
+      'Desarrollo del theme sobre Ipanema: secciones propias, filtros, fichas y estilos en sawdust.css',
+      'Actualización de la base a Ipanema 1.4.2 conservando los componentes propios',
       'QA en preview real (390 a 1440 px) antes de cada publicación',
     ],
     solution:
-      'Un theme propio sobre Ipanema que respeta todo lo nativo de Tiendanube (variantes, promos, cuotas, envío, filtros) y suma secciones configurables desde el editor visual: hero de campaña, rubros, campaña destacada, producto protagonista y FAQ.',
-    stack: ['Tiendanube', 'Twig', 'CSS', 'JavaScript sin librerías'],
+      'Un theme propio sobre Ipanema que respeta todo lo nativo de Tiendanube (variantes, promociones, cuotas, envíos, filtros) y suma secciones configurables desde el editor visual: hero con varios banners, rubros, producto protagonista con video, campaña destacada, descubrimiento por rubro y preguntas frecuentes. Cada cambio se prueba en un borrador y las versiones anteriores quedan congeladas para volver atrás.',
+    stack: ['Tiendanube', 'Twig', 'CSS', 'JavaScript sin librerías', 'Git'],
     link: { href: 'https://www.sawdust.com.ar/', label: 'sawdust.com.ar' },
     plate: {
       src: sdHome,
-      alt: 'Home de SawDust en desktop: header con buscador, hero de autos a radio control y tarjetas de rubro.',
+      alt: 'Home de SawDust en desktop: header con buscador y menú por rubros, hero de autos a radio control y tarjetas de Radio Control, Bidones y Lockers.',
       callouts: [
         {
           title: 'Buscador protagonista y menú por rubros',
-          detail: 'El buscador queda siempre a mano y el menú ordena la tienda por rubro. Al hacer scroll el header se compacta solo con CSS, sin saltos de layout.',
+          detail: 'El buscador queda siempre a mano y el menú ordena la tienda por rubro, con Bidones y Ofertas en primer nivel. Al hacer scroll el header se compacta solo con CSS, sin saltos de layout.',
           impl: 'header.tpl · menú propio seleccionable desde el editor',
-          region: { x: 4.6, y: 2.4, w: 90.8, h: 10.2 },
+          region: { x: 5, y: 2.2, w: 90, h: 9.8 },
+          pin: { x: 36, y: 3 },
         },
         {
-          title: 'Hero de campaña por dispositivo',
-          detail: 'Arte distinto para desktop y mobile, para que el producto y el texto se lean bien en cada pantalla.',
+          title: 'Hero con varios banners',
+          detail: 'Slider de campañas (cuotas, envíos, nuevos ingresos) con arte distinto para desktop y mobile, para que el producto y el texto se lean bien en cada pantalla.',
           impl: 'sección sd-hero',
-          region: { x: 0, y: 12.4, w: 100, h: 38 },
+          region: { x: 0, y: 12, w: 100, h: 36.8 },
+          pin: { x: 2, y: 13.5 },
         },
         {
           title: 'Tarjetas de rubro',
-          detail: 'Tres rubros principales como puerta de entrada. El encuadre de cada foto se ajusta desde el editor para que el producto se vea completo en pantallas chicas.',
+          detail: 'Los rubros principales como puerta de entrada; desde el editor se elige cuáles destacar (hoy Radio Control, Bidones y Lockers) y el encuadre de cada foto para pantallas chicas.',
           impl: 'sección sd-rubros',
-          region: { x: 5, y: 55.4, w: 90, h: 42.4 },
-          pin: { x: 20.6, y: 55.6 },
+          region: { x: 5, y: 55.6, w: 90, h: 40.5 },
+          pin: { x: 22, y: 55.8 },
         },
       ],
     },
     figures: [
-      { src: sdHomeM, alt: 'Home de SawDust en mobile con el hero vertical.', caption: 'Home mobile, arte vertical propio', kind: 'mobile' },
+      { src: sdHomeM, alt: 'Home de SawDust en mobile con el banner vertical de autos a radio control.', caption: 'Home mobile, arte vertical propio', kind: 'mobile' },
+      { src: sdSpot, alt: 'Sección de producto protagonista: bidones flexibles con texto a la izquierda y video a la derecha.', caption: 'Producto protagonista: Bidones con video', kind: 'desktop' },
+      { src: sdSpotM, alt: 'Producto protagonista en mobile: texto, botón y video vertical del bidón flexible.', caption: 'Producto protagonista mobile, clip vertical', kind: 'mobile' },
       { src: sdCat, alt: 'Categoría Autos RC con filtro Tipo y precio en la barra lateral.', caption: 'Categoría con filtro «Tipo» por campo personalizado', kind: 'desktop' },
       { src: sdPdpM, alt: 'Ficha de producto de SawDust en mobile con precio, cuotas y precio por transferencia.', caption: 'Ficha de producto mobile', kind: 'mobile' },
       { src: sdDest, alt: 'Grilla de productos destacados con precio, cuotas y precio con transferencia.', caption: 'Product cards: precio, cuotas y transferencia', kind: 'desktop' },
@@ -135,9 +145,13 @@ export const projects: Project[] = [
       { src: sdPdp, alt: 'Ficha de producto de SawDust en desktop con galería y selector de color.', caption: 'Ficha de producto desktop', kind: 'desktop' },
     ],
     facts: [
-      { label: 'Base', value: 'Theme Ipanema, versión propia' },
-      { label: 'Secciones propias', value: 'Hero, rubros, campaña, descubrimiento, producto protagonista, FAQ' },
+      { label: 'Base', value: 'Theme Ipanema 1.4.2, versión propia' },
+      { label: 'Secciones propias', value: 'sd-hero, sd-rubros, producto protagonista, sd-editorial, sd-discovery y preguntas frecuentes' },
+      { label: 'Rubros', value: 'Radio Control, Fresas CNC, Lockers, Bidones, Accesorios para tu viaje y más' },
       { label: 'Respaldo', value: 'Cada versión anterior del theme queda congelada para volver atrás' },
+    ],
+    notes: [
+      'Siguen en curso, por fases: optimización de los videos de campaña en desktop, ajustes del árbol de categorías en el administrador y pruebas en iPhone real.',
     ],
   },
   {
@@ -149,61 +163,75 @@ export const projects: Project[] = [
     kind: 'Sitio con CMS',
     platform: 'Next.js + Sanity',
     year: '2026',
-    status: 'listo',
-    statusLabel: 'Listo para publicar',
-    statusNote: 'Terminado, a la espera del dominio del cliente',
+    status: 'online',
+    statusLabel: 'Online',
+    statusNote: 'Publicado en Vercel; el dominio propio lo define el cliente',
     summary:
-      'Landing y páginas internas para un campus virtual de formación en salud digital dirigido a médicos especialistas.',
+      'Sitio administrable para un campus virtual de salud digital e inteligencia artificial aplicada a la medicina, dirigido a médicos especialistas.',
     goal:
-      'Explicar un modelo denso (recursos gratis → talleres → acompañamiento) a médicos con poco tiempo que llegan desde el celular, y que el cliente pueda editar los textos sin depender de un desarrollador.',
+      'Explicar un modelo denso (recursos gratis → talleres → acompañamiento) a médicos con poco tiempo que llegan desde el celular, y que el cliente pueda editar los contenidos sin depender de un desarrollador.',
     role: [
-      'Sistema visual derivado del logo: la cruz ámbar que se abre en esquinas',
-      'Arquitectura de contenido: home + cursos, referencias y preguntas frecuentes',
-      'Desarrollo en Next.js y TypeScript con CSS Modules',
-      'CMS en Sanity con panel en español, SEO técnico y QA final',
+      'Sistema visual editorial derivado del logo, con tokens de color, tipografía y espaciado',
+      'Arquitectura de contenido: home por secciones + cursos, referencias y preguntas frecuentes',
+      'Desarrollo en Next.js, React y TypeScript con CSS Modules y componentes reutilizables',
+      'CMS en Sanity con Studio en español, revalidación por webhook y pruebas de edición reales',
+      'Deploy en Vercel, SEO técnico, accesibilidad y QA en producción',
     ],
     solution:
-      'Un sitio estático con revalidación: Sanity entrega los textos, un webhook firmado actualiza las páginas al publicar y el formulario oficial de Substack capta suscriptores sin backend propio.',
-    stack: ['Next.js', 'TypeScript', 'CSS Modules', 'Sanity', 'Substack'],
+      'Páginas estáticas que se regeneran al publicar: Sanity entrega los contenidos (textos de cada sección, talleres, equipo, referencias y preguntas frecuentes), un webhook firmado actualiza el sitio en segundos y, si el CMS falla, se mantiene la última versión buena. Navegación por anclas con estado activo, Studio embebido en /studio y suscripción con el formulario oficial de Substack, sin backend propio.',
+    stack: ['Next.js', 'React', 'TypeScript', 'CSS Modules', 'Sanity', 'Vercel'],
+    link: { href: 'https://medicos-digitales.vercel.app/', label: 'medicos-digitales.vercel.app' },
     plate: {
       src: mdHome,
-      alt: 'Hero de Médicos Digitales en desktop: titular con una palabra en serif itálica y reel de retratos.',
+      alt: 'Hero de Médicos Digitales en desktop: titular con una palabra en serif itálica, propuesta del campus y reel de fotos de especialistas.',
       callouts: [
+        {
+          title: 'Navegación por anclas con estado activo',
+          detail: 'El menú marca la sección que se está leyendo y lleva a las páginas internas sin perder el contexto. Al volver atrás se recupera el scroll.',
+          impl: 'SiteHeader · IntersectionObserver',
+          region: { x: 27, y: 0, w: 53.2, h: 8 },
+          pin: { x: 21, y: 1 },
+        },
         {
           title: 'Titular editorial',
           detail: 'Grotesca con carácter para leer rápido y una sola palabra en serif itálica como acento. Fuentes autoalojadas.',
           impl: 'next/font · tokens.css',
-          region: { x: 3.6, y: 27.6, w: 52.4, h: 28 },
-          pin: { x: 47.5, y: 24 },
+          region: { x: 4, y: 25.5, w: 52, h: 27 },
+          pin: { x: 47, y: 26 },
         },
         {
-          title: 'Textos editables desde Sanity',
-          detail: 'Propuesta, listas y botones salen del CMS: el cliente cambia copys y destinos sin tocar el diseño.',
-          impl: 'Sanity Studio en /studio',
-          region: { x: 59, y: 13.4, w: 37.6, h: 40.6 },
-          pin: { x: 87.4, y: 13.6 },
+          title: 'Contenido editable desde Sanity',
+          detail: 'Propuesta, listas y botones salen del CMS: el cliente cambia textos y destinos sin tocar el diseño, y el sitio se actualiza al publicar.',
+          impl: 'Sanity Studio en /studio · webhook de revalidación',
+          region: { x: 59.5, y: 11.5, w: 36.5, h: 40.5 },
+          pin: { x: 89, y: 12 },
         },
         {
-          title: 'Reel con la cruz del logo',
-          detail: 'Las esquinas ámbar del logo enmarcan la foto activa. El movimiento se puede pausar y se detiene con movimiento reducido.',
+          title: 'Reel de la red de especialistas',
+          detail: 'Fotos con recorte ajustado una por una. El movimiento se puede pausar, se detiene fuera de pantalla y queda quieto con movimiento reducido.',
           impl: 'componente HeroReel',
-          region: { x: 0, y: 58.4, w: 100, h: 41.6 },
+          region: { x: 0, y: 60, w: 100, h: 40 },
         },
       ],
     },
     figures: [
       { src: mdHomeM, alt: 'Hero de Médicos Digitales en mobile.', caption: 'Hero mobile', kind: 'mobile' },
-      { src: mdComp, alt: 'Sección de competencias digitales con una cruz ámbar dividiendo cuatro áreas.', caption: 'Competencias: la cruz como divisor', kind: 'desktop' },
-      { src: mdEco, alt: 'Pirámide del ecosistema de servicios construida en HTML sobre fondo negro.', caption: 'Ecosistema: diagrama del PDF rehecho en HTML', kind: 'desktop' },
-      { src: mdProg, alt: 'Programa en tres niveles representado como escalera.', caption: 'Programa en tres niveles', kind: 'desktop' },
+      { src: mdComp, alt: 'Sección de competencias digitales con una cruz ámbar dividiendo cuatro áreas.', caption: 'Competencias: la cruz del logo como divisor', kind: 'desktop' },
+      { src: mdEco, alt: 'Pirámide del ecosistema de servicios construida en HTML sobre fondo negro.', caption: 'Ecosistema: diagrama rehecho en HTML', kind: 'desktop' },
+      { src: mdProg, alt: 'Programa Médicos Digitales con seis áreas en grilla.', caption: 'Programa educativo por áreas', kind: 'desktop' },
       { src: mdTall, alt: 'Webinars gratuitos y talleres con acompañamiento en dos columnas.', caption: 'Talleres: gratis vs. acompañamiento', kind: 'desktop' },
-      { src: mdCursos, alt: 'Página interna de cursos y seminarios.', caption: 'Página interna /cursos', kind: 'desktop' },
+      { src: mdEquipo, alt: 'Sección Quiénes somos con la foto y la trayectoria del director del campus.', caption: 'Equipo y especialistas', kind: 'desktop' },
       { src: mdRec, alt: 'Recursos gratuitos y bloque de suscripción con el formulario de Substack.', caption: 'Recursos + suscripción con Substack', kind: 'desktop' },
+      { src: mdCursos, alt: 'Página interna de cursos y seminarios con índice por tipo de taller.', caption: 'Página interna /cursos', kind: 'desktop' },
+      { src: mdRefs, alt: 'Página de referencias y evidencia con publicaciones numeradas.', caption: 'Página interna /referencias', kind: 'desktop' },
+      { src: mdFaq, alt: 'Página de preguntas frecuentes con acordeones y contacto.', caption: 'Página interna /preguntas-frecuentes', kind: 'desktop' },
     ],
     facts: [
+      { label: 'CMS', value: 'Sanity: textos por sección, talleres, equipo, referencias y preguntas frecuentes' },
       { label: 'Lighthouse mobile', value: 'Rendimiento 95–97 · Accesibilidad, buenas prácticas y SEO 100' },
       { label: 'Lighthouse desktop', value: '100 en las cuatro categorías' },
-      { label: 'Medición', value: 'Build de producción local, mediana de 3 corridas' },
+      { label: 'Medición', value: 'Durante el desarrollo, sobre el build de producción: mediana de 3 corridas por ruta. No es un monitoreo del sitio publicado' },
+      { label: 'Accesibilidad', value: 'axe-core sin violaciones en las 4 rutas, a 1440 y 390 px' },
     ],
   },
   {
@@ -214,57 +242,61 @@ export const projects: Project[] = [
     kind: 'Tienda online',
     platform: 'Shopify',
     year: '2026',
-    status: 'desarrollo',
-    statusLabel: 'En desarrollo',
-    statusNote: 'Tienda de prueba; la marca todavía no lanzó',
+    status: 'online',
+    statusLabel: 'Online',
+    statusNote: 'Entregada al cliente, que la administra en su plan Shopify Basic',
     summary:
-      'Tienda de óptica para una marca nueva: anteojos de vista, cristales y lentes de contacto, con compra de anteojos recetados online.',
+      'Tienda de óptica diseñada y desarrollada sobre Shopify: anteojos de vista y cristales graduados, con una estética minimalista y premium. Entregada al cliente, que hoy la administra.',
     goal:
-      'Vender anteojos con receta, no solo de sol: cada compra depende de datos de graduación que antes solo se tomaban en el local.',
+      'Vender anteojos con receta online: que el cliente elija armazón y cristales, y que los datos de graduación lleguen con el pedido en vez de tomarse solo en el local.',
     role: [
-      'Prototipo visual navegable aprobado por el cliente antes de programar',
-      'Conversión a theme Shopify Online Store 2.0 sobre Dawn, con secciones propias',
-      'Flujo de receta y graduación en la ficha de producto',
-      'Exploración previa de la tienda en Tiendanube',
+      'Evaluación de Tiendanube y prototipo visual navegable aprobado antes de programar',
+      'Theme Online Store 2.0 sobre Dawn con secciones propias en Liquid y CSS',
+      'Arquitectura comercial: catálogo por categorías, variantes de color, navegación y footer',
+      'Flujo de cristales graduados: carga por ojo o receta adjunta',
+      'Configuración de la tienda y traspaso al cliente en Shopify Basic',
     ],
     solution:
-      'Variantes de color reales con stock propio, carrito y checkout nativos de Shopify, filtros de colección nativos y una receta que viaja con el pedido: valores cargados a mano o foto adjunta, visibles en el Admin sin apps.',
-    stack: ['Shopify', 'Liquid', 'Dawn', 'JavaScript'],
+      'Secciones propias editables desde el personalizador (hero por slides con encuadre configurable, grilla de categorías, más vendidos, bloque editorial, cómo comprar con receta y footer), variantes de color reales con stock propio, carrito y checkout nativos y filtros de colección nativos. La ficha de cristales pide la graduación por ojo o la receta en foto: los datos viajan con el pedido y se ven en el Admin sin apps.',
+    stack: ['Shopify', 'Liquid', 'Dawn', 'CSS', 'JavaScript'],
     plate: {
-      src: gvProd,
-      alt: 'Ficha de producto de Gold Vision: anteojo rojo, selector de color y pregunta sobre cristales graduados.',
+      src: gvHome,
+      alt: 'Home de Gold Vision en desktop: menú con Anteojos de Vista y Cristales, hero de cristales graduados, franja de beneficios y grilla de dos categorías.',
       callouts: [
         {
-          title: 'Cuotas y transferencia junto al precio',
-          detail: 'La financiación aparece donde se decide la compra, como hacen las ópticas líderes de venta online en Argentina.',
-          impl: 'sección gv-main-product',
-          region: { x: 56.1, y: 43.4, w: 41, h: 7.6 },
-          pin: { x: 84, y: 46.6 },
+          title: 'Navegación priorizada',
+          detail: 'El menú y la home llevan a lo que más se vende: Anteojos de Vista y Cristales. Lentes de contacto salió de la navegación destacada.',
+          impl: 'gv-header · menú principal',
+          region: { x: 39.5, y: 2.6, w: 23, h: 6.4 },
+          pin: { x: 33, y: 3.4 },
         },
         {
-          title: 'Variantes de color reales',
-          detail: 'Cada color es una variante de Shopify con su propio stock, no una simulación visual.',
-          impl: 'Product variants',
-          region: { x: 55.4, y: 54.8, w: 11.6, h: 6.4 },
-          pin: { x: 66.4, y: 54.4 },
+          title: 'Hero por slides con encuadre configurable',
+          detail: 'Cada slide define desde el personalizador dónde se centra la foto y el tamaño del bloque, para que el producto no se recorte.',
+          impl: 'sección gv-hero-slider',
+          region: { x: 0, y: 8.8, w: 100, h: 39 },
+          pin: { x: 40, y: 10 },
         },
         {
-          title: 'Cristales graduados en la misma ficha',
-          detail: 'El cliente elige si necesita graduación y carga los valores o sube la receta. Los datos llegan al pedido como propiedades de la línea.',
-          impl: 'line item properties',
-          region: { x: 56.1, y: 62.4, w: 41, h: 17 },
-          pin: { x: 92.4, y: 63.2 },
+          title: 'Grilla de categorías',
+          detail: 'Las categorías protagonistas en formato 1:1, el mismo de las fotos de producto, para que ninguna imagen se deforme.',
+          impl: 'sección gv-category-grid',
+          region: { x: 22.7, y: 63.7, w: 54.6, h: 32.3 },
         },
       ],
     },
     figures: [
-      { src: gvGrad, alt: 'Formulario de graduación con esfera, cilindro, eje y distancia pupilar para cada ojo.', caption: 'Carga de graduación por ojo', kind: 'detail' },
-      { src: gvHome, alt: 'Home de Gold Vision con barra de beneficios y categorías.', caption: 'Home: beneficios y categorías', kind: 'desktop' },
-      { src: gvMas, alt: 'Grilla de más vendidos con precios y colores disponibles.', caption: 'Más vendidos con colores por producto', kind: 'desktop' },
+      { src: gvGrad, alt: 'Formulario de graduación en mobile: opción de graduación estándar, carga de valores o receta, esquema de ojo derecho e izquierdo y campos de esfera y cilindro.', caption: 'Carga de graduación por ojo en la ficha de cristales', kind: 'detail' },
+      { src: gvRecetados, alt: 'Bloque editorial oscuro con foto de anteojos al atardecer y el título Tu receta, tu estilo.', caption: 'Bloque editorial de anteojos de vista', kind: 'desktop' },
+      { src: gvComoComprar, alt: 'Sección Comprá tus anteojos con receta en cuatro pasos con íconos.', caption: 'Cómo comprar con receta, en cuatro pasos', kind: 'desktop' },
+    ],
+    facts: [
+      { label: 'Base', value: 'Dawn (Online Store 2.0) con secciones propias gv-*' },
+      { label: 'Catálogo', value: 'Anteojos de vista con variantes de color y cristales graduados' },
     ],
     notes: [
-      'Las fotos de producto son provisorias hasta tener fotografía propia.',
-      'Faltan definir medios de pago y envío: es una decisión del cliente, no técnica.',
+      'Los mensajes de cuotas y transferencia quedan apagados con una opción del tema hasta que se confirmen las condiciones de la pasarela de pagos.',
+      'La carga del catálogo de cristales y la fotografía de producto siguen a cargo del cliente.',
     ],
   },
   {

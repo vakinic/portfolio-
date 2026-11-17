@@ -7,13 +7,13 @@
 web
 
 ## Users
-Clientes directos en Argentina y LATAM: marcas, pymes y profesionales que necesitan una tienda online (Tiendanube o Shopify), una landing o sitio institucional, o una automatización con IA. Llegan desde LinkedIn, WhatsApp o una recomendación, muchas veces desde el celular, y quieren decidir rápido si Nicolás puede resolver su proyecto.
+Empresas, marcas, importadoras, distribuidoras y emprendedores (Argentina primero, con apertura a clientes internacionales) que necesitan gestionar u optimizar su canal de Mercado Libre, una tienda online (Tiendanube o Shopify), una landing o sitio institucional, o una automatización. Llegan desde LinkedIn, WhatsApp o una recomendación, muchas veces desde el celular, y quieren decidir rápido si Nicolás puede resolver su proyecto.
 
 ## Product Purpose
 Portfolio personal de Nicolás Ferreira. Tiene que mostrar trabajos reales con suficiente detalle para generar confianza y llevar a una conversación (WhatsApp, email o LinkedIn). Éxito: un cliente potencial entiende qué hace, ve proyectos comparables al suyo y escribe.
 
 ## Positioning
-Perfil que combina diseño, desarrollo frontend y criterio comercial. A diferencia de un diseñador o un programador puro, viene de operar e-commerce real: más de 5 años gestionando el canal de Mercado Libre de una importadora (MercadoLíder Platinum). Eso respalda decisiones de diseño orientadas a vender, no solo a verse bien.
+Especialista en e-commerce (desde 2026-11): marketplaces, tiendas online y soluciones digitales. Concepto: «E-commerce pensado desde el negocio. Resuelto con tecnología.» La gestión y optimización de marketplaces (Mercado Libre) es la especialidad principal, respaldada por más de 5 años gestionando el canal de Mercado Libre de una importadora (MercadoLíder Platinum); el desarrollo de tiendas, sitios y automatizaciones son capacidades complementarias. No posicionarlo solo como programador ni solo como gestor de marketplaces.
 
 ## Operating Context
 Proyectos entregados sobre plataformas reales: themes de Tiendanube (Twig, editor visual), Shopify (Liquid, Online Store 2.0), Next.js + Sanity CMS, automatizaciones con n8n. Trabaja documentando decisiones, con QA en desktop y mobile y sin romper la operación del cliente.
@@ -21,7 +21,8 @@ Proyectos entregados sobre plataformas reales: themes de Tiendanube (Twig, edito
 ## Capabilities and Constraints
 - Stack del sitio: Astro + Tailwind CSS 4, deploy en Vercel (rama `main` = producción).
 - Capacidades a comunicar: diseño web y desarrollo frontend; tiendas Tiendanube y Shopify; landings; diseño UI/UX; integraciones, automatizaciones e IA aplicada; productos digitales.
-- La trayectoria en Mercado Libre / Amazon es respaldo comercial, no el centro del sitio.
+- La experiencia en Mercado Libre va justo después del hero. Amazon (Seller Central, FBA) figura solo como experiencia, no como servicio.
+- La evolución de facturación ($8M → $130M) queda oculta hasta confirmar fechas y si son valores nominales (ver `docs/caso-mercado-libre.md`).
 - Idioma: español rioplatense (voseo).
 
 ## Brand Commitments
@@ -37,7 +38,7 @@ Nombre: Nicolás Ferreira. Contacto: WhatsApp +54 9 11 3815-8237, fernicnet@gmai
 - No hay testimonios de clientes ni métricas de resultados de los proyectos web: no inventarlos.
 
 ## Product Principles
-1. Los proyectos son protagonistas; el texto los explica, no los reemplaza.
+1. La experiencia comercial y los proyectos son la evidencia; el texto los explica, no los reemplaza. Cada proyecto empieza por el problema de negocio que resolvió.
 2. Veracidad: cada proyecto dice su estado real (publicado, sin publicar, en desarrollo).
 3. Diseño con criterio comercial: mostrar decisiones que ayudan a vender o a entender.
 4. Rápido de leer en mobile y fácil de contactar desde cualquier punto.

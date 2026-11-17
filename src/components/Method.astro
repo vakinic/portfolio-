@@ -1,15 +1,18 @@
 ---
 // The order is the method itself, so steps keep their sequence number.
 const steps = [
-  { t: 'Relevamiento', d: 'Entiendo qué vendés, a quién y qué tiene que pasar en la web para que te compren.', out: 'Alcance y prioridades por escrito.' },
-  { t: 'Prototipo aprobado', d: 'Diseño un prototipo navegable en desktop y mobile y lo ajustamos antes de programar.', out: 'Prototipo para revisar desde tu celular.' },
-  { t: 'Desarrollo aislado', d: 'Construyo en un borrador, tienda de prueba o rama aparte. Tu sitio sigue funcionando.', out: 'Versión de prueba con tu contenido.' },
-  { t: 'QA y publicación', d: 'Pruebo en varios tamaños de pantalla, documento y publico dejando un respaldo.', out: 'Sitio publicado y versión anterior guardada.' },
+  { t: 'Diagnóstico del negocio', d: 'Reviso cómo vendés hoy: canales, catálogo, publicaciones, tienda y números disponibles.', out: 'Prioridades por escrito.' },
+  { t: 'Objetivos y estrategia', d: 'Definimos qué queremos mejorar, en qué orden y cómo lo vamos a medir.', out: 'Plan con alcance y plazos.' },
+  { t: 'Implementación', d: 'Publicaciones, campañas, tienda o desarrollo. Trabajo en borradores, tiendas de prueba o versiones aparte, sin frenar tu operación.', out: 'Cambios probados antes de publicarse.' },
+  { t: 'Seguimiento y optimización', d: 'Revisamos resultados y ajustamos. Puede ser una revisión al cierre del proyecto o una gestión mensual, según el alcance.', out: 'Próximos pasos definidos con datos.' },
 ];
 ---
 <section class="mth" aria-labelledby="mth-title">
   <div class="wrap mth__grid">
-    <h2 class="h2" id="mth-title">Cómo trabajo</h2>
+    <div class="mth__head">
+      <h2 class="h2" id="mth-title">Cómo trabajo</h2>
+      <p class="mth__intro">El mismo método para gestionar un canal o desarrollar una tienda; cambia el alcance que definimos juntos.</p>
+    </div>
     <ol class="mth__list">
       {steps.map((s, i) => (
         <li class="mth__step">
@@ -28,6 +31,8 @@ const steps = [
 <style>
   .mth { padding-top: clamp(5rem, 3rem + 6vw, 10rem); }
   .mth__grid { display: grid; gap: 2rem 4rem; }
+  .mth__head { display: grid; gap: 1rem; align-content: start; }
+  .mth__intro { color: var(--ink-2); max-width: 34ch; }
   .mth__list { display: grid; gap: 0 3rem; }
   .mth__step {
     display: grid;
@@ -52,5 +57,11 @@ const steps = [
     .mth__grid { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
     .mth__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .mth__step { padding-block: 1.5rem; }
+    /* Los pasos de una misma fila comparten las alturas de título, descripción y resultado,
+       así un título en dos líneas no desalinea al paso vecino. */
+    .mth__list { grid-auto-rows: auto auto auto; }
+    .mth__step { grid-row: span 3; grid-template-rows: subgrid; row-gap: 0.3rem; }
+    .mth__n { grid-row: 1; }
+    .mth__body { grid-row: 1 / span 3; grid-template-rows: subgrid; gap: 0.3rem; }
   }
 </style>

@@ -61,6 +61,8 @@ export interface Project {
   companion?: Figure;
   slug: string;
   name: string;
+  /** Business problem the project solves, in one sentence. Shown first on the home sheet. */
+  challenge?: string;
   /** What it is, in a few words. */
   kind: string;
   platform: string;
@@ -86,6 +88,8 @@ export const projects: Project[] = [
     layout: 'bleed',
     slug: 'sawdust',
     name: 'SawDust',
+    challenge:
+      'Que un catálogo de rubros muy distintos se entienda y se recorra rápido, y que la vidriera se pueda cambiar desde el editor sin rediseñar la tienda.',
     kind: 'Rediseño de tienda online',
     platform: 'Tiendanube',
     year: '2026',
@@ -156,10 +160,79 @@ export const projects: Project[] = [
   },
   {
     ref: '02',
+    layout: 'product',
+    slug: 'gold-vision',
+    name: 'Gold Vision',
+    challenge:
+      'Vender anteojos con receta online: que la graduación llegue con el pedido en lugar de tomarse solo en el local, sin apps pagas.',
+    kind: 'Tienda online',
+    platform: 'Shopify',
+    year: '2026',
+    status: 'online',
+    statusLabel: 'Online',
+    statusNote: 'Entregada al cliente, que la administra en su plan Shopify Basic',
+    summary:
+      'Tienda de óptica diseñada y desarrollada sobre Shopify: anteojos de vista y cristales graduados, con una estética minimalista y premium. Entregada al cliente, que hoy la administra.',
+    goal:
+      'Vender anteojos con receta online: que el cliente elija armazón y cristales, y que los datos de graduación lleguen con el pedido en vez de tomarse solo en el local.',
+    role: [
+      'Evaluación de Tiendanube y prototipo visual navegable aprobado antes de programar',
+      'Theme Online Store 2.0 sobre Dawn con secciones propias en Liquid y CSS',
+      'Arquitectura comercial: catálogo por categorías, variantes de color, navegación y footer',
+      'Flujo de cristales graduados: carga por ojo o receta adjunta',
+      'Configuración de la tienda y traspaso al cliente en Shopify Basic',
+    ],
+    solution:
+      'Secciones propias editables desde el personalizador (hero por slides con encuadre configurable, grilla de categorías, más vendidos, bloque editorial, cómo comprar con receta y footer), variantes de color reales con stock propio, carrito y checkout nativos y filtros de colección nativos. La ficha de cristales pide la graduación por ojo o la receta en foto: los datos viajan con el pedido y se ven en el Admin sin apps.',
+    stack: ['Shopify', 'Liquid', 'Dawn', 'CSS', 'JavaScript'],
+    plate: {
+      src: gvHome,
+      alt: 'Home de Gold Vision en desktop: menú con Anteojos de Vista y Cristales, hero de cristales graduados, franja de beneficios y grilla de dos categorías.',
+      callouts: [
+        {
+          title: 'Navegación priorizada',
+          detail: 'El menú y la home llevan a lo que más se vende: Anteojos de Vista y Cristales. Lentes de contacto salió de la navegación destacada.',
+          impl: 'gv-header · menú principal',
+          region: { x: 39.5, y: 2.6, w: 23, h: 6.4 },
+          pin: { x: 33, y: 3.4 },
+        },
+        {
+          title: 'Hero por slides con encuadre configurable',
+          detail: 'Cada slide define desde el personalizador dónde se centra la foto y el tamaño del bloque, para que el producto no se recorte.',
+          impl: 'sección gv-hero-slider',
+          region: { x: 0, y: 8.8, w: 100, h: 39 },
+          pin: { x: 40, y: 10 },
+        },
+        {
+          title: 'Grilla de categorías',
+          detail: 'Las categorías protagonistas en formato 1:1, el mismo de las fotos de producto, para que ninguna imagen se deforme.',
+          impl: 'sección gv-category-grid',
+          region: { x: 22.7, y: 63.7, w: 54.6, h: 32.3 },
+        },
+      ],
+    },
+    figures: [
+      { src: gvGrad, alt: 'Formulario de graduación en mobile: opción de graduación estándar, carga de valores o receta, esquema de ojo derecho e izquierdo y campos de esfera y cilindro.', caption: 'Carga de graduación por ojo en la ficha de cristales', kind: 'detail' },
+      { src: gvRecetados, alt: 'Bloque editorial oscuro con foto de anteojos al atardecer y el título Tu receta, tu estilo.', caption: 'Bloque editorial de anteojos de vista', kind: 'desktop' },
+      { src: gvComoComprar, alt: 'Sección Comprá tus anteojos con receta en cuatro pasos con íconos.', caption: 'Cómo comprar con receta, en cuatro pasos', kind: 'desktop' },
+    ],
+    facts: [
+      { label: 'Base', value: 'Dawn (Online Store 2.0) con secciones propias gv-*' },
+      { label: 'Catálogo', value: 'Anteojos de vista con variantes de color y cristales graduados' },
+    ],
+    notes: [
+      'Los mensajes de cuotas y transferencia quedan apagados con una opción del tema hasta que se confirmen las condiciones de la pasarela de pagos.',
+      'La carga del catálogo de cristales y la fotografía de producto siguen a cargo del cliente.',
+    ],
+  },
+  {
+    ref: '03',
     layout: 'pair',
     companion: { src: mdHomeM, alt: 'Hero de Médicos Digitales en mobile.', caption: 'La misma portada en el celular', kind: 'mobile' },
     slug: 'medicos-digitales',
     name: 'Médicos Digitales',
+    challenge:
+      'Explicar una oferta educativa compleja a médicos que llegan desde el celular, con contenidos que el cliente edita sin depender de un desarrollador.',
     kind: 'Sitio con CMS',
     platform: 'Next.js + Sanity',
     year: '2026',
@@ -235,75 +308,12 @@ export const projects: Project[] = [
     ],
   },
   {
-    ref: '03',
-    layout: 'product',
-    slug: 'gold-vision',
-    name: 'Gold Vision',
-    kind: 'Tienda online',
-    platform: 'Shopify',
-    year: '2026',
-    status: 'online',
-    statusLabel: 'Online',
-    statusNote: 'Entregada al cliente, que la administra en su plan Shopify Basic',
-    summary:
-      'Tienda de óptica diseñada y desarrollada sobre Shopify: anteojos de vista y cristales graduados, con una estética minimalista y premium. Entregada al cliente, que hoy la administra.',
-    goal:
-      'Vender anteojos con receta online: que el cliente elija armazón y cristales, y que los datos de graduación lleguen con el pedido en vez de tomarse solo en el local.',
-    role: [
-      'Evaluación de Tiendanube y prototipo visual navegable aprobado antes de programar',
-      'Theme Online Store 2.0 sobre Dawn con secciones propias en Liquid y CSS',
-      'Arquitectura comercial: catálogo por categorías, variantes de color, navegación y footer',
-      'Flujo de cristales graduados: carga por ojo o receta adjunta',
-      'Configuración de la tienda y traspaso al cliente en Shopify Basic',
-    ],
-    solution:
-      'Secciones propias editables desde el personalizador (hero por slides con encuadre configurable, grilla de categorías, más vendidos, bloque editorial, cómo comprar con receta y footer), variantes de color reales con stock propio, carrito y checkout nativos y filtros de colección nativos. La ficha de cristales pide la graduación por ojo o la receta en foto: los datos viajan con el pedido y se ven en el Admin sin apps.',
-    stack: ['Shopify', 'Liquid', 'Dawn', 'CSS', 'JavaScript'],
-    plate: {
-      src: gvHome,
-      alt: 'Home de Gold Vision en desktop: menú con Anteojos de Vista y Cristales, hero de cristales graduados, franja de beneficios y grilla de dos categorías.',
-      callouts: [
-        {
-          title: 'Navegación priorizada',
-          detail: 'El menú y la home llevan a lo que más se vende: Anteojos de Vista y Cristales. Lentes de contacto salió de la navegación destacada.',
-          impl: 'gv-header · menú principal',
-          region: { x: 39.5, y: 2.6, w: 23, h: 6.4 },
-          pin: { x: 33, y: 3.4 },
-        },
-        {
-          title: 'Hero por slides con encuadre configurable',
-          detail: 'Cada slide define desde el personalizador dónde se centra la foto y el tamaño del bloque, para que el producto no se recorte.',
-          impl: 'sección gv-hero-slider',
-          region: { x: 0, y: 8.8, w: 100, h: 39 },
-          pin: { x: 40, y: 10 },
-        },
-        {
-          title: 'Grilla de categorías',
-          detail: 'Las categorías protagonistas en formato 1:1, el mismo de las fotos de producto, para que ninguna imagen se deforme.',
-          impl: 'sección gv-category-grid',
-          region: { x: 22.7, y: 63.7, w: 54.6, h: 32.3 },
-        },
-      ],
-    },
-    figures: [
-      { src: gvGrad, alt: 'Formulario de graduación en mobile: opción de graduación estándar, carga de valores o receta, esquema de ojo derecho e izquierdo y campos de esfera y cilindro.', caption: 'Carga de graduación por ojo en la ficha de cristales', kind: 'detail' },
-      { src: gvRecetados, alt: 'Bloque editorial oscuro con foto de anteojos al atardecer y el título Tu receta, tu estilo.', caption: 'Bloque editorial de anteojos de vista', kind: 'desktop' },
-      { src: gvComoComprar, alt: 'Sección Comprá tus anteojos con receta en cuatro pasos con íconos.', caption: 'Cómo comprar con receta, en cuatro pasos', kind: 'desktop' },
-    ],
-    facts: [
-      { label: 'Base', value: 'Dawn (Online Store 2.0) con secciones propias gv-*' },
-      { label: 'Catálogo', value: 'Anteojos de vista con variantes de color y cristales graduados' },
-    ],
-    notes: [
-      'Los mensajes de cuotas y transferencia quedan apagados con una opción del tema hasta que se confirmen las condiciones de la pasarela de pagos.',
-      'La carga del catálogo de cristales y la fotografía de producto siguen a cargo del cliente.',
-    ],
-  },
-  {
     ref: '04',
     layout: 'ink',
     slug: 'agente-de-agenda',
     name: 'Agente de agenda',
+    challenge:
+      'Responder y agendar turnos por WhatsApp sin intervención manual.',
     kind: 'Automatización con IA',
     platform: 'n8n',
     year: '2026',

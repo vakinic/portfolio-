@@ -20,12 +20,12 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: site.name,
-  jobTitle: 'Diseñador y desarrollador web',
+  jobTitle: 'Especialista en e-commerce',
   url: Astro.site?.href,
   email: `mailto:${site.email}`,
   address: { '@type': 'PostalAddress', addressLocality: 'Buenos Aires', addressCountry: 'AR' },
   sameAs: [site.linkedin],
-  knowsAbout: ['Diseño web', 'Desarrollo frontend', 'Tiendanube', 'Shopify', 'E-commerce', 'Automatizaciones con IA'],
+  knowsAbout: ['E-commerce', 'Mercado Libre', 'Mercado Ads', 'Amazon Seller Central', 'Shopify', 'Tiendanube', 'Desarrollo web', 'Automatizaciones'],
 };
 ---
 <!doctype html>
@@ -51,7 +51,7 @@ const jsonLd = {
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Nicolás Ferreira — Tiendas, sitios y automatizaciones pensados para vender" />
+    <meta property="og:image:alt" content="Nicolás Ferreira, especialista en e-commerce: e-commerce pensado desde el negocio, resuelto con tecnología" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />

@@ -3,29 +3,31 @@ import Icon from './Icon.astro';
 import { site, waLink } from '../data/site';
 
 const options = [
-  { id: 'tienda', label: 'Tienda online', msg: 'Hola Nicolás, quiero hablar de una tienda online.' },
-  { id: 'sitio', label: 'Sitio o landing', msg: 'Hola Nicolás, quiero hablar de un sitio o una landing.' },
-  { id: 'ia', label: 'Automatización con IA', msg: 'Hola Nicolás, quiero hablar de una automatización con IA.' },
-  { id: 'otro', label: 'Otra cosa', msg: 'Hola Nicolás, vi tu portfolio y quiero consultarte por un proyecto.' },
+  { id: 'mercadolibre', label: 'Gestión de Mercado Libre', msg: 'Hola Nicolás, quiero hablar de la gestión de mi cuenta de Mercado Libre.' },
+  { id: 'tienda', label: 'Desarrollo de tienda online', msg: 'Hola Nicolás, quiero hablar del desarrollo de una tienda online.' },
+  { id: 'optimizacion', label: 'Optimización de e-⁠commerce', msg: 'Hola Nicolás, quiero mejorar el rendimiento de mi e-commerce.' },
+  { id: 'web', label: 'Desarrollo web o landing page', msg: 'Hola Nicolás, quiero hablar de un sitio web o una landing page.' },
+  { id: 'automatizacion', label: 'Automatizaciones y soluciones digitales', msg: 'Hola Nicolás, quiero hablar de una automatización o solución digital.' },
+  { id: 'otro', label: 'Otra consulta', msg: 'Hola Nicolás, vi tu portfolio y quiero hacerte una consulta.' },
 ];
-const fallback = options[3].msg;
+const fallback = options[options.length - 1].msg;
 ---
 <section class="ct" id="contacto" aria-labelledby="ct-title">
   <div class="wrap ct__grid">
-    <h2 class="ct__title" id="ct-title">¿Qué necesitás construir?</h2>
-    <form class="ct__form" data-contact action={`https://wa.me/${site.whatsapp}`} method="get" target="_blank">
+    <h2 class="ct__title" id="ct-title">Contame de tu negocio</h2>
+    <!-- Cada opción envía su propio mensaje como parámetro `text` de wa.me: funciona sin JavaScript. -->
+    <form class="ct__form" action={`https://wa.me/${site.whatsapp}`} method="get" target="_blank">
       <fieldset>
-        <legend>Elegí una opción y te abro el chat con el mensaje listo.</legend>
+        <legend>Elegí el tipo de consulta y te abro el chat con el mensaje listo.</legend>
         <div class="ct__opts">
           {options.map((o, i) => (
             <label class="ct__opt">
-              <input type="radio" name="tipo" form="ct-sin-envio" value={o.id} data-msg={o.msg} checked={i === 0} />
+              <input type="radio" name="text" value={o.msg} data-option={o.id} checked={i === 0} />
               <span>{o.label}</span>
             </label>
           ))}
         </div>
       </fieldset>
-      <input type="hidden" name="text" value={options[0].msg} data-text />
       <button class="btn btn--paper ct__send" type="submit">
         <Icon name="chat" />Escribir por WhatsApp<Icon name="arrow-right" />
       </button>
@@ -39,11 +41,11 @@ const fallback = options[3].msg;
 </section>
 
 <script>
-  document.querySelectorAll<HTMLFormElement>('[data-contact]').forEach((form) => {
-    const text = form.querySelector<HTMLInputElement>('[data-text]');
-    form.addEventListener('change', (e) => {
-      const input = e.target as HTMLInputElement;
-      if (input.name === 'tipo' && text) text.value = input.dataset.msg ?? text.value;
+  // Enlaces con data-pick (p. ej. desde Experiencia) preseleccionan una opción del formulario.
+  document.querySelectorAll<HTMLAnchorElement>('a[data-pick]').forEach((link) => {
+    link.addEventListener('click', () => {
+      const input = document.querySelector<HTMLInputElement>(`input[data-option="${link.dataset.pick}"]`);
+      if (input) input.checked = true;
     });
   });
 </script>
@@ -70,7 +72,10 @@ const fallback = options[3].msg;
   }
   .ct__form fieldset { border: 0; padding: 0; margin: 0; }
   .ct__form legend { color: var(--on-blue-2); margin-bottom: 1rem; font-size: var(--fs-sm); }
-  .ct__opts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
+  .ct__opts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0.5rem; }
+  @media (min-width: 30rem) {
+    .ct__opts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
   .ct__opt { position: relative; display: block; cursor: pointer; }
   .ct__opt input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
   .ct__opt span {

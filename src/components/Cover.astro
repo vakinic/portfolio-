@@ -3,29 +3,34 @@ import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import { projects } from '../data/projects';
 import { waLink } from '../data/site';
+
+const platforms = ['Mercado Libre', 'Amazon', 'Shopify', 'Tiendanube'];
 ---
 <section class="cover" aria-labelledby="cover-title">
   <div class="wrap cover__grid">
     <div class="cover__head">
+      <p class="cover__kicker">Especialista en e-commerce</p>
       <h1 id="cover-title" class="cover__title">
-        Tiendas, sitios y automatizaciones pensados para vender.
+        <span>E-commerce pensado desde el negocio.</span> <span>Resuelto con tecnología.</span>
       </h1>
     </div>
     <div class="cover__main">
       <p class="cover__lede">
-        Soy Nicolás Ferreira. Diseño y desarrollo tiendas en Tiendanube y Shopify, sitios con CMS y
-        automatizaciones con IA. Antes de construir tiendas, las operé: más de 5 años al frente del canal
-        de Mercado Libre de una importadora.
+        Soy Nicolás Ferreira, especialista en e-&#8288;commerce. Combino más de cinco años de experiencia gestionando
+        operaciones de Mercado Libre con el desarrollo de tiendas online y soluciones digitales para marcas y empresas.
       </p>
+      <ul class="cover__platforms" aria-label="Plataformas con las que trabajé">
+        {platforms.map((name) => <li>{name}</li>)}
+      </ul>
       <div class="cover__actions">
-        <a class="btn btn--blue" href={waLink('Hola Nicolás, vi tu portfolio y quiero consultarte por un proyecto.')} target="_blank" rel="noopener noreferrer">
-          <Icon name="chat" />Escribime por WhatsApp
+        <a class="btn btn--blue" href={waLink('Hola Nicolás, vi tu portfolio y quiero hablar de mi negocio.')} target="_blank" rel="noopener noreferrer">
+          <Icon name="chat" />Hablemos de tu negocio
         </a>
-        <a class="btn btn--line" href="#trabajos">Ver trabajos<Icon name="arrow-down" /></a>
+        <a class="btn btn--line" href="#trabajos">Ver proyectos<Icon name="arrow-down" /></a>
       </div>
     </div>
 
-    <nav class="index" aria-label="Trabajos">
+    <nav class="index" aria-label="Proyectos">
       <ol>
         {projects.map((p, i) => (
           <li>
@@ -49,6 +54,15 @@ import { waLink } from '../data/site';
 
 <style>
   .cover { padding-top: clamp(2rem, 0.8rem + 3vw, 3.5rem); }
+  .cover__kicker {
+    margin-bottom: clamp(0.9rem, 0.6rem + 1vw, 1.5rem);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    font-stretch: 75%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
   .cover__title {
     font-size: var(--fs-display);
     font-stretch: var(--display-stretch, 125%);
@@ -73,6 +87,24 @@ import { waLink } from '../data/site';
     color: var(--ink-2);
     max-width: 46ch;
     text-wrap: pretty;
+  }
+  /* Cada frase arranca su propia línea: negocio y tecnología, dos ideas. */
+  .cover__title span { display: block; }
+  .cover__platforms {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    font-stretch: 88%;
+    color: var(--ink);
+  }
+  .cover__platforms li:not(:last-child)::after {
+    content: "·";
+    margin-inline: 0.55em;
+    color: var(--ink-3);
+    font-weight: 400;
   }
   .cover__actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.75rem; }
 
@@ -150,7 +182,16 @@ import { waLink } from '../data/site';
       align-items: start;
     }
     /* El título llena su columna: "automatizaciones", la palabra más larga, mide 10.3em. */
-    .cover__title { font-size: min(var(--fs-display), 9.6cqi); max-width: none; }
+    .cover__kicker {
+    margin-bottom: clamp(0.9rem, 0.6rem + 1vw, 1.5rem);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    font-stretch: 75%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .cover__title { font-size: min(var(--fs-display), 9.6cqi); max-width: none; }
     .cover__main { margin-top: clamp(1.75rem, 0.5rem + 2vw, 3rem); }
     .index {
       margin-top: 0;

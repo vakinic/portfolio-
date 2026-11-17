@@ -2,15 +2,38 @@
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import reputacion from '../assets/trayectoria/reputacion.png';
+
+/**
+ * Evolución de facturación mensual del canal ($8M → pico de $130M, pesos).
+ * Oculta hasta confirmar fechas de inicio y del pico y si son valores nominales:
+ * sin ese contexto la comparación se lee como crecimiento real. Para mostrarla,
+ * completar `period` y pasar `show` a true.
+ */
+const revenue = { show: false, from: '$8M', to: '$130M', period: '' };
+
+/** Verificados con capturas reales: perfil de vendedor (+10mil ventas, Platinum)
+ *  y panel de Mercado Ads del 15/11 al 14/12/2025 (ingresos / inversión = 13,8). */
+const facts = [
+  { value: 'MercadoLíder Platinum', label: 'Reputación de la cuenta' },
+  { value: 'ROAS de 13×', label: 'Alcanzado en Product Ads (15 nov – 14 dic 2025)' },
+];
 ---
 <section class="trk" id="trayectoria" aria-labelledby="trk-title">
   <div class="wrap">
-    <h2 class="trk__title" id="trk-title">Antes de diseñar tiendas, las operé.</h2>
-    <p class="trk__figure" aria-describedby="trk-figcap">
-      <span>$8M</span><Icon name="arrow-right" class="trk__arrow" /><span>$130M</span>
-      <span class="sr-only">: de 8 a 130 millones de pesos mensuales</span>
-    </p>
-    <p class="trk__figcap" id="trk-figcap">Facturación mensual del canal de Mercado Libre que gestioné, del inicio al pico.</p>
+    <h2 class="trk__title" id="trk-title">Más de cinco años gestionando e-commerce desde adentro.</h2>
+    <p class="trk__figure" aria-describedby="trk-figcap">+10.000<span class="trk__unit">ventas</span></p>
+    <p class="trk__figcap" id="trk-figcap">En la cuenta de Mercado Libre de la importadora que gestioné.</p>
+    {revenue.show && revenue.period && (
+      <p class="trk__revenue">
+        Facturación mensual del canal: de {revenue.from} a un pico de {revenue.to} ({revenue.period}).
+      </p>
+    )}
+
+    <ul class="trk__facts">
+      {facts.map((f) => (
+        <li><strong>{f.value}</strong><span>{f.label}</span></li>
+      ))}
+    </ul>
 
     <div class="trk__grid">
       <div class="trk__text">
@@ -19,13 +42,15 @@ import reputacion from '../assets/trayectoria/reputacion.png';
           catálogo, precios, promociones, publicidad, métricas y coordinación del equipo operativo.
         </p>
         <p>
-          Por eso diseño pensando en lo que pasa después del lanzamiento: el stock, las cuotas, las preguntas del
-          cliente y el margen real de cada venta.
+          Esa operación diaria es la base de lo que hago hoy: decisiones sobre publicaciones, precios y campañas, y
+          tiendas pensadas para lo que pasa después de la venta: stock, cuotas, preguntas del cliente y margen.
         </p>
-        <p class="trk__facts">
-          MercadoLíder Platinum · más de 10.000 ventas · ROAS 13× en Product Ads · también Amazon Seller Central,
-          envíos FBA y sourcing desde China.
+        <p class="trk__also">
+          También: Amazon Seller Central, envíos FBA y sourcing desde China.
         </p>
+        <a class="trk__cta link" href="#contacto" data-pick="mercadolibre">
+          Consultar por gestión de Mercado Libre<Icon name="arrow-right" />
+        </a>
       </div>
       <figure class="trk__fig">
         <div class="trk__mount" data-reveal>
@@ -58,7 +83,7 @@ import reputacion from '../assets/trayectoria/reputacion.png';
     font-weight: 720;
     letter-spacing: -0.03em;
     line-height: 1.02;
-    max-width: 18ch;
+    max-width: 22ch;
     text-wrap: balance;
   }
   .trk__figure {
@@ -74,13 +99,49 @@ import reputacion from '../assets/trayectoria/reputacion.png';
     line-height: 0.86;
     color: var(--paper);
   }
-  .trk__figure :global(.trk__arrow) {
-    width: 0.62em;
-    height: 0.62em;
+  .trk__unit {
+    margin-left: 0.3em;
+    font-size: 0.32em;
+    font-stretch: 100%;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
     color: var(--on-ink-2);
-    stroke-width: 2.2;
-    flex: none;
+    align-self: flex-end;
+    padding-bottom: 0.12em;
   }
+  .trk__revenue { margin-top: 0.5rem; color: var(--on-ink-2); font-size: var(--fs-sm); max-width: 52ch; }
+  .trk__facts {
+    margin-top: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--line-on-ink);
+  }
+  .trk__facts li {
+    display: grid;
+    gap: 0.2rem;
+    padding-block: 1rem;
+    border-bottom: 1px solid var(--line-on-ink);
+  }
+  .trk__facts strong {
+    font-size: var(--fs-h3);
+    font-weight: 720;
+    font-stretch: 112%;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    color: var(--paper);
+  }
+  .trk__facts span { font-size: var(--fs-sm); color: var(--on-ink-2); }
+  .trk__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.75rem;
+    justify-self: start;
+    font-weight: 600;
+    color: var(--on-ink);
+  }
+  .trk__cta :global(svg) { width: 1.1em; height: 1.1em; }
   .trk__figcap {
     margin-top: 1rem;
     font-size: var(--fs-lead);
@@ -89,15 +150,13 @@ import reputacion from '../assets/trayectoria/reputacion.png';
   }
   .trk__grid {
     margin-top: clamp(2.5rem, 2rem + 2.5vw, 4.5rem);
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--line-on-ink);
     display: grid;
     gap: 2.5rem 4rem;
   }
   .trk__text { display: grid; gap: 1.1rem; align-content: start; }
   .trk__text p { max-width: 52ch; color: var(--on-ink-2); }
   .trk__text p:first-child { color: var(--on-ink); font-size: 1.125rem; }
-  .trk__facts { font-size: var(--fs-sm); }
+  .trk__also { font-size: var(--fs-sm); }
   .trk__fig { margin: 0; display: grid; gap: 0.6rem; }
   .trk__mount { background: var(--mount-on-ink); padding: clamp(0.5rem, 0.2rem + 1.2vw, 1.25rem); }
   .trk__mount :global(img) { display: block; width: 100%; height: auto; }
@@ -111,6 +170,10 @@ import reputacion from '../assets/trayectoria/reputacion.png';
     white-space: nowrap;
   }
 
+  @media (min-width: 48rem) {
+    .trk__facts { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; }
+    .trk__facts li { border-bottom: 0; padding-block: 1.25rem 0; }
+  }
   @media (min-width: 64rem) {
     .trk__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   }

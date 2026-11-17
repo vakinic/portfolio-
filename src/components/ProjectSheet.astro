@@ -27,7 +27,13 @@ const plateSizes = {
     <div class="sheet__intro">
       <SheetHead project={p} />
       <div class="sheet__about">
-        <p class="sheet__summary">{p.summary}</p>
+        {p.challenge && (
+          <div class="sheet__challenge">
+            <p class="sheet__k">El desafío</p>
+            <p class="sheet__challenge-text">{p.challenge}</p>
+          </div>
+        )}
+        <p class:list={['sheet__summary', { 'sheet__summary--secondary': p.challenge }]}>{p.summary}</p>
         <p class="sheet__stack">{p.stack.join(' · ')}</p>
       </div>
     </div>
@@ -72,6 +78,17 @@ const plateSizes = {
   .sheet__about { display: grid; gap: 0.75rem; }
   .sheet__summary { font-size: var(--fs-lead); line-height: 1.45; max-width: 46ch; text-wrap: pretty; }
   .sheet__stack { font-size: var(--fs-sm); color: var(--ink-3); }
+  .sheet__challenge { display: grid; gap: 0.35rem; }
+  .sheet__k {
+    font-size: var(--fs-label);
+    font-weight: 700;
+    font-stretch: 75%;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .sheet__challenge-text { font-size: var(--fs-lead); line-height: 1.4; max-width: 46ch; text-wrap: pretty; font-weight: 560; }
+  .sheet__summary--secondary { font-size: var(--fs-body); color: var(--ink-2); max-width: 54ch; }
   .sheet__body { margin-top: clamp(1.75rem, 1.25rem + 2vw, 3rem); display: grid; gap: 1.5rem 3rem; }
   .sheet__links { margin-top: 1.75rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; }
   .sheet__ext { display: inline-flex; align-items: center; gap: 0.35rem; min-height: 2.75rem; font-weight: 600; }
@@ -91,6 +108,8 @@ const plateSizes = {
     color: var(--on-ink);
   }
   .sheet--ink .sheet__summary { color: var(--on-ink); }
+  .sheet--ink .sheet__summary--secondary { color: var(--on-ink-2); }
+  .sheet--ink .sheet__k { color: var(--on-ink-2); }
   .sheet--ink :global(.sh__meta),
   .sheet--ink :global(.status--prototipo),
   .sheet--ink .sheet__stack { color: var(--on-ink-2); }

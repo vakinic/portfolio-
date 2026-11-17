@@ -122,7 +122,9 @@ const fallback = options[options.length - 1].msg;
       row-gap: 0;
       align-items: start;
     }
-    .ct__title { grid-row: span 2; }
+    /* El título ocupa las dos filas y se centra en ellas: queda alineado con el
+       centro del formulario, igual que el contacto. */
+    .ct__title { grid-row: span 2; align-self: center; }
     .ct__alt { align-self: center; }
   }
 </style>
